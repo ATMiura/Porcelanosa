@@ -1,0 +1,130 @@
+@import "../media.css";
+@import "../variables.css";
+
+.modal,
+.popup{
+    position: relative;
+    width: 100%;
+    max-width: 1050px;
+    padding: 0;
+    overflow: visible;
+    margin: 0 auto;
+}
+.modal{
+    display: none;
+}
+.modal-small{
+    max-width: 616px;
+    padding: 38px 50px;
+}
+.modal__head{
+    margin-bottom: 28px;
+    @media(--mobile-s){
+        margin-bottom: 33px;
+    }
+}
+.modal__title{
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 24px;
+    letter-spacing: -0.05em;
+    @media(--mobile-s){
+        font-size: 18px;
+    }
+}
+.modal__body{
+    .input{
+        color: var(--c-gold);
+    }
+    @media(--mobile-s){
+        width: 100%;
+    }
+}
+.modal__form{
+
+}
+.modal__label{
+    position: relative;
+    display: block;
+    &:not(:last-child){
+        margin-bottom: 25px;
+        @media(--mobile-s){
+            margin-bottom: 14px;
+        }
+    }
+    &:nth-last-child(2){
+        margin-bottom: 0;
+    }
+    .error-tooltip {
+        text-align: right;
+        margin-bottom: 0;
+    }
+}
+.modal__input{
+
+}
+.modal__button{
+    width: 100%;
+    .btn{
+        width: 100%;
+    }
+}
+.modal__submit{
+    margin: 30px auto 20px;
+}
+.modal__privacy{
+    max-width: 345px;
+    margin-left: 30px;
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: normal;
+
+    a{
+        color: currentColor;
+        text-decoration: underline;
+    }
+}
+.modal__code{
+    margin-top: 30px;
+    padding-left: 29px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1;
+    @media(--mobile-s){
+        margin-top: 0;
+        padding-left: 13px;
+        font-size: 10px;
+    }
+}
+.resend-code {
+    color: #A77255;
+    border: none;
+    background-color: transparent;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: block;
+    padding: 0;
+    margin-top: 23px;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    @media(--mobile-s){
+        margin-top: 17px;
+        font-size: 12px;
+    }
+}
+@media(--mobile){
+    .modal,
+    .popup{
+        display: inline-flex !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        padding: 30px;
+    }
+    .modal__head{
+        text-align: center;
+    }
+}

@@ -1,0 +1,14 @@
+
+<section class="section-personal">
+    <div class="container">
+        <div class="personal grid">
+            <div class="personal-col personal-col__nav grid__col grid__col--3">
+                <%- require("../components/personal/personal-nav.ejs")({personalKey: personalKey}) %>
+            </div>
+            <div class="personal-col personal-col__content grid__col grid__col--9">
+                <%- require("../components/personal/personal-"+personalKey+".ejs")() %>
+            </div>
+        </div>
+    </div>
+</section>
+

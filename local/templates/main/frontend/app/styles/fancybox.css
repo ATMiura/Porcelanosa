@@ -1,0 +1,58 @@
+@import "media.css";
+@import "variables.css";
+
+.fancybox-bg{
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.8);
+}
+#reviewVideo{
+
+}
+.fancybox-slide{
+    display: flex;
+    align-items: center;
+    &--video{
+        .fancybox-content{
+            max-width: 1050px;
+            background: transparent;
+            /*@media(min-width: 1001px){*/
+            /*    width: 100% !important;*/
+            /*    height: auto !important;*/
+            /*}*/
+        }
+        .fancybox-close-small{
+            top: -33px;
+            right: -33px;
+            width: 66px;
+            height: 66px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-image: url("data:image/svg+xml,%3Csvg width='66' height='66' viewBox='0 0 66 66' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M64.9999 66L-7.55191e-05 0.999999L0.707031 0.292892L65.707 65.2929L64.9999 66Z' fill='%23403838'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M1.00008 66L66.0001 0.999999L65.293 0.292892L0.29297 65.2929L1.00008 66Z' fill='%23403838'/%3E%3C/svg%3E%0A");
+            @media(--tablet){
+                top: -30px;
+                right: -30px;
+                width: 30px;
+                height: 30px;
+            }
+            @media(--mobile){
+                top: 0;
+                right: 0;
+                background-size: 75%;
+                background-color: #fff;
+            }
+            svg{
+                display: none;
+            }
+        }
+    }
+}
+.fancybox-video{
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+@media(--mobile){
+    .fancybox-slide{
+        padding: 0;
+    }
+}

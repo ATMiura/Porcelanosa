@@ -1,0 +1,36 @@
+<%
+    const listNew = [
+        { img: './images/content/slider-collections-img-1.jpg', title: 'Mirage-Image', price: 'от 16 500 руб. / м2' },
+        { img: './images/content/slider-collections-img-2.jpg', title: 'Mirage-Image', price: 'от 16 500 руб. / м2' },
+        { img: './images/content/slider-collections-img-3.jpg', title: 'Mirage-Image', price: 'от 16 500 руб. / м2' },
+
+        { img: './images/content/slider-collections-img-1.jpg', title: 'Mirage-Image', price: 'от 16 500 руб. / м2' },
+        { img: './images/content/slider-collections-img-2.jpg', title: 'Mirage-Image', price: 'от 16 500 руб. / м2' },
+        { img: './images/content/slider-collections-img-3.jpg', title: 'Mirage-Image', price: 'от 16 500 руб. / м2' },
+    ]
+%>
+
+<div id="<%= sliderId %>" class="slider swiper-slider <%= sliderClass %> <% if(sliderDark) { %> slider-dark <% } %>">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <% list.forEach(function (item) { %>
+                <%- require("./swiper-slide.ejs")({ img: item.img, title: item.title, price: item.price }) %>
+            <% }) %>
+        </div>
+        <div class="swiper-navigation">
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-wrapper">
+                <div class="swiper-button swiper-button-prev">
+                    <svg class="i-icon">
+                        <use xlink:href="#i-slider-arrow-left"></use>
+                    </svg>
+                </div>
+                <div class="swiper-button swiper-button-next">
+                    <svg class="i-icon">
+                        <use xlink:href="#i-slider-arrow-right"></use>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

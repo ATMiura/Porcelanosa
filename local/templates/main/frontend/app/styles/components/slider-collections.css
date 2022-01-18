@@ -1,0 +1,106 @@
+@import "../media.css";
+@import "../variables.css";
+
+.slider-collections{
+    .swiper-container{
+        overflow: visible;
+    }
+    .swiper-slide{
+        width: 66%;
+        .collections-item-content{
+            opacity: 0;
+            visibility: hidden;
+        }
+        &-active{
+            .collections-item-content{
+                opacity: 1;
+                visibility: visible;
+                transition-duration: .3s;
+                transition-delay: .3s;
+            }
+        }
+        &.swiper-slide-active{
+            &:hover{
+                .collections-item__image{
+                    filter: brightness(60%);
+                    transition: all 0.5s ease-in;
+                }
+            }
+        }
+        &:not(.swiper-slide-active){
+            .collections-item__picture{
+                position: relative;
+                display: block;
+            }
+            .collections-item__image{
+                filter: brightness(25%);
+                transition: all 0.5s ease-in;
+            }
+        }
+        .swiper-slide-prev,
+        .swiper-slide-next{
+            .collections-item__image{
+                filter: brightness(40%);
+                transition: all 0.5s ease-in;
+            }
+        }
+        &:hover{
+            .collections-item-content{
+                color: var(--c-gold-hover);
+            }
+        }
+    }
+    .swiper-navigation{
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 1;
+
+        height: 106px;
+        width: 100%;
+        max-width: 100%;
+
+    }
+
+    .swiper-pagination,
+    .swiper-button-wrapper {
+        position: absolute;
+        width: 100%;
+        max-width: 240px;
+    }
+
+    .swiper-pagination{
+        left: -14px;
+        bottom: 47px;
+    }
+    .swiper-button-wrapper {
+        right: 0;
+        bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-left: auto;
+    }
+    .swiper-button-next,
+    .swiper-button-prev{
+        position: relative;
+        top: 0;
+        margin-top: 0;
+    }
+    @media(--tablet){
+        /*.swiper-container{
+            padding: 0 20px;
+        }*/
+        .swiper-pagination,
+        .swiper-button-wrapper{
+            display: none;
+        }
+    }
+    @media(--mobile){
+        padding-top: 5px;
+    }
+    @media(--mobile-s){
+        padding-top: 5px;
+    }
+}

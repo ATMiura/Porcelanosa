@@ -1,0 +1,44 @@
+<div class="grid">
+    <div class="grid__col grid__col--3 filter-wrapper" data-desktop="bx-filter">
+
+        <% if(!searchPage) { %>
+            <%- require('../components/bx/bx-filter.ejs')() %>
+        <% } %>
+    </div>
+    <div class="grid__col grid__col--9">
+        <% if(!searchPage) { %>
+            <div class="catalog-fast-links">
+                <a href="#" class="catalog-fast__link current">Матовые</a>
+                <a href="#" class="catalog-fast__link">Глянцевые</a>
+                <a href="#" class="catalog-fast__link">Полированные</a>
+            </div>
+            <div class="catalog__sorting">
+                <div class="toggle-filter">
+                    <button class="toggle-filter__btn" type="button" data-mobile-filter-open="">
+                        <svg class="i-icon i-filter">
+                            <use xlink:href="#i-filter"></use>
+                        </svg>
+                        <span>Фильтр</span>
+                    </button>
+                </div>
+                <%- require("../components/elements/sorting.ejs")() %>
+                <div class="catalog-switch">
+                    <% if(catalogType === 'list') { %>
+                        <a href="#" class="btn btn--catalog active">Товары</a>
+                        <a href="#" class="btn btn--catalog">Коллекции</a>
+                    <% } else { %>
+                        <a href="#" class="btn btn--catalog">Товары</a>
+                        <a href="#" class="btn btn--catalog active">Коллекции</a>
+                    <% } %>
+                </div>
+            </div>
+        <% } %>
+
+        <%- require('../components/catalog/catalog.ejs')({catalogType: catalogType, }) %>
+
+        <div class="load-more catalog__show">
+            <button class="load-more__button" id="ajax_product" href="">Показать еще</button>
+        </div>
+        <%- require("../components/elements/pagination.ejs")() %>
+    </div>
+</div>

@@ -1,0 +1,240 @@
+@import "variables.css";
+@import "media.css";
+
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100vh;
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+body {
+    min-height: inherit;
+    font-family: 'TT Norms Pro';
+    font-weight: 500;
+    letter-spacing: 0.002rem;
+    color: var(--c-black);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    &.overflow-hidden {
+        overflow: hidden;
+    }
+    &.is-mobile-menu-open{
+        overflow: hidden;
+    }
+}
+
+sup {
+    top: -7px;
+    font-size: 55%;
+    left: 0;
+}
+.is-empty{
+    display: none;
+}
+
+#svg-sprite {
+    display: none !important;
+}
+
+.flow-container {
+    display: flex;
+    flex-flow: column;
+    min-height: inherit;
+    /*overflow-x: hidden;*/
+    z-index: 3;
+}
+
+.content {
+    position: relative;
+    display: block;
+    flex: 1 0 0;
+    overflow-x: initial;
+}
+
+.container {
+    max-width: 1630px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-family: 'TT Norms Pro';
+    font-weight: bold;
+    line-height: 1.24;
+    text-transform: uppercase;
+}
+
+h1, .h1 {
+    font-size: 45px;
+}
+
+h2, .h2 {
+    font-size: 70px;
+    line-height: .9;
+}
+
+h3, .h3 {
+    font-size: 30px;
+}
+
+h4, .h4 {
+    font-size: 24px;
+}
+
+h5, .h5 {
+    font-size: 20px;
+}
+
+h6, .h6 {
+    font-size: 19px;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+
+}
+
+a {
+    text-decoration: none;
+    font-weight: normal;
+    color: var(--c-gold);
+    transition: .2s;
+
+    &:hover {
+        text-decoration: none;
+        color: var(--c-gold);
+    }
+    &:active {
+        color: var(--c-gold);
+    }
+}
+
+.link {
+    @extend a;
+
+    &--dotted {
+        text-decoration: none;
+        border-bottom: 2px dotted;
+
+        &:hover {
+            border-bottom-color: transparent;
+        }
+    }
+}
+.none-message{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 30px 0;
+    text-align: center;
+
+    font-size: 50px;
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--c-gold-light);
+    text-transform: uppercase;
+    @media(--tablet){
+        height: auto;
+    }
+}
+
+.clearfix:after,
+.clearfix:before {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.editor-content{
+    ul, ol {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        > li {
+            padding-left: 30px;
+        }
+        li {
+            margin: 15px 0;
+            line-height: 1.9;
+        }
+    }
+
+    ul {
+        > li {
+            position: relative;
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0.7em;
+                left: 0;
+                width: 8px;
+                height: 8px;
+                background-color: black;
+                border-radius: 100%;
+            }
+        }
+    }
+
+    ol {
+        counter-reset: list 0;
+        ul {
+            opacity: 0.8;
+        }
+        > li {
+            position: relative;
+            font-size: 14px;
+            &::before {
+                counter-increment: list;
+                content: counter(list) ".";
+                position: absolute;
+                top: -1rem;
+                left: 0;
+                font-family: 'Playfair Display';
+                font-size: 24px;
+            }
+            ol {
+                counter-reset: sublist 0;
+                li {
+                    font-size: 13px;
+                    &::before {
+                        counter-increment: sublist;
+                        content: counter(list) "." counter(sublist);
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+    }
+    p {
+        margin: 10px 0;
+        line-height: 1.9;
+        &:first-of-type {
+            margin-top: 0;
+        }
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+
+    hr {
+        margin: 26px 0;
+    }
+}
+
+.mobile-brand-slider{
+    padding: 20px 0;
+    @media(min-width: 651px){
+        display: none;
+    }
+}
+

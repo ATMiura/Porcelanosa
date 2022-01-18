@@ -1,0 +1,10 @@
+<div class="property">
+    <div class="property__list">
+        <% property.forEach(function (item) { %>
+            <div class="property__item">
+                <div class="property__key"><%= item.key %></div>
+                <div class="property__val"><%= item.val %></div>
+            </div>
+        <% }) %>
+    </div>
+</div>

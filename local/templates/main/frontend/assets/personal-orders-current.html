@@ -1,0 +1,1618 @@
+
+<!-- (c) Digital Element || http://www.d-element.ru/ -->
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список заказов</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=61536017-f4a7-4aaf-a708-fa73ef88c02d&amp;lang=ru_RU" type="text/javascript"></script>
+<link href="styles/main.css" rel="stylesheet"></head>
+<body>
+
+<div class="cursor"></div>
+<style>
+    /*html:not(html:hover) .cursor::after {
+        opacity: 0;
+        transform: scale(0);
+    }*/
+    .cursor {
+        display: none;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: var(--width);
+        height: var(--height);
+        transform: translate(calc(var(--x) - var(--width) / 2), calc(var(--y) - var(--height) / 2));
+        transition-duration: 125ms;
+        transition-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+        transition-property: width, height, transform;
+        z-index: 999;
+        border-radius: 50%;
+        pointer-events: none;
+        will-change: transform;
+        opacity: var(--opacity);
+        visibility: var(--visibility);
+        background-color: var(--background);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: initial;
+    }
+    .cursor.active{
+
+    }
+    .cursor-black{
+        background-image: url("data:image/svg+xml,%3Csvg width='25' height='25' viewBox='0 0 25 25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='12' y1='2.18557e-08' x2='12' y2='25' stroke='%23403838'/%3E%3Cline y1='13' x2='25' y2='13' stroke='%23403838'/%3E%3C/svg%3E%0A");
+    }
+    .cursor-white{
+        background-image: url("data:image/svg+xml,%3Csvg width='25' height='25' viewBox='0 0 25 25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M11.5 25L11.5 -4.37114e-08L12.5 0L12.5 25L11.5 25Z' fill='white'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M25 13.5L0 13.5L0 12.5L25 12.5V13.5Z' fill='white'/%3E%3C/svg%3E%0A");
+    }
+    @media (pointer: fine) {
+        .cursor {
+            display: flex;
+        }
+    }
+    .cursor:before {
+        content: "";
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        transition: 300ms opacity cubic-bezier(0.39, 0.575, 0.565, 1),
+        300ms transform cubic-bezier(0.39, 0.575, 0.565, 1),
+        150ms border-radius cubic-bezier(0.39, 0.575, 0.565, 1);
+    }
+    .cursor.show-text:after{
+        content: "смотреть";
+        margin-left: calc(100% + 19px);
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 1.2;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #FFFFFF;
+    }
+</style>
+
+<div class="flow-container flow-container--main">
+    <div class="content">
+        <header class="header " data-header>
+            <div class="header__inner">
+                <div class="header-top">
+                    <div class="header-top__left" data-desktop="header-left">
+                        <div class="header__location" data-move="header-location">
+                            <div class="location" data-location>
+    <a href="#" class="location__link" data-location-select-open>
+        <span class="location__label">Новосибирск</span>
+    </a>
+    <!--<div class="modal-location" data-modal-location="confirm">
+        <button class="modal-location__close" aria-label="Закрыть окно" data-modal-location-close></button>
+        <div class="modal-location__head">
+            <div class="modal-location-title">
+                <div class="modal-location-title__label">Ваш город:</div>
+                <div class="modal-location-title__city">Москва</div>
+            </div>
+        </div>
+        <div class="modal-location__body">
+            <div class="modal-location__buttons">
+                <div class="buttons-list">
+                    <div class="buttons-list__item">
+                        <a href="#" class="btn" data-modal-location-close>Да, верно</a>
+                    </div>
+                    <div class="buttons-list__item">
+                        <a href="#" class="btn btn&#45;&#45;border-orange" data-location-select-open>Нет, выбрать другой</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <div class="modal-location" data-modal-location="select">
+        <button class="modal-location__close" aria-label="Закрыть окно" data-modal-location-close></button>
+        <div class="modal-location__head">
+            <div class="modal-location-title">
+                <div class="modal-location-title__label">Выбрать город</div>
+            </div>
+            <div class="modal-location__form">
+                <form action="" class="modal-location-form">
+                    <input class="input" type="text" placeholder="Введите город" data-location-search>
+                    <button class="submit">
+                        <svg class="i-icon i-search">
+                            <use xlink:href="#i-search"></use>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="modal-location__body" data-location-list>
+            <ul class="modal-location-list">
+                
+                
+                    <li class="modal-location-list__item">
+                        <a href="#" class="modal-location-list__link">
+                            <span>Новосибирск</span>
+                        </a>
+                    </li>
+                
+                    <li class="modal-location-list__item">
+                        <a href="#" class="modal-location-list__link">
+                            <span>Омск</span>
+                        </a>
+                    </li>
+                
+                    <li class="modal-location-list__item">
+                        <a href="#" class="modal-location-list__link">
+                            <span>Барнаул</span>
+                        </a>
+                    </li>
+                
+                    <li class="modal-location-list__item">
+                        <a href="#" class="modal-location-list__link">
+                            <span>Томск</span>
+                        </a>
+                    </li>
+                
+                    <li class="modal-location-list__item">
+                        <a href="#" class="modal-location-list__link">
+                            <span>Кемерово</span>
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+                        </div>
+                        <a href="tel: +7 900 000 00 00" class="header__phone" data-move="header-phone">+7 900 000 00 00</a>
+                    </div>
+                    <div class="header-top__center">
+                        <a class="header-logo" data-move="logo">
+                            <img src="./images/logo.svg" alt="" class="header-logo__img" title="">
+                        </a>
+                    </div>
+                    <div class="header-top__right">
+                        <div class="header__search" data-header="search">
+                            <div class="search" data-search data-clone="search">
+    <form action="" class="search__form">
+        <input type="text" class="search__input input" placeholder="Поиск по сайту" data-search-input>
+        <div class="search__btns">
+            <button class="search__submit" type="submit">
+                <svg class="i-icon i-search">
+                    <use xlink:href="#i-search"></use>
+                </svg>
+            </button>
+            <svg class="i-icon i-close" data-control-search>
+                <use xlink:href="#i-close"></use>
+            </svg>
+        </div>
+    </form>
+    <div class="search-tooltip" data-search-tooltip>
+    <div class="search-tooltip-cat-list">
+        <div class="search-tooltip-cat-list__item">
+            <a href="#" class="search-tooltip-item__link">
+                <div class="search-tooltip-item__name">Плитка</div>
+            </a>
+        </div>
+    </div>
+    <div class="search-tooltip-list">
+        <div class="search-tooltip-list__item">
+            <div class="search-tooltip-item">
+                <div class="search-tooltip-item__picture">
+                    <a href="#" class="search-tooltip-item__link">
+                        <picture class="search-tooltip-item-picture">
+                            <img src="./images/content/search-img-1.jpg" alt="" class="search-tooltip-item-picture__img">
+                        </picture>
+                    </a>
+                </div>
+                <div class="search-tooltip-item__content">
+                    <a href="#" class="search-tooltip-item__link">
+                        <div class="search-tooltip-item__name">Плитка Mirage-Image</div>
+                    </a>
+                </div>
+                <div class="search-tooltip-item__price">
+                    <div class="price">
+                        <div class="price__value">400 руб. / м <sup>2</sup></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="search-tooltip-list__item">
+            <div class="search-tooltip-item">
+                <div class="search-tooltip-item__picture">
+                    <a href="#" class="search-tooltip-item__link">
+                        <picture class="search-tooltip-item-picture">
+                            <img src="./images/content/search-img-2.jpg" alt="" class="search-tooltip-item-picture__img">
+                        </picture>
+                    </a>
+                </div>
+                <div class="search-tooltip-item__content">
+                    <a href="#" class="search-tooltip-item__link">
+                        <div class="search-tooltip-item__name">Керамогранит Austin</div>
+                    </a>
+                </div>
+                <div class="search-tooltip-item__price">
+                    <div class="price">
+                        <div class="price__value">48 000 руб. / м <sup>2</sup></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="search-tooltip-list__item">
+            <div class="search-tooltip-item">
+                <div class="search-tooltip-item__picture">
+                    <a href="#" class="search-tooltip-item__link">
+                        <picture class="search-tooltip-item-picture">
+                            <img src="./images/content/search-img-3.jpg" alt="" class="search-tooltip-item-picture__img">
+                        </picture>
+                    </a>
+                </div>
+                <div class="search-tooltip-item__content">
+                    <a href="#" class="search-tooltip-item__link">
+                        <div class="search-tooltip-item__name">Плитка MARMOL CARRARA BLANCO 31.6X90 G-261</div>
+                    </a>
+                </div>
+                <div class="search-tooltip-item__price">
+                    <div class="price">
+                        <div class="price__value">765 899 руб. / м <sup>2</sup></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="search-tooltip__btn">
+        <a class="search-tooltip__link" href="#">
+            <span>Смотреть все</span>
+        </a>
+    </div>
+</div>
+</div>
+                        </div>
+                        <div class="control">
+                            <div href="#" class="control-item control-search" data-control-search>
+                                <svg class="i-icon i-search">
+                                    <use xlink:href="#i-search"></use>
+                                </svg>
+                            </div>
+                            <a href="#auth" class="control-item control-login" data-modal-open>
+                                <svg class="i-icon i-login">
+                                    <use xlink:href="#i-login"></use>
+                                </svg>
+                            </a>
+                            <a href="#" class="control-item control-cart control-favorites">
+                                <div class="control-cart__icon">
+                                    <svg class="i-icon i-favorites">
+                                        <use xlink:href="#i-favorites"></use>
+                                    </svg>
+                                </div>
+                                <div class="control-cart__counter">2</div>
+                            </a>
+                            <a href="#" class="control-item control-cart header-cart">
+                                <div class="control-cart__icon">
+                                    <svg class="i-icon i-cart">
+                                        <use xlink:href="#i-cart"></use>
+                                    </svg>
+                                </div>
+                                <div class="control-cart__counter">1</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-sticky" data-header-sticky>
+                    <nav class="header-nav" data-desktop="header-menu">
+                        <div class="burger" data-burger="catalog">
+                            <div class="burger__icon">
+                                <span class="burger__icon-line"></span>
+                                <span class="burger__icon-line"></span>
+                                <span class="burger__icon-line"></span>
+                            </div>
+                            <div class="burger__label">Каталог</div>
+                        </div>
+                        <div class="mobile-menu-btn btn" data-burger="header-nav">
+                            <div class="burger__icon">
+                                <span class="burger__icon-line"></span>
+                                <span class="burger__icon-line"></span>
+                                <span class="burger__icon-line"></span>
+                            </div>
+                            Меню
+                        </div>
+                        
+                        <ul class="header-nav-list" data-move="header-menu">
+                            
+                                <li class="header-nav-list__item">
+                                    <a href="#" class="header-nav-list__link">плитка</a>
+                                </li>
+                            
+                                <li class="header-nav-list__item">
+                                    <a href="#" class="header-nav-list__link">сантехника</a>
+                                </li>
+                            
+                                <li class="header-nav-list__item">
+                                    <a href="#" class="header-nav-list__link">мебель</a>
+                                </li>
+                            
+                                <li class="header-nav-list__item">
+                                    <a href="#" class="header-nav-list__link">sale</a>
+                                </li>
+                            
+                                <li class="header-nav-list__item">
+                                    <a href="#" class="header-nav-list__link">услуги</a>
+                                </li>
+                            
+                                <li class="header-nav-list__item">
+                                    <a href="#" class="header-nav-list__link">проекты</a>
+                                </li>
+                            
+                                <li class="header-nav-list__item">
+                                    <a href="#" class="header-nav-list__link">профессионалам</a>
+                                </li>
+                            
+                        </ul>
+                    </nav>
+                    <div class="header-catalog" data-header-catalog data-desktop="catalog">
+                        <div class="header-catalog__inner" data-move="catalog">
+                            
+
+                            <ul class="header-catalog-list">
+                                
+                                    <li class="header-catalog-item active " data-catalog-item data-id="0">
+                                        <a href="#Плитка" class="header-catalog-item__link" data-catalog-item-link>Плитка</a>
+                                    </li>
+                                
+                                    <li class="header-catalog-item  has-child" data-catalog-item data-id="1">
+                                        <a href="#Сантехника" class="header-catalog-item__link" data-catalog-item-link>Сантехника</a>
+                                    </li>
+                                
+                                    <li class="header-catalog-item  has-child" data-catalog-item data-id="2">
+                                        <a href="#Мебель" class="header-catalog-item__link" data-catalog-item-link>Мебель</a>
+                                    </li>
+                                
+                                    <li class="header-catalog-item  has-child" data-catalog-item data-id="3">
+                                        <a href="#Распродажа" class="header-catalog-item__link" data-catalog-item-link>Распродажа</a>
+                                    </li>
+                                
+                            </ul>
+                            <div class="header-sub-catalog">
+                                
+                                    
+                                
+                                    
+                                        <div class="header-sub-catalog-group " data-catalog-group data-group-id="1">
+                                            <ul class="header-sub-catalog-list">
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Сантехника Керамическая плитка</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Сантехника Керамогранит</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Сантехника Крупноформатный керамогранит</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Сантехника Мозайка</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Сантехника Паркет, ламинат, виниловые покрытия</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Сантехника Керамический паркет</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Сантехника Натуральный камень</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Сантехника Искусственный камень</a>
+                                                    </li>
+                                                
+                                            </ul>
+                                            <div class="brands">
+                                                <div class="brands-list">
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-1.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-2.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-3.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-4.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                
+                                    
+                                        <div class="header-sub-catalog-group " data-catalog-group data-group-id="2">
+                                            <ul class="header-sub-catalog-list">
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Мебель Керамическая плитка</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Мебель Керамогранит</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Мебель Крупноформатный керамогранит</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Мебель Мозайка</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Мебель Паркет, ламинат, виниловые покрытия</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Мебель Керамический паркет</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Мебель Натуральный камень</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Мебель Искусственный камень</a>
+                                                    </li>
+                                                
+                                            </ul>
+                                            <div class="brands">
+                                                <div class="brands-list">
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-1.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-2.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-3.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-4.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                
+                                    
+                                        <div class="header-sub-catalog-group " data-catalog-group data-group-id="3">
+                                            <ul class="header-sub-catalog-list">
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Распродажа Керамическая плитка</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Распродажа Керамогранит</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Распродажа Крупноформатный керамогранит</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Распродажа Мозайка</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Распродажа Паркет, ламинат, виниловые покрытия</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Распродажа Керамический паркет</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Распродажа Натуральный камень</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Распродажа Искусственный камень</a>
+                                                    </li>
+                                                
+                                            </ul>
+                                            <div class="brands">
+                                                <div class="brands-list">
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-1.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-2.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-3.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-4.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+
+
+<section class="section-head">
+    <div class="container">
+        <div class="section-breadcrumbs">
+    <div class="breadcrumbs">
+        <ul class="breadcrumbs__list">
+            <li class="breadcrumbs__item">
+                <a href="#" class="breadcrumbs__link">
+                    <span>Главная</span>
+                </a>
+            </li>
+            <li class="breadcrumbs-list__item">
+                <span>Список заказов</span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+        <div class="section-head__title">
+            <h1 class="h1">Список заказов</h1>
+            <div class="personal-switch">
+                <a href="personal-orders-current.html" class="btn btn--personal">Текущие заказы</a>
+                <a href="personal-orders-finished.html" class="btn btn--personal active">Завершенные заказы</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section-personal">
+    <div class="container">
+        <div class="personal grid">
+            <div class="personal-col personal-col__nav grid__col grid__col--3">
+                <nav class="personal-nav">
+    <ul class="personal-nav-list">
+        <li class="personal-nav-list__item">
+            <a href="personal-data.html" class="personal-nav-list-item__link ">Личные данные</a>
+        </li>
+        <li class="personal-nav-list__item">
+            <a href="personal-orders-current.html" class="personal-nav-list-item__link is-active">Список заказов</a>
+        </li>
+        <li class="personal-nav-list__item">
+            <a href="personal-favorites.html" class="personal-nav-list-item__link ">Избранное</a>
+        </li>
+    </ul>
+    <div class="logout">
+        <a href="#" class="logout__link">
+            <svg class="i-icon">
+                <use xlink:href="#i-logout"></use>
+            </svg>
+            <span class="logout__label">Выход</span>
+        </a>
+    </div>
+</nav>
+            </div>
+            <div class="personal-col personal-col__content grid__col grid__col--9">
+                <div class="personal-orders">
+    <div class="order__list">
+        
+
+        
+            <div class="order__item" data-order-item>
+    <div class="order-item__header">
+        <div class="order-item__title">
+            <div class="order-item__name">ЗАКАЗ №</div>
+            <div class="order-item__code">56956826</div>
+        </div>
+        <div class="order-item__status">Завершен</div>
+        <div class="order-item__toggle" data-order-toggle>Свернуть</div>
+    </div>
+    <div class="order-item__body" data-order-preview>
+        <div class="order-item__property">
+            <div class="property">
+    <div class="property__list">
+        
+            <div class="property__item">
+                <div class="property__key">Дата заказа</div>
+                <div class="property__val">28.12.2020</div>
+            </div>
+        
+            <div class="property__item">
+                <div class="property__key">Число позиций</div>
+                <div class="property__val">55</div>
+            </div>
+        
+            <div class="property__item">
+                <div class="property__key">Стоимость заказа</div>
+                <div class="property__val">194 000 руб.</div>
+            </div>
+        
+    </div>
+</div>
+        </div>
+        <div class="order-item__details">
+            <table class="basket-items-list-table">
+                <tbody>
+                    
+                        <tr class="basket-items-list-item-container" >
+                            <td class="basket-items-list-item-descriptions">
+                                <div class="basket-items-list-item-descriptions-inner" >
+                                    <div class="basket-item-block-image">
+                                        <a href="#" class="basket-item-image-link">
+                                            <img class="basket-item-image" alt="" src="./images/content/product_1.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="basket-item-block-info">
+                                        <div class="basket-item-block-info__head">
+                                            <h2 class="basket-item-info-name">
+                                                <a href="#" class="basket-item-info-name-link">
+                                                    <span data-entity="basket-item-name">Плитка Mirage-Image</span>
+                                                </a>
+                                            </h2>
+                                            <div class="basket-item-block-info__top">
+                                                <div class="basket-item-block-article">
+                                                    <div class="basket-item-block-article__key">Артикул</div>
+                                                    <div class="basket-item-block-article__value">V14402641</div>
+                                                </div>
+                                                <div class="basket-item-block-for-one">
+                                                    <div class="basket-item-block-for-one__volume">400 руб. / м<sup>2</sup></div>
+                                                    <div class="basket-item-block-for-one__pack">undefined</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-count">
+                                <div class="basket-item-block-count">
+                                    <span class="basket-item-count-text">42 упак.</span>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-price">
+                                <div class="basket-item-block-price">
+                                    <div class="basket-item-price-current">
+                                        <span class="basket-item-price-current-text">100 000 руб.</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    
+                        <tr class="basket-items-list-item-container" >
+                            <td class="basket-items-list-item-descriptions">
+                                <div class="basket-items-list-item-descriptions-inner" >
+                                    <div class="basket-item-block-image">
+                                        <a href="#" class="basket-item-image-link">
+                                            <img class="basket-item-image" alt="" src="./images/content/product_2.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="basket-item-block-info">
+                                        <div class="basket-item-block-info__head">
+                                            <h2 class="basket-item-info-name">
+                                                <a href="#" class="basket-item-info-name-link">
+                                                    <span data-entity="basket-item-name">Керамогранит Manhattan Par-Ker</span>
+                                                </a>
+                                            </h2>
+                                            <div class="basket-item-block-info__top">
+                                                <div class="basket-item-block-article">
+                                                    <div class="basket-item-block-article__key">Артикул</div>
+                                                    <div class="basket-item-block-article__value">440261241</div>
+                                                </div>
+                                                <div class="basket-item-block-for-one">
+                                                    <div class="basket-item-block-for-one__volume">1 400 руб. / м<sup>2</sup></div>
+                                                    <div class="basket-item-block-for-one__pack">undefined</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-count">
+                                <div class="basket-item-block-count">
+                                    <span class="basket-item-count-text">8 упак.</span>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-price">
+                                <div class="basket-item-block-price">
+                                    <div class="basket-item-price-current">
+                                        <span class="basket-item-price-current-text">94 000 руб.</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+        
+            <div class="order__item" data-order-item>
+    <div class="order-item__header">
+        <div class="order-item__title">
+            <div class="order-item__name">ЗАКАЗ №</div>
+            <div class="order-item__code">98122126</div>
+        </div>
+        <div class="order-item__status">Завершен</div>
+        <div class="order-item__toggle" data-order-toggle>Свернуть</div>
+    </div>
+    <div class="order-item__body" data-order-preview>
+        <div class="order-item__property">
+            <div class="property">
+    <div class="property__list">
+        
+            <div class="property__item">
+                <div class="property__key">Дата заказа</div>
+                <div class="property__val">02.11.2020</div>
+            </div>
+        
+            <div class="property__item">
+                <div class="property__key">Число позиций</div>
+                <div class="property__val">1 145</div>
+            </div>
+        
+            <div class="property__item">
+                <div class="property__key">Стоимость заказа</div>
+                <div class="property__val">99 999 руб.</div>
+            </div>
+        
+    </div>
+</div>
+        </div>
+        <div class="order-item__details">
+            <table class="basket-items-list-table">
+                <tbody>
+                    
+                        <tr class="basket-items-list-item-container" >
+                            <td class="basket-items-list-item-descriptions">
+                                <div class="basket-items-list-item-descriptions-inner" >
+                                    <div class="basket-item-block-image">
+                                        <a href="#" class="basket-item-image-link">
+                                            <img class="basket-item-image" alt="" src="./images/content/product_2.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="basket-item-block-info">
+                                        <div class="basket-item-block-info__head">
+                                            <h2 class="basket-item-info-name">
+                                                <a href="#" class="basket-item-info-name-link">
+                                                    <span data-entity="basket-item-name">Плитка Mirage-Image</span>
+                                                </a>
+                                            </h2>
+                                            <div class="basket-item-block-info__top">
+                                                <div class="basket-item-block-article">
+                                                    <div class="basket-item-block-article__key">Артикул</div>
+                                                    <div class="basket-item-block-article__value">V14402641</div>
+                                                </div>
+                                                <div class="basket-item-block-for-one">
+                                                    <div class="basket-item-block-for-one__volume">400 руб. / м<sup>2</sup></div>
+                                                    <div class="basket-item-block-for-one__pack">undefined</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-count">
+                                <div class="basket-item-block-count">
+                                    <span class="basket-item-count-text">42 упак.</span>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-price">
+                                <div class="basket-item-block-price">
+                                    <div class="basket-item-price-current">
+                                        <span class="basket-item-price-current-text">100 000 руб.</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    
+                        <tr class="basket-items-list-item-container" >
+                            <td class="basket-items-list-item-descriptions">
+                                <div class="basket-items-list-item-descriptions-inner" >
+                                    <div class="basket-item-block-image">
+                                        <a href="#" class="basket-item-image-link">
+                                            <img class="basket-item-image" alt="" src="./images/content/product_3.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="basket-item-block-info">
+                                        <div class="basket-item-block-info__head">
+                                            <h2 class="basket-item-info-name">
+                                                <a href="#" class="basket-item-info-name-link">
+                                                    <span data-entity="basket-item-name">Керамогранит Manhattan Par-Ker</span>
+                                                </a>
+                                            </h2>
+                                            <div class="basket-item-block-info__top">
+                                                <div class="basket-item-block-article">
+                                                    <div class="basket-item-block-article__key">Артикул</div>
+                                                    <div class="basket-item-block-article__value">440261241</div>
+                                                </div>
+                                                <div class="basket-item-block-for-one">
+                                                    <div class="basket-item-block-for-one__volume">1 400 руб. / м<sup>2</sup></div>
+                                                    <div class="basket-item-block-for-one__pack">undefined</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-count">
+                                <div class="basket-item-block-count">
+                                    <span class="basket-item-count-text">8 упак.</span>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-price">
+                                <div class="basket-item-block-price">
+                                    <div class="basket-item-price-current">
+                                        <span class="basket-item-price-current-text">94 000 руб.</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    
+                        <tr class="basket-items-list-item-container" >
+                            <td class="basket-items-list-item-descriptions">
+                                <div class="basket-items-list-item-descriptions-inner" >
+                                    <div class="basket-item-block-image">
+                                        <a href="#" class="basket-item-image-link">
+                                            <img class="basket-item-image" alt="" src="./images/content/product_4.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="basket-item-block-info">
+                                        <div class="basket-item-block-info__head">
+                                            <h2 class="basket-item-info-name">
+                                                <a href="#" class="basket-item-info-name-link">
+                                                    <span data-entity="basket-item-name">Плитка Mirage-Image</span>
+                                                </a>
+                                            </h2>
+                                            <div class="basket-item-block-info__top">
+                                                <div class="basket-item-block-article">
+                                                    <div class="basket-item-block-article__key">Артикул</div>
+                                                    <div class="basket-item-block-article__value">V14402641</div>
+                                                </div>
+                                                <div class="basket-item-block-for-one">
+                                                    <div class="basket-item-block-for-one__volume">400 руб. / м<sup>2</sup></div>
+                                                    <div class="basket-item-block-for-one__pack">undefined</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-count">
+                                <div class="basket-item-block-count">
+                                    <span class="basket-item-count-text">42 упак.</span>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-price">
+                                <div class="basket-item-block-price">
+                                    <div class="basket-item-price-current">
+                                        <span class="basket-item-price-current-text">100 000 руб.</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    
+                        <tr class="basket-items-list-item-container" >
+                            <td class="basket-items-list-item-descriptions">
+                                <div class="basket-items-list-item-descriptions-inner" >
+                                    <div class="basket-item-block-image">
+                                        <a href="#" class="basket-item-image-link">
+                                            <img class="basket-item-image" alt="" src="./images/content/product_5.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="basket-item-block-info">
+                                        <div class="basket-item-block-info__head">
+                                            <h2 class="basket-item-info-name">
+                                                <a href="#" class="basket-item-info-name-link">
+                                                    <span data-entity="basket-item-name">Керамогранит Manhattan Par-Ker</span>
+                                                </a>
+                                            </h2>
+                                            <div class="basket-item-block-info__top">
+                                                <div class="basket-item-block-article">
+                                                    <div class="basket-item-block-article__key">Артикул</div>
+                                                    <div class="basket-item-block-article__value">440261241</div>
+                                                </div>
+                                                <div class="basket-item-block-for-one">
+                                                    <div class="basket-item-block-for-one__volume">1 400 руб. / м<sup>2</sup></div>
+                                                    <div class="basket-item-block-for-one__pack">undefined</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-count">
+                                <div class="basket-item-block-count">
+                                    <span class="basket-item-count-text">8 упак.</span>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-price">
+                                <div class="basket-item-block-price">
+                                    <div class="basket-item-price-current">
+                                        <span class="basket-item-price-current-text">94 000 руб.</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    
+                        <tr class="basket-items-list-item-container" >
+                            <td class="basket-items-list-item-descriptions">
+                                <div class="basket-items-list-item-descriptions-inner" >
+                                    <div class="basket-item-block-image">
+                                        <a href="#" class="basket-item-image-link">
+                                            <img class="basket-item-image" alt="" src="./images/content/product_1.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="basket-item-block-info">
+                                        <div class="basket-item-block-info__head">
+                                            <h2 class="basket-item-info-name">
+                                                <a href="#" class="basket-item-info-name-link">
+                                                    <span data-entity="basket-item-name">Плитка Mirage-Image</span>
+                                                </a>
+                                            </h2>
+                                            <div class="basket-item-block-info__top">
+                                                <div class="basket-item-block-article">
+                                                    <div class="basket-item-block-article__key">Артикул</div>
+                                                    <div class="basket-item-block-article__value">V14402641</div>
+                                                </div>
+                                                <div class="basket-item-block-for-one">
+                                                    <div class="basket-item-block-for-one__volume">400 руб. / м<sup>2</sup></div>
+                                                    <div class="basket-item-block-for-one__pack">undefined</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-count">
+                                <div class="basket-item-block-count">
+                                    <span class="basket-item-count-text">42 упак.</span>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-price">
+                                <div class="basket-item-block-price">
+                                    <div class="basket-item-price-current">
+                                        <span class="basket-item-price-current-text">100 000 руб.</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+        
+            <div class="order__item" data-order-item>
+    <div class="order-item__header">
+        <div class="order-item__title">
+            <div class="order-item__name">ЗАКАЗ №</div>
+            <div class="order-item__code">85612246</div>
+        </div>
+        <div class="order-item__status">Завершен</div>
+        <div class="order-item__toggle" data-order-toggle>Свернуть</div>
+    </div>
+    <div class="order-item__body" data-order-preview>
+        <div class="order-item__property">
+            <div class="property">
+    <div class="property__list">
+        
+            <div class="property__item">
+                <div class="property__key">Дата заказа</div>
+                <div class="property__val">01.08.2020</div>
+            </div>
+        
+            <div class="property__item">
+                <div class="property__key">Число позиций</div>
+                <div class="property__val">105</div>
+            </div>
+        
+            <div class="property__item">
+                <div class="property__key">Стоимость заказа</div>
+                <div class="property__val">69 999 руб.</div>
+            </div>
+        
+    </div>
+</div>
+        </div>
+        <div class="order-item__details">
+            <table class="basket-items-list-table">
+                <tbody>
+                    
+                        <tr class="basket-items-list-item-container" >
+                            <td class="basket-items-list-item-descriptions">
+                                <div class="basket-items-list-item-descriptions-inner" >
+                                    <div class="basket-item-block-image">
+                                        <a href="#" class="basket-item-image-link">
+                                            <img class="basket-item-image" alt="" src="./images/content/product_3.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="basket-item-block-info">
+                                        <div class="basket-item-block-info__head">
+                                            <h2 class="basket-item-info-name">
+                                                <a href="#" class="basket-item-info-name-link">
+                                                    <span data-entity="basket-item-name">Плитка Mirage-Image</span>
+                                                </a>
+                                            </h2>
+                                            <div class="basket-item-block-info__top">
+                                                <div class="basket-item-block-article">
+                                                    <div class="basket-item-block-article__key">Артикул</div>
+                                                    <div class="basket-item-block-article__value">V14402641</div>
+                                                </div>
+                                                <div class="basket-item-block-for-one">
+                                                    <div class="basket-item-block-for-one__volume">400 руб. / м<sup>2</sup></div>
+                                                    <div class="basket-item-block-for-one__pack">undefined</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-count">
+                                <div class="basket-item-block-count">
+                                    <span class="basket-item-count-text">42 упак.</span>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-price">
+                                <div class="basket-item-block-price">
+                                    <div class="basket-item-price-current">
+                                        <span class="basket-item-price-current-text">100 000 руб.</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    
+                        <tr class="basket-items-list-item-container" >
+                            <td class="basket-items-list-item-descriptions">
+                                <div class="basket-items-list-item-descriptions-inner" >
+                                    <div class="basket-item-block-image">
+                                        <a href="#" class="basket-item-image-link">
+                                            <img class="basket-item-image" alt="" src="./images/content/product_1.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="basket-item-block-info">
+                                        <div class="basket-item-block-info__head">
+                                            <h2 class="basket-item-info-name">
+                                                <a href="#" class="basket-item-info-name-link">
+                                                    <span data-entity="basket-item-name">Керамогранит Manhattan Par-Ker</span>
+                                                </a>
+                                            </h2>
+                                            <div class="basket-item-block-info__top">
+                                                <div class="basket-item-block-article">
+                                                    <div class="basket-item-block-article__key">Артикул</div>
+                                                    <div class="basket-item-block-article__value">440261241</div>
+                                                </div>
+                                                <div class="basket-item-block-for-one">
+                                                    <div class="basket-item-block-for-one__volume">1 400 руб. / м<sup>2</sup></div>
+                                                    <div class="basket-item-block-for-one__pack">undefined</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-count">
+                                <div class="basket-item-block-count">
+                                    <span class="basket-item-count-text">8 упак.</span>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-price">
+                                <div class="basket-item-block-price">
+                                    <div class="basket-item-price-current">
+                                        <span class="basket-item-price-current-text">94 000 руб.</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    
+                        <tr class="basket-items-list-item-container" >
+                            <td class="basket-items-list-item-descriptions">
+                                <div class="basket-items-list-item-descriptions-inner" >
+                                    <div class="basket-item-block-image">
+                                        <a href="#" class="basket-item-image-link">
+                                            <img class="basket-item-image" alt="" src="./images/content/product_5.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="basket-item-block-info">
+                                        <div class="basket-item-block-info__head">
+                                            <h2 class="basket-item-info-name">
+                                                <a href="#" class="basket-item-info-name-link">
+                                                    <span data-entity="basket-item-name">Плитка Mirage-Image</span>
+                                                </a>
+                                            </h2>
+                                            <div class="basket-item-block-info__top">
+                                                <div class="basket-item-block-article">
+                                                    <div class="basket-item-block-article__key">Артикул</div>
+                                                    <div class="basket-item-block-article__value">V14402641</div>
+                                                </div>
+                                                <div class="basket-item-block-for-one">
+                                                    <div class="basket-item-block-for-one__volume">400 руб. / м<sup>2</sup></div>
+                                                    <div class="basket-item-block-for-one__pack">undefined</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-count">
+                                <div class="basket-item-block-count">
+                                    <span class="basket-item-count-text">42 упак.</span>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-price">
+                                <div class="basket-item-block-price">
+                                    <div class="basket-item-price-current">
+                                        <span class="basket-item-price-current-text">100 000 руб.</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+        
+            <div class="order__item" data-order-item>
+    <div class="order-item__header">
+        <div class="order-item__title">
+            <div class="order-item__name">ЗАКАЗ №</div>
+            <div class="order-item__code">256981226</div>
+        </div>
+        <div class="order-item__status">Завершен</div>
+        <div class="order-item__toggle" data-order-toggle>Свернуть</div>
+    </div>
+    <div class="order-item__body" data-order-preview>
+        <div class="order-item__property">
+            <div class="property">
+    <div class="property__list">
+        
+            <div class="property__item">
+                <div class="property__key">Дата заказа</div>
+                <div class="property__val">08.05.2020</div>
+            </div>
+        
+            <div class="property__item">
+                <div class="property__key">Число позиций</div>
+                <div class="property__val">655</div>
+            </div>
+        
+            <div class="property__item">
+                <div class="property__key">Стоимость заказа</div>
+                <div class="property__val">99 999 руб.</div>
+            </div>
+        
+    </div>
+</div>
+        </div>
+        <div class="order-item__details">
+            <table class="basket-items-list-table">
+                <tbody>
+                    
+                        <tr class="basket-items-list-item-container" >
+                            <td class="basket-items-list-item-descriptions">
+                                <div class="basket-items-list-item-descriptions-inner" >
+                                    <div class="basket-item-block-image">
+                                        <a href="#" class="basket-item-image-link">
+                                            <img class="basket-item-image" alt="" src="./images/content/product_1.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="basket-item-block-info">
+                                        <div class="basket-item-block-info__head">
+                                            <h2 class="basket-item-info-name">
+                                                <a href="#" class="basket-item-info-name-link">
+                                                    <span data-entity="basket-item-name">Плитка Mirage-Image</span>
+                                                </a>
+                                            </h2>
+                                            <div class="basket-item-block-info__top">
+                                                <div class="basket-item-block-article">
+                                                    <div class="basket-item-block-article__key">Артикул</div>
+                                                    <div class="basket-item-block-article__value">V14402641</div>
+                                                </div>
+                                                <div class="basket-item-block-for-one">
+                                                    <div class="basket-item-block-for-one__volume">400 руб. / м<sup>2</sup></div>
+                                                    <div class="basket-item-block-for-one__pack">undefined</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-count">
+                                <div class="basket-item-block-count">
+                                    <span class="basket-item-count-text">42 упак.</span>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-price">
+                                <div class="basket-item-block-price">
+                                    <div class="basket-item-price-current">
+                                        <span class="basket-item-price-current-text">100 000 руб.</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    
+                        <tr class="basket-items-list-item-container" >
+                            <td class="basket-items-list-item-descriptions">
+                                <div class="basket-items-list-item-descriptions-inner" >
+                                    <div class="basket-item-block-image">
+                                        <a href="#" class="basket-item-image-link">
+                                            <img class="basket-item-image" alt="" src="./images/content/product_3.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="basket-item-block-info">
+                                        <div class="basket-item-block-info__head">
+                                            <h2 class="basket-item-info-name">
+                                                <a href="#" class="basket-item-info-name-link">
+                                                    <span data-entity="basket-item-name">Керамогранит Manhattan Par-Ker</span>
+                                                </a>
+                                            </h2>
+                                            <div class="basket-item-block-info__top">
+                                                <div class="basket-item-block-article">
+                                                    <div class="basket-item-block-article__key">Артикул</div>
+                                                    <div class="basket-item-block-article__value">440261241</div>
+                                                </div>
+                                                <div class="basket-item-block-for-one">
+                                                    <div class="basket-item-block-for-one__volume">1 400 руб. / м<sup>2</sup></div>
+                                                    <div class="basket-item-block-for-one__pack">undefined</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-count">
+                                <div class="basket-item-block-count">
+                                    <span class="basket-item-count-text">8 упак.</span>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-price">
+                                <div class="basket-item-block-price">
+                                    <div class="basket-item-price-current">
+                                        <span class="basket-item-price-current-text">94 000 руб.</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+        
+
+    </div>
+
+    <div class="pagination">
+    <ul class="pagination-list">
+        <!--class="pagination-list__item--hide" для не активного элемента-->
+        <li class="pagination-list__item pagination-list__item--prev">
+            <a href="#" class="pagination-list__link">
+                <div class="arrow-circle arrow-circle--left"></div>
+            </a>
+        </li>
+        <li class="pagination-list__item current">
+            <a href="#" class="pagination-list__link">01</a>
+        </li>
+        <li class="pagination-list__item">
+            <a href="#" class="pagination-list__link">02</a>
+        </li>
+        <li class="pagination-list__item">
+            <a href="#" class="pagination-list__link">03</a>
+        </li>
+        <li class="pagination-list__item pagination-list__item--dot">
+            <a href="#" class="pagination-list__link">
+                <span class="pagination-dot"></span>
+                <span class="pagination-dot"></span>
+                <span class="pagination-dot"></span>
+            </a>
+        </li>
+        <li class="pagination-list__item">
+            <a href="#" class="pagination-list__link">20</a>
+        </li>
+        <li class="pagination-list__item pagination-list__item--next">
+            <a href="#" class="pagination-list__link">
+                <div class="arrow-circle arrow-circle--right"></div>
+            </a>
+        </li>
+    </ul>
+</div>
+</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+        </main>
+        </div>
+        <footer class="footer">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="footer-row">
+                        <div class="footer-col">
+                            <div class="footer-col__inner">
+                                <div class="footer-col__title">Каталог</div>
+                                <div class="footer-nav">
+                                    <ul class="footer-nav-list">
+                                        <li class="footer-nav-item">
+                                            <a href="#" class="footer-nav__link">Плитка</a>
+                                        </li>
+                                        <li class="footer-nav-item">
+                                            <a href="#" class="footer-nav__link">Сантехника</a>
+                                        </li>
+                                        <li class="footer-nav-item">
+                                            <a href="#" class="footer-nav__link">Мебель</a>
+                                        </li>
+                                        <li class="footer-nav-item">
+                                            <a href="#" class="footer-nav__link">Распродажа</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-col" data-mobile="footer-logo">
+                            <div class="footer-col__inner">
+                                <div class="footer-col__title">Блог</div>
+                                <div class="footer-nav">
+                                    <ul class="footer-nav-list">
+                                        <li class="footer-nav-item">
+                                            <a href="#" class="footer-nav__link">Новости</a>
+                                        </li>
+                                        <li class="footer-nav-item">
+                                            <a href="#" class="footer-nav__link">Мероприятия</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-col">
+                            <div class="footer-col__inner">
+                                <div class="footer-col__title">О компании</div>
+                                <div class="footer-nav">
+                                    <ul class="footer-nav-list">
+                                        <li class="footer-nav-item">
+                                            <a href="#" class="footer-nav__link">Салоны</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-col">
+                            <div class="footer-col__inner">
+                                <div class="footer-col__title">Контакты</div>
+                                <div class="footer-contact-list">
+                                    <a href="tel:+7 (383) 383 09 63" class="footer-contact__item footer__phone">+7 (383) 383 09 63</a>
+                                    <a href="mailto:mail@info.ru" class="footer-contact__item footer__email">E-mail@info.ru</a>
+                                    <div class="footer-contact__item footer__address">г. Новосибирск, <br> Фабричная улица, 31</div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+            <div class="footer-middle">
+                <div class="container" data-desktop="footer-logo">
+                    <div class="footer-logo" data-move="footer-logo">
+                        <a href="#" class="footer-logo-social__link">
+                            <svg class="i-icon i-inst">
+                                <use xlink:href="#i-inst"></use>
+                            </svg>
+                        </a>
+                        <a href="#" class="footer-logo__link">
+                            <img src="./images/footer-logo.svg" alt="" class="footer-logo__image">
+                        </a>
+                        <a href="#" class="footer-logo-social__link">
+                            <svg class="i-icon i-vk">
+                                <use xlink:href="#i-vk"></use>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="subscription">
+                        <div class="subscription__left">
+                            <div class="subscription__info">
+                                <div class="subscription__title">Подписаться на <br> рассылку</div>
+                            </div>
+                        </div>
+                        <div class="subscription__center">
+                            <form class="subscription__form" action="#" data-form="subscription" data-ajax-url="" data-form-no-ajax="">
+                                <label class="subscription__label">
+                                    <input type="text" class="subscription__input input" name="email" data-input-required="email" placeholder="Ваш e-mail">
+                                    <input type="submit" class="subscription__btn" value="Подписаться">
+                                </label>
+                            </form>
+                        </div>
+                        <div class="subscription__right">
+                            <div class="subscription__rules">
+                                <span>Подписываясь, вы соглашаетесь <br> с </span>
+                                <a href="#">условиями обработки персональных данных</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-bottom-row">
+                        <div class="footer-dev">
+                            <a class="footer-dev__link" href="https://iarga.ru" target="_blank">
+                                <span>Сделано в </span>
+                                <img src="./images/svg/dev-logo.svg" alt="" class="footer-dev__logo">
+                            </a>
+                        </div>
+                        <div class="footer__copyright">
+                            <div class="copyright">
+                                <span>© 2021. ООО Мой Дом. Все права защищены. </span>
+                            </div>
+                        </div>
+                        <div class="footer__privacy">
+                            <div class="privacy">
+                                <div class="privacy__item">
+                                    <a href="#" class="privacy__link">Политика конфеденциальности</a>
+                                </div>
+                                <div class="privacy__item">
+                                    <a href="#" class="privacy__link">Публичная оферта</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        </div>
+
+        <div class="whats-app">
+            <a href="#" class="whats-app__link">
+                <svg class="i-icon i-wa">
+                    <use xlink:href="#i-wa"></use>
+                </svg>
+            </a>
+        </div>
+
+        <div id="mobileFilter" class="mobile-filter" data-mobile-filter>
+    <button class="mobile-filter__close circle-close" data-mobile-filter-close></button>
+    <div class="mobile-filter__filter" data-mobile="bx-filter"></div>
+</div>
+        <div id="mobileMenu" class="mobile-menu" data-mobile-menu>
+    <div class="mobile-menu__section" data-mobile-section="catalog">
+
+    </div>
+    <div class="mobile-menu__section" data-mobile-section="header-nav">
+
+    </div>
+</div>
+        <div id="mobileSearch" class="mobile-search" data-mobile-search>
+    <div class="mobile-search__section mobile-search__search" data-mobile="header-search">
+
+    </div>
+    <div class="mobile-search__section mobile-search__logo" data-mobile="header-logo">
+
+    </div>
+</div>
+        <div id="auth" class="modal modal-small">
+    <div class="modal__head">
+        <div class="modal__title">Вход в личный кабинет</div>
+    </div>
+    <div class="modal__body">
+        <form class="modal__form" data-form data-ajax-url="">
+            <label class="modal__label">
+                <input type="text" class="modal__input input" placeholder="+ 7 (ххх)  ххх - хх-хх" data-inputmask data-input-required="phone">
+            </label>
+            <label class="modal__label">
+                <input type="text" class="modal__input input" placeholder="Введите код из СМС*" data-input-required="code">
+            </label>
+            <div class="modal__button">
+                <button type="submit" class="modal__submit btn btn--brown--dark">
+                    <span>Получить код</span>
+                </button>
+                <div class="modal__code">
+                    Не пришел код?
+                    <span>Повторить отправку можно через <span>60</span> сек</span>
+                    <button type="button" class="resend-code">Отправить код</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="reviewVideo" class="modal">
+    <div class="modal__body">
+        <div class="video-wrapper">
+            <div class="video" data-video>
+                <a class="video__link" href="./video/video.mp4" data-video-link="">
+                    <picture>
+                        <img class="video__media" src="./images/content/video-image.jpg" alt="" data-video-media="">
+                    </picture>
+                </a>
+                <button class="video__button" type="button" aria-label="Запустить видео" data-video-button="">
+                    <img src="./images/svg/video-play.svg" alt="">
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <div class="overlay"></div>
+        <div class="preloader" data-preloader>
+            <div class="preloader__circle"></div>
+            <div class="preloader__circle"></div>
+            <div class="preloader__circle"></div>
+        </div>
+    <script type="text/javascript" src="bundle.js"></script></body>
+</html>

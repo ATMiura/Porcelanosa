@@ -1,0 +1,111 @@
+@import "../media.css";
+@import "../variables.css";
+
+.post{
+
+}
+.post__banner{
+    margin-bottom: 50px;
+    @media(--mobile){
+        margin-bottom: 30px;
+    }
+}
+.post__picture{
+    display: inline-block;
+    font-size: 0;
+    line-height: 0;
+}
+.post__image{
+
+}
+.post__date{
+    @media(--mobile){
+        width: 100%;
+        min-width: 100%;
+        margin-bottom: 30px;
+    }
+}
+.post-date{
+    display: flex;
+    align-items: center;
+    padding-top: 15px;
+
+    font-family: 'History Pro 02';
+    font-size: 12px;
+    line-height: 1;
+    color: var(--c-gold);
+    text-transform: uppercase;
+
+    border-top: 1px solid #A77255;
+
+    &:before{
+        content: "";
+        display: block;
+        width: 18px;
+        height: 18px;
+        margin-right: 17px;
+        border: 1px solid #A77255;
+        border-radius: 100%;
+    }
+    @media(--mobile){
+        display: inline-flex;
+    }
+}
+.post-date__list{
+    display: flex;
+    align-items: flex-end;
+}
+.post-date__item{
+    margin-right: 5px;
+    &:last-child{
+        margin-bottom: 5px;
+    }
+}
+.post-date__day{
+    font-weight: normal;
+    font-size: 40px;
+}
+.post-date__month{
+    margin-bottom: 5px;
+}
+.post-date__year{
+
+}
+
+.post__editor{
+    margin-bottom: 63px;
+    * {
+        font-size: 18px;
+        @media(--mobile){
+            font-size: 16px;
+        }
+    }
+    @media(--mobile){
+        width: 100%;
+        min-width: 100%;
+        margin-bottom: 30px;
+    }
+}
+.post__gallery{
+    margin-bottom: 20px;
+    .masonry{
+        padding: 0;
+    }
+}
+.post__back__link{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 238px;
+    width: 100%;
+
+    .i-icon{
+        margin-right: 10px;
+    }
+
+    &:hover{
+        path{
+            fill: var(--c-gold);
+        }
+    }
+}

@@ -1,0 +1,20 @@
+.brands{
+
+}
+.brands-list{
+
+}
+.brands-item{
+    &:not(:last-child){
+        margin-bottom: 25px;
+    }
+}
+.brands__link{
+    display: inline-block;
+}
+.brands__picture{
+
+}
+.brands__image{
+
+}

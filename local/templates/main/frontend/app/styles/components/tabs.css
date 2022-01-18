@@ -1,0 +1,33 @@
+@import "../media.css";
+@import "../variables.css";
+
+[data-tabs]{
+
+}
+[data-tabs-nav]{
+    display: flex;
+    align-items: center;
+}
+[data-tabs-nav-item]{
+    display: flex;
+    cursor: pointer;
+    &.current{
+
+    }
+}
+[data-tabs-nav-toggle]{
+    width: 100%;
+}
+[data-tabs-content]{
+
+}
+[data-tabs-content-item]{
+    display: none;
+
+    &.current{
+        display: block;
+    }
+    &:not(:last-child) {
+         margin-bottom: 0;
+    }
+}

@@ -1,0 +1,50 @@
+<% const data = {
+    title: 'Плитка',
+    'flowContainerClass' : 'flow-container--main'
+} %>
+<%- require("../layouts/header.ejs")(data) %>
+
+    <section class="section-head">
+        <div class="container">
+            <%- require('../components/elements/breadcrumbs.ejs')(data)%>
+            <div class="section-head__title">
+                <h1 class="h1">Плитка</h1>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-catalog">
+        <div class="container">
+            <div class="grid">
+                <div class="grid__col grid__col--3 filter-wrapper" data-desktop="bx-filter">
+                    <%- require('../components/catalog/catalog-filter-subcategory.ejs')() %>
+                    <%- require('../components/bx/bx-filter.ejs')() %>
+                </div>
+                <div class="grid__col grid__col--9">
+                    <div class="catalog-fast-links">
+                        <a href="#" class="catalog-fast__link current">Матовые</a>
+                        <a href="#" class="catalog-fast__link">Глянцевые</a>
+                        <a href="#" class="catalog-fast__link">Полированные</a>
+                    </div>
+                    <div class="catalog__sorting">
+                        <div class="toggle-filter">
+                            <button class="toggle-filter__btn" type="button" data-mobile-filter-open="">
+                                <svg class="i-icon i-filter">
+                                    <use xlink:href="#i-filter"></use>
+                                </svg>
+                                <span>Фильтр</span>
+                            </button>
+                        </div>
+                        <%- require("../components/elements/sorting.ejs")() %>
+                        <div class="catalog-switch">
+                            <a href="#" class="btn btn--catalog active">Товары</a>
+                            <a href="#" class="btn btn--catalog">Коллекции</a>
+                        </div>
+                    </div>
+                    <div class="none-message">нет товаров</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<%- require("../layouts/footer.ejs")() %>

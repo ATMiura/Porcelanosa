@@ -1,0 +1,69 @@
+<div id="<%= sliderId %>" class="slider swiper-slider slider-<%= sliderClass %> <%= sliderProduct ? 'slider-product' : '' %>">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <% sliderSlides.forEach(function (item) { %>
+
+                <div class="swiper-slide">
+                    <% if(sliderId == 'sliderProjects') { %>
+                        <%- require("../elements/projects-item.ejs")({image: item.img, title: item.title, author: item.author, usedProd: item.usedProd, }) %>
+
+                    <% } else if(sliderId == 'sliderReviews') { %>
+
+                            <%- require("../elements/review-item.ejs")({ reviewText: item.reviewText, image: item.img, name: item.name, position: item.position, }) %>
+
+                    <% } else if(sliderId == 'sliderEvents') { %>
+
+                            <%- require("../elements/events-card.ejs")({date: item.date, image: item.img, title: item.title, place: item.place, }) %>
+
+                    <% } else if(sliderProduct) { %>
+
+                        <div class="catalog-item">
+                            <%- require("../catalog/catalog-item.ejs")({ name: item.name, img: item.img, price: item.price, sale: item.sale, units: item.units }) %>
+                        </div>
+
+                    <% } else if(sliderId == 'sliderCollections') { %>
+
+                            <%- require("../elements/collections-item.ejs")({image: item.img, title: item.title, price: item.price, }) %>
+
+                    <% } %>
+                </div>
+
+            <% }) %>
+        </div>
+    </div>
+    <% if(sliderId == 'sliderCollections') { %>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-wrapper">
+            <div class="swiper-button swiper-button-prev">
+                <svg class="i-icon">
+                    <use xlink:href="#i-slider-arrow-left"></use>
+                </svg>
+            </div>
+            <div class="swiper-button swiper-button-next">
+                <svg class="i-icon">
+                    <use xlink:href="#i-slider-arrow-right"></use>
+                </svg>
+            </div>
+        </div>
+    <% } else { %>
+        <div class="swiper-navigation">
+            <div class="swiper-navigation__container">
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-wrapper">
+                    <div class="swiper-button swiper-button-prev">
+                        <svg class="i-icon">
+                            <use xlink:href="#i-slider-arrow-left"></use>
+                        </svg>
+                    </div>
+                    <div class="swiper-button swiper-button-next">
+                        <svg class="i-icon">
+                            <use xlink:href="#i-slider-arrow-right"></use>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %>
+
+
+</div>

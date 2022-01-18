@@ -1,0 +1,30 @@
+<div class="catalog-item" data-catalog-list-item>
+    <div class="catalog-item__inner" >
+        <div class="catalog-item__head">
+            <a href="#" class="catalog-item__link-picture" >
+                <picture class="catalog-item__picture">
+                    <img src="./images/content/<%= img %>" alt="" class="catalog-item__img">
+                </picture>
+            </a>
+        </div>
+        <div class="catalog-item__body">
+            <a href="#" class="catalog-item__link">
+                <div class="catalog-item__name"><%= name %></div>
+            </a>
+            <%- require("../elements/price.ejs")({ sale: sale, priceValue: price, }) %>
+            <div class="catalog-item__features">
+                <div class="features">
+                    <div class="features__list">
+                        <div class="features__item">120 х 250 см</div>
+                        <div class="features__item">Коллекция VENIS</div>
+                        <div class="features__item">Под заказ</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="catalog-item__foot">
+            <a href="#" class="btn btn--gold">Добавить в корзину</a>
+        </div>
+    </div>
+</div>

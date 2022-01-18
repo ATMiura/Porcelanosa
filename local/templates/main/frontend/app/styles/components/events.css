@@ -1,0 +1,23 @@
+@import "../media.css";
+@import "../variables.css";
+
+.events{
+
+}
+.events-list{
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 0 -15px 25px;
+    .events-card{
+        padding: 0 15px;
+        &:not(:nth-last-child(-n+2)){
+            margin-bottom: 50px;
+        }
+        @media(--tablet){
+            &:not(:last-child){
+                margin-bottom: 30px;
+            }
+        }
+    }
+}

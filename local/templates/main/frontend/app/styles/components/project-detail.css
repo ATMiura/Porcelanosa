@@ -1,0 +1,73 @@
+@import "../media.css";
+@import "../variables.css";
+
+.project{
+    display: flex;
+    flex-wrap: wrap;
+}
+.project__descr{
+    max-width: 947px;
+    padding-right: 30px;
+    .editor{
+        font-size: 18px;
+    }
+}
+.project__right{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+}
+.project__used-products{
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-top: 11px;
+
+    font-size: 24px;
+    color: var(--c-gold-hover);
+
+    border-top: 1px solid #A77255;
+
+    &:before{
+         content: "";
+         min-width: 25px;
+         width: 25px;
+         height: 25px;
+         margin-right: 11px;
+         background-image: url("data:image/svg+xml,%3Csvg width='25' height='25' viewBox='0 0 25 25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M12.5 24C18.8513 24 24 18.8513 24 12.5C24 6.14873 18.8513 1 12.5 1C6.14873 1 1 6.14873 1 12.5C1 18.8513 6.14873 24 12.5 24ZM12.5 25C19.4036 25 25 19.4036 25 12.5C25 5.59644 19.4036 0 12.5 0C5.59644 0 0 5.59644 0 12.5C0 19.4036 5.59644 25 12.5 25Z' fill='%23A77255'/%3E%3C/svg%3E%0A");
+         background-repeat: no-repeat;
+         background-position: center center;
+         background-size: contain;
+    }
+    @media(--tablet-above){
+        font-size: 18px;
+    }
+    @media(--tablet){
+        font-size: 16px;
+    }
+    @media(--mobile-s){
+        font-size: 14px;
+    }
+    @media(--mobile-xs){
+        font-size: 12px;
+        &:before{
+             content: "";
+             min-width: 10px;
+             width: 10px;
+             height: 10px;
+             margin-right: 6px;
+        }
+    }
+}
+.project__label{
+    width: 100%;
+    padding-left: 20.6%;
+    margin-bottom: 35px;
+
+    font-family: "History Pro 02";
+    font-size: 36px;
+    line-height: 1.5;
+
+    border-left: 1px solid var(--c-brown-dark);
+}

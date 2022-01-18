@@ -1,0 +1,32 @@
+@import '../media.css';
+@import "../variables.css";
+
+.header-sticky {
+    z-index: 890;
+    top: 0;
+    left: 0;
+    right: 0;
+    /*transform: translateY(-100%);*/
+    background: white;
+    transition: transform.3s;
+    overflow: hidden;
+
+    &.is-fixed {
+        position: fixed;
+        max-width: 1590px;
+        margin: 0 auto;
+        padding: 0 35px;
+        transform: translateY(0);
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+        overflow: visible;
+    }
+    @media(--tablet){
+        padding: 0 20px;
+    }
+    @media(--mobile){
+        padding: 0;
+        &.is-fixed{
+            padding: 0;
+        }
+    }
+}

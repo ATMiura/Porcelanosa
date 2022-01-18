@@ -1,0 +1,101 @@
+<% const data = {
+    'title': 'Список страниц верстки',
+    'flowContainerClass' : ''
+} %>
+
+<div class="container">
+    <h1>Список страниц верстки</h1>
+
+    <ul>
+        <li>
+            <a href="main.html">Главная</a>
+        </li>
+        <li>
+            <a href="catalog.html">Каталог</a>
+        </li>
+        <li>
+            <a href="catalog-collections.html">Каталог - Коллекции</a>
+        </li>
+        <li>
+            <a href="catalog-list.html">Каталог - Список товаров</a>
+        </li>
+        <li>
+            <a href="catalog-list-empty.html">Каталог - Список товаров пустой</a>
+        </li>
+        <li>
+            <a href="card.html">Карточка товара</a>
+        </li>
+        <li>
+            <a href="collections-detail.html">Коллекции деталка</a>
+        </li>
+        <li>
+            <a href="search-result.html">Результаты поиска</a>
+        </li>
+        <li>
+            <a href="events.html">Меропрития</a>
+        </li>
+        <li>
+            <a href="events-detail.html">Меропрития - деталка</a>
+        </li>
+        <li>
+            <a href="news.html">Новости</a>
+        </li>
+        <li>
+            <a href="news-detail.html">Новости - деталка</a>
+        </li>
+        <li>
+            <a href="projects.html">Проекты</a>
+        </li>
+        <li>
+            <a href="projects-detail.html">Проект - деталка</a>
+        </li>
+        <li>
+            <a href="basket.html">Корзина</a>
+        </li>
+        <li>
+            <a href="thx-for-order.html">Спасибо за заказ</a>
+        </li>
+        <li>
+            <a href="404.html">404</a>
+        </li>
+        <li>
+            <a href="service.html">Услуги</a>
+        </li>
+        <li>
+            <a href="text.html">Текстовая</a>
+        </li>
+        <li>
+            <a href="contact.html">Контакты/салоны</a>
+        </li>
+        <li></li>
+        <li>
+            <a href="personal-data.html">Личные данные</a>
+        </li>
+        <li>
+            <a href="personal-orders-none.html">Нет заказов</a>
+        </li>
+        <li>
+            <a href="personal-orders-current.html">Текущие заказы</a>
+        </li>
+        <li>
+            <a href="personal-orders-finished.html">Завршенные заказы</a>
+        </li>
+        <li>
+            <a href="personal-favorites.html">Избранное</a>
+        </li>
+        <li>
+            <a href="personal-favorites-none.html">Нет избранного</a>
+        </li>
+        <!--<li>
+            Модальные окна
+            <ul>
+                <li>
+                    &lt;!&ndash; data-modal-open - для открытия модального окна&ndash;&gt;
+                    <a href="#call" data-modal-open>Заказать звонок</a>
+                </li>
+            </ul>
+        </li>-->
+    </ul>
+</div>
+
+<%- require("../layouts/modals.ejs")() %>

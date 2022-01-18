@@ -1,0 +1,22 @@
+@import "../media.css";
+@import "../variables.css";
+
+.location {
+    position: relative;
+}
+.location__label {
+
+}
+.location__link {
+    padding: 0;
+    font-weight: 500;
+    color: #BC9C76;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: .2s;
+    &:focus,
+    &:focus-visible{
+         outline: none;
+    }
+}

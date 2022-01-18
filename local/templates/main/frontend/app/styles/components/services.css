@@ -1,0 +1,40 @@
+@import "../media.css";
+@import "../variables.css";
+
+.services-property__switch{
+    width: 240px;
+    height: 50px;
+
+    font-weight: normal;
+    line-height: 48px;
+    color: var(--c-gold);
+    text-align: center;
+    text-transform: uppercase;
+
+    border: 1px solid var(--c-gold-light);
+    &:not(:last-child){
+        border-right: 0;
+    }
+
+    &.current{
+         color: var(--c-brown-dark);
+         background: var(--c-gold-light);
+    }
+}
+.services-property__item{
+    padding-top: 50px;
+}
+.services-property__content{
+
+}
+.services-property__title{
+    margin-bottom: 50px;
+
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+.services-property__table{
+
+}

@@ -1,0 +1,73 @@
+<div class="personal-orders">
+    <div class="order__list">
+        <%
+            const order__list = {
+                orderItem: [
+                {
+                    code: '56956826',
+                    status: 'Завершен',
+                    property: [
+                        { key: 'Дата заказа', val: '28.12.2020', },
+                        { key: 'Число позиций', val: '55', },
+                        { key: 'Стоимость заказа', val: '194 000 руб.', }
+                    ],
+                    orderItems: [
+                        { image: 'product_1', name: 'Плитка Mirage-Image', code: 'V14402641', volume: '400 руб.', part: '148 400 руб. / упак.', count: '42 упак.', cost: '100 000 руб.' },
+                        { image: 'product_2', name: 'Керамогранит Manhattan Par-Ker', code: '440261241', volume: '1 400 руб.', part: '8 400 руб. / упак.', count: '8 упак.', cost: '94 000 руб.' },
+                    ]
+                },
+                {
+                    code: '98122126',
+                    status: 'Завершен',
+                    property: [
+                        { key: 'Дата заказа', val: '02.11.2020', },
+                        { key: 'Число позиций', val: '1 145', },
+                        { key: 'Стоимость заказа', val: '99 999 руб.', }
+                    ],
+                    orderItems: [
+                        { image: 'product_2', name: 'Плитка Mirage-Image', code: 'V14402641', volume: '400 руб.', part: '148 400 руб. / упак.', count: '42 упак.', cost: '100 000 руб.' },
+                        { image: 'product_3', name: 'Керамогранит Manhattan Par-Ker', code: '440261241', volume: '1 400 руб.', part: '8 400 руб. / упак.', count: '8 упак.', cost: '94 000 руб.' },
+                        { image: 'product_4', name: 'Плитка Mirage-Image', code: 'V14402641', volume: '400 руб.', part: '148 400 руб. / упак.', count: '42 упак.', cost: '100 000 руб.' },
+                        { image: 'product_5', name: 'Керамогранит Manhattan Par-Ker', code: '440261241', volume: '1 400 руб.', part: '8 400 руб. / упак.', count: '8 упак.', cost: '94 000 руб.' },
+                        { image: 'product_1', name: 'Плитка Mirage-Image', code: 'V14402641', volume: '400 руб.', part: '148 400 руб. / упак.', count: '42 упак.', cost: '100 000 руб.' },
+                    ]
+                },
+                {
+                    code: '85612246',
+                    status: 'Завершен',
+                    property: [
+                        { key: 'Дата заказа', val: '01.08.2020', },
+                        { key: 'Число позиций', val: '105', },
+                        { key: 'Стоимость заказа', val: '69 999 руб.', }
+                    ],
+                    orderItems: [
+                        { image: 'product_3', name: 'Плитка Mirage-Image', code: 'V14402641', volume: '400 руб.', part: '148 400 руб. / упак.', count: '42 упак.', cost: '100 000 руб.' },
+                        { image: 'product_1', name: 'Керамогранит Manhattan Par-Ker', code: '440261241', volume: '1 400 руб.', part: '8 400 руб. / упак.', count: '8 упак.', cost: '94 000 руб.' },
+                        { image: 'product_5', name: 'Плитка Mirage-Image', code: 'V14402641', volume: '400 руб.', part: '148 400 руб. / упак.', count: '42 упак.', cost: '100 000 руб.' },
+                    ]
+                },
+                {
+                    code: '256981226',
+                    status: 'Завершен',
+                    property: [
+                        { key: 'Дата заказа', val: '08.05.2020', },
+                        { key: 'Число позиций', val: '655', },
+                        { key: 'Стоимость заказа', val: '99 999 руб.', }
+                    ],
+                    orderItems: [
+                        { image: 'product_1', name: 'Плитка Mirage-Image', code: 'V14402641', volume: '400 руб.', part: '148 400 руб. / упак.', count: '42 упак.', cost: '100 000 руб.' },
+                        { image: 'product_3', name: 'Керамогранит Manhattan Par-Ker', code: '440261241', volume: '1 400 руб.', part: '8 400 руб. / упак.', count: '8 упак.', cost: '94 000 руб.' },
+                    ]
+                }
+                ]
+            }
+        %>
+
+        <% order__list.orderItem.forEach(function(item) { %>
+            <%-require("../elements/order-item.ejs")({ code: item.code, status: item.status, property: item.property, orderItems: item.orderItems }) %>
+        <% }); %>
+
+    </div>
+
+    <%- require("../elements/pagination.ejs")() %>
+</div>

@@ -1,0 +1,190 @@
+<%
+    const property = [
+        {
+            key: 'Тип поверхности',
+            val: 'Полированный',
+        },
+        {
+            key: 'Тип плитки',
+            val: 'Напольная',
+        },
+        {
+            key: 'Цвет',
+            val: 'Белый',
+        },
+        {
+            key: 'Cтруктура поверхности',
+            val: 'Под мрамор',
+        },
+        {
+            key: 'Размер',
+            val: 'Крупноформатный',
+        },
+        {
+            key: 'Коллекция',
+            val: 'Venis',
+        },
+    ]
+%>
+
+<div class="card">
+    <div class="card-header__mobile" data-mobile="card-header"></div>
+    <div class="slider-card" id="sliderCard">
+        <div class="slider-card__container swiper-container">
+            <span class="close-button"></span>
+            <div class="swiper-wrapper slider-card__wrapper slider-card__list">
+                <div class="slider-card__item swiper-slide">
+                    <picture class="slider-card__picture">
+                        <source srcset="./images/content/card-image-1.jpg" type="image/webp" data-src="./images/content/card-image-1.jpg">
+                        <img src="./images/content/card-image-1.jpg" alt="" class="slider-card__image" data-src="./images/content/card-image-1.jpg">
+                    </picture>
+                </div>
+                <div class="slider-card__item swiper-slide">
+                    <picture class="slider-card__picture">
+                        <source srcset="./images/content/card-image-2.jpg" type="image/webp" data-src="./images/content/card-image-big-2.jpg">
+                        <img src="./images/content/card-image-2.jpg" alt="" class="slider-card__image" data-src="./images/content/card-image-big-2.jpg">
+                    </picture>
+                </div>
+                <div class="slider-card__item swiper-slide">
+                    <picture class="slider-card__picture">
+                        <source srcset="./images/content/card-image-3.jpg" type="image/webp" data-src="./images/content/card-image-big-3.jpg">
+                        <img src="./images/content/card-image-3.jpg" alt="" class="slider-card__image" data-src="./images/content/card-image-big-3.jpg">
+                    </picture>
+                </div>
+                <div class="slider-card__item swiper-slide">
+                    <picture class="slider-card__picture">
+                        <source srcset="./images/content/card-image-4.jpg" type="image/webp" data-src="./images/content/card-image-big-4.jpg">
+                        <img src="./images/content/card-image-4.jpg" alt="" class="slider-card__image" data-src="./images/content/card-image-big-4.jpg">
+                    </picture>
+                </div>
+                <div class="slider-card__item swiper-slide">
+                    <picture class="slider-card__picture">
+                        <source srcset="./images/content/card-image-5.jpg" type="image/webp" data-src="./images/content/card-image-big-5.jpg">
+                        <img src="./images/content/card-image-5.jpg" alt="" class="slider-card__image" data-src="./images/content/card-image-big-5.jpg">
+                    </picture>
+                </div>
+            </div>
+        </div>
+        <div class="slider-card-thumbs__container swiper-container">
+            <div class="swiper-wrapper slider-card-thumbs__wrapper"></div>
+        </div>
+    </div>
+    <div class="card-right">
+        <div class="card__content">
+            <div class="card__row" data-desktop="card-header">
+                <h1 class="card__title" data-move="card__title">Плитка Mirage-image</h1>
+                <div class="card__code" data-move="card__code">
+                    <%- require("../components/elements/vendor-code.ejs")() %>
+                </div>
+            </div>
+            <div class="card__row">
+                <div class="select">
+                    <div class="select__list">
+                        <a href="#" class="select__item current">100х100</a>
+                        <a href="#" class="select__item">50х50</a>
+                        <a href="#" class="select__item select__more" data-select-more>ещё</a>
+                        <div class="select-more-wrapper">
+                            <div class="select-more__close" data-select-more-close></div>
+                            <div class="select__list">
+                                <a href="#" class="select__item">100х100</a>
+                                <a href="#" class="select__item">50х50</a>
+                                <a href="#" class="select__item">50х50</a>
+                                <a href="#" class="select__item">100х100</a>
+                                <a href="#" class="select__item">50х50</a>
+                                <a href="#" class="select__item">50х50</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card__row">
+                <div class="card__price">
+                    <div class="price">
+                        <div class="price__old">10 900 руб. / упак</div>
+                        <div class="price__value">9 800 руб. / упак</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card__row card__row--flex">
+                <div class="card__label">
+                    <span class="card__label-key">Веберите количество товара:</span>
+                </div>
+                <div class="card__counter">
+                    <div class="counter">
+                        <div class="counter-btns">
+                            <button class="counter__btn counter__btn--reduce" type="button"></button>
+                            <input class="counter__input" type="text" data-inputmask-numeric="" value="1" max="100">
+                            <button class="counter__btn counter__btn--increase" type="button"></button>
+                        </div>
+                        <div class="counter__value">упак = 2,15 м<sup>2</sup></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card__row" data-holder="card-result">
+                <div class="card__label">
+                    <span class="card__label-key">Итого:</span>
+                </div>
+                <div class="card__result">9 800 руб. / м<sup>2</sup></div>
+            </div>
+            <div class="card__row">
+                <div class="card__button">
+                    <a href="#" class="btn btn--brown--dark">Добавить в корзину</a>
+                    <a href="#" class="btn btn--border-brown-dark">Добавить в избранное</a>
+                </div>
+            </div>
+            <div class="card__row">
+                <div class="card-property" data-tabs>
+                    <div class="card-property__head" data-tabs-nav>
+                        <div class="card-property__switch current" data-tabs-nav-item><span data-tabs-nav-toggle>Характеристики</span></div>
+                        <div class="card-property__switch" data-tabs-nav-item><span data-tabs-nav-toggle>Материалы для <br> скачивания</span></div>
+                    </div>
+                    <div class="card-property__body" data-tabs-content>
+                        <div class="card-property__item current" data-tabs-content-item>
+                            <div class="card-property__content">
+                                <%- require("../components/elements/property.ejs")({property: property}) %>
+                            </div>
+                        </div>
+                        <div class="card-property__item" data-tabs-content-item>
+                            <div class="card-property__content">
+                                <div class="property">
+                                    <div class="property__list">
+                                        <div class="property__item">
+                                            <a href="#" class="property__link">
+                                                <div class="property__icon">
+                                                    <svg class="i-icon i-download">
+                                                        <use xlink:href="#i-download"></use>
+                                                    </svg>
+                                                </div>
+                                                <div class="property__val">каталог коллекции</div>
+                                            </a>
+                                        </div>
+                                        <div class="property__item">
+                                            <a href="#" class="property__link">
+                                                <div class="property__icon">
+                                                    <svg class="i-icon i-download">
+                                                        <use xlink:href="#i-download"></use>
+                                                    </svg>
+                                                </div>
+                                                <div class="property__val">3D модель</div>
+                                            </a>
+                                        </div>
+                                        <div class="property__item">
+                                            <a href="#" class="property__link">
+                                                <div class="property__icon">
+                                                    <svg class="i-icon i-download">
+                                                        <use xlink:href="#i-download"></use>
+                                                    </svg>
+                                                </div>
+                                                <div class="property__val">характеристики</div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

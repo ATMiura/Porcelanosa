@@ -1,0 +1,20 @@
+<% const data = {
+    title: '404',
+    'flowContainerClass' : 'flow-container--main'
+} %>
+
+<%- require("../layouts/header.ejs")(data) %>
+
+<section class="section section-404">
+    <div class="container">
+        <div class="message">
+            <div class="message__inner">
+                <div class="message__title">404</div>
+                <div class="message__descr">По вашему запросу ничего не найдено</div>
+                <a href="#" class="message__link">На главную</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- require("../layouts/footer.ejs")() %>

@@ -1,0 +1,72 @@
+<div class="location" data-location>
+    <a href="#" class="location__link" data-location-select-open>
+        <span class="location__label">Новосибирск</span>
+    </a>
+    <!--<div class="modal-location" data-modal-location="confirm">
+        <button class="modal-location__close" aria-label="Закрыть окно" data-modal-location-close></button>
+        <div class="modal-location__head">
+            <div class="modal-location-title">
+                <div class="modal-location-title__label">Ваш город:</div>
+                <div class="modal-location-title__city">Москва</div>
+            </div>
+        </div>
+        <div class="modal-location__body">
+            <div class="modal-location__buttons">
+                <div class="buttons-list">
+                    <div class="buttons-list__item">
+                        <a href="#" class="btn" data-modal-location-close>Да, верно</a>
+                    </div>
+                    <div class="buttons-list__item">
+                        <a href="#" class="btn btn&#45;&#45;border-orange" data-location-select-open>Нет, выбрать другой</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <div class="modal-location" data-modal-location="select">
+        <button class="modal-location__close" aria-label="Закрыть окно" data-modal-location-close></button>
+        <div class="modal-location__head">
+            <div class="modal-location-title">
+                <div class="modal-location-title__label">Выбрать город</div>
+            </div>
+            <div class="modal-location__form">
+                <form action="" class="modal-location-form">
+                    <input class="input" type="text" placeholder="Введите город" data-location-search>
+                    <button class="submit">
+                        <svg class="i-icon i-search">
+                            <use xlink:href="#i-search"></use>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="modal-location__body" data-location-list>
+            <ul class="modal-location-list">
+                <% const list = [
+                    {
+                        title: 'Новосибирск'
+                    },
+                    {
+                        title: 'Омск'
+                    },
+                    {
+                        title: 'Барнаул'
+                    },
+                    {
+                        title: 'Томск'
+                    },
+                    {
+                        title: 'Кемерово'
+                    },
+                ]%>
+                <% list.forEach(function (item) { %>
+                    <li class="modal-location-list__item">
+                        <a href="#" class="modal-location-list__link">
+                            <span><%= item.title%></span>
+                        </a>
+                    </li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+</div>

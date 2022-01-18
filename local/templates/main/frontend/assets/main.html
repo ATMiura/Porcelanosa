@@ -1,0 +1,2290 @@
+
+
+<!-- (c) Digital Element || http://www.d-element.ru/ -->
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=61536017-f4a7-4aaf-a708-fa73ef88c02d&amp;lang=ru_RU" type="text/javascript"></script>
+<link href="styles/main.css" rel="stylesheet"></head>
+<body>
+
+<div class="cursor"></div>
+<style>
+    /*html:not(html:hover) .cursor::after {
+        opacity: 0;
+        transform: scale(0);
+    }*/
+    .cursor {
+        display: none;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: var(--width);
+        height: var(--height);
+        transform: translate(calc(var(--x) - var(--width) / 2), calc(var(--y) - var(--height) / 2));
+        transition-duration: 125ms;
+        transition-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+        transition-property: width, height, transform;
+        z-index: 999;
+        border-radius: 50%;
+        pointer-events: none;
+        will-change: transform;
+        opacity: var(--opacity);
+        visibility: var(--visibility);
+        background-color: var(--background);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: initial;
+    }
+    .cursor.active{
+
+    }
+    .cursor-black{
+        background-image: url("data:image/svg+xml,%3Csvg width='25' height='25' viewBox='0 0 25 25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='12' y1='2.18557e-08' x2='12' y2='25' stroke='%23403838'/%3E%3Cline y1='13' x2='25' y2='13' stroke='%23403838'/%3E%3C/svg%3E%0A");
+    }
+    .cursor-white{
+        background-image: url("data:image/svg+xml,%3Csvg width='25' height='25' viewBox='0 0 25 25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M11.5 25L11.5 -4.37114e-08L12.5 0L12.5 25L11.5 25Z' fill='white'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M25 13.5L0 13.5L0 12.5L25 12.5V13.5Z' fill='white'/%3E%3C/svg%3E%0A");
+    }
+    @media (pointer: fine) {
+        .cursor {
+            display: flex;
+        }
+    }
+    .cursor:before {
+        content: "";
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        transition: 300ms opacity cubic-bezier(0.39, 0.575, 0.565, 1),
+        300ms transform cubic-bezier(0.39, 0.575, 0.565, 1),
+        150ms border-radius cubic-bezier(0.39, 0.575, 0.565, 1);
+    }
+    .cursor.show-text:after{
+        content: "смотреть";
+        margin-left: calc(100% + 19px);
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 1.2;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #FFFFFF;
+    }
+</style>
+
+<div class="flow-container flow-container--main">
+    <div class="content">
+        <header class="header  header-fixed " data-header>
+            <div class="header__inner">
+                <div class="header-top">
+                    <div class="header-top__left" data-desktop="header-left">
+                        <div class="header__location" data-move="header-location">
+                            <div class="location" data-location>
+    <a href="#" class="location__link" data-location-select-open>
+        <span class="location__label">Новосибирск</span>
+    </a>
+    <!--<div class="modal-location" data-modal-location="confirm">
+        <button class="modal-location__close" aria-label="Закрыть окно" data-modal-location-close></button>
+        <div class="modal-location__head">
+            <div class="modal-location-title">
+                <div class="modal-location-title__label">Ваш город:</div>
+                <div class="modal-location-title__city">Москва</div>
+            </div>
+        </div>
+        <div class="modal-location__body">
+            <div class="modal-location__buttons">
+                <div class="buttons-list">
+                    <div class="buttons-list__item">
+                        <a href="#" class="btn" data-modal-location-close>Да, верно</a>
+                    </div>
+                    <div class="buttons-list__item">
+                        <a href="#" class="btn btn&#45;&#45;border-orange" data-location-select-open>Нет, выбрать другой</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <div class="modal-location" data-modal-location="select">
+        <button class="modal-location__close" aria-label="Закрыть окно" data-modal-location-close></button>
+        <div class="modal-location__head">
+            <div class="modal-location-title">
+                <div class="modal-location-title__label">Выбрать город</div>
+            </div>
+            <div class="modal-location__form">
+                <form action="" class="modal-location-form">
+                    <input class="input" type="text" placeholder="Введите город" data-location-search>
+                    <button class="submit">
+                        <svg class="i-icon i-search">
+                            <use xlink:href="#i-search"></use>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="modal-location__body" data-location-list>
+            <ul class="modal-location-list">
+                
+                
+                    <li class="modal-location-list__item">
+                        <a href="#" class="modal-location-list__link">
+                            <span>Новосибирск</span>
+                        </a>
+                    </li>
+                
+                    <li class="modal-location-list__item">
+                        <a href="#" class="modal-location-list__link">
+                            <span>Омск</span>
+                        </a>
+                    </li>
+                
+                    <li class="modal-location-list__item">
+                        <a href="#" class="modal-location-list__link">
+                            <span>Барнаул</span>
+                        </a>
+                    </li>
+                
+                    <li class="modal-location-list__item">
+                        <a href="#" class="modal-location-list__link">
+                            <span>Томск</span>
+                        </a>
+                    </li>
+                
+                    <li class="modal-location-list__item">
+                        <a href="#" class="modal-location-list__link">
+                            <span>Кемерово</span>
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+                        </div>
+                        <a href="tel: +7 900 000 00 00" class="header__phone" data-move="header-phone">+7 900 000 00 00</a>
+                    </div>
+                    <div class="header-top__center">
+                        <a class="header-logo" data-move="logo">
+                            <img src="./images/logo.svg" alt="" class="header-logo__img" title="">
+                        </a>
+                    </div>
+                    <div class="header-top__right">
+                        <div class="header__search" data-header="search">
+                            <div class="search" data-search data-clone="search">
+    <form action="" class="search__form">
+        <input type="text" class="search__input input" placeholder="Поиск по сайту" data-search-input>
+        <div class="search__btns">
+            <button class="search__submit" type="submit">
+                <svg class="i-icon i-search">
+                    <use xlink:href="#i-search"></use>
+                </svg>
+            </button>
+            <svg class="i-icon i-close" data-control-search>
+                <use xlink:href="#i-close"></use>
+            </svg>
+        </div>
+    </form>
+    <div class="search-tooltip" data-search-tooltip>
+    <div class="search-tooltip-cat-list">
+        <div class="search-tooltip-cat-list__item">
+            <a href="#" class="search-tooltip-item__link">
+                <div class="search-tooltip-item__name">Плитка</div>
+            </a>
+        </div>
+    </div>
+    <div class="search-tooltip-list">
+        <div class="search-tooltip-list__item">
+            <div class="search-tooltip-item">
+                <div class="search-tooltip-item__picture">
+                    <a href="#" class="search-tooltip-item__link">
+                        <picture class="search-tooltip-item-picture">
+                            <img src="./images/content/search-img-1.jpg" alt="" class="search-tooltip-item-picture__img">
+                        </picture>
+                    </a>
+                </div>
+                <div class="search-tooltip-item__content">
+                    <a href="#" class="search-tooltip-item__link">
+                        <div class="search-tooltip-item__name">Плитка Mirage-Image</div>
+                    </a>
+                </div>
+                <div class="search-tooltip-item__price">
+                    <div class="price">
+                        <div class="price__value">400 руб. / м <sup>2</sup></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="search-tooltip-list__item">
+            <div class="search-tooltip-item">
+                <div class="search-tooltip-item__picture">
+                    <a href="#" class="search-tooltip-item__link">
+                        <picture class="search-tooltip-item-picture">
+                            <img src="./images/content/search-img-2.jpg" alt="" class="search-tooltip-item-picture__img">
+                        </picture>
+                    </a>
+                </div>
+                <div class="search-tooltip-item__content">
+                    <a href="#" class="search-tooltip-item__link">
+                        <div class="search-tooltip-item__name">Керамогранит Austin</div>
+                    </a>
+                </div>
+                <div class="search-tooltip-item__price">
+                    <div class="price">
+                        <div class="price__value">48 000 руб. / м <sup>2</sup></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="search-tooltip-list__item">
+            <div class="search-tooltip-item">
+                <div class="search-tooltip-item__picture">
+                    <a href="#" class="search-tooltip-item__link">
+                        <picture class="search-tooltip-item-picture">
+                            <img src="./images/content/search-img-3.jpg" alt="" class="search-tooltip-item-picture__img">
+                        </picture>
+                    </a>
+                </div>
+                <div class="search-tooltip-item__content">
+                    <a href="#" class="search-tooltip-item__link">
+                        <div class="search-tooltip-item__name">Плитка MARMOL CARRARA BLANCO 31.6X90 G-261</div>
+                    </a>
+                </div>
+                <div class="search-tooltip-item__price">
+                    <div class="price">
+                        <div class="price__value">765 899 руб. / м <sup>2</sup></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="search-tooltip__btn">
+        <a class="search-tooltip__link" href="#">
+            <span>Смотреть все</span>
+        </a>
+    </div>
+</div>
+</div>
+                        </div>
+                        <div class="control">
+                            <div href="#" class="control-item control-search" data-control-search>
+                                <svg class="i-icon i-search">
+                                    <use xlink:href="#i-search"></use>
+                                </svg>
+                            </div>
+                            <a href="#auth" class="control-item control-login" data-modal-open>
+                                <svg class="i-icon i-login">
+                                    <use xlink:href="#i-login"></use>
+                                </svg>
+                            </a>
+                            <a href="#" class="control-item control-cart control-favorites">
+                                <div class="control-cart__icon">
+                                    <svg class="i-icon i-favorites">
+                                        <use xlink:href="#i-favorites"></use>
+                                    </svg>
+                                </div>
+                                <div class="control-cart__counter">2</div>
+                            </a>
+                            <a href="#" class="control-item control-cart header-cart">
+                                <div class="control-cart__icon">
+                                    <svg class="i-icon i-cart">
+                                        <use xlink:href="#i-cart"></use>
+                                    </svg>
+                                </div>
+                                <div class="control-cart__counter">1</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-sticky" data-header-sticky>
+                    <nav class="header-nav" data-desktop="header-menu">
+                        <div class="burger" data-burger="catalog">
+                            <div class="burger__icon">
+                                <span class="burger__icon-line"></span>
+                                <span class="burger__icon-line"></span>
+                                <span class="burger__icon-line"></span>
+                            </div>
+                            <div class="burger__label">Каталог</div>
+                        </div>
+                        <div class="mobile-menu-btn btn" data-burger="header-nav">
+                            <div class="burger__icon">
+                                <span class="burger__icon-line"></span>
+                                <span class="burger__icon-line"></span>
+                                <span class="burger__icon-line"></span>
+                            </div>
+                            Меню
+                        </div>
+                        
+                        <ul class="header-nav-list" data-move="header-menu">
+                            
+                                <li class="header-nav-list__item">
+                                    <a href="#" class="header-nav-list__link">плитка</a>
+                                </li>
+                            
+                                <li class="header-nav-list__item">
+                                    <a href="#" class="header-nav-list__link">сантехника</a>
+                                </li>
+                            
+                                <li class="header-nav-list__item">
+                                    <a href="#" class="header-nav-list__link">мебель</a>
+                                </li>
+                            
+                                <li class="header-nav-list__item">
+                                    <a href="#" class="header-nav-list__link">sale</a>
+                                </li>
+                            
+                                <li class="header-nav-list__item">
+                                    <a href="#" class="header-nav-list__link">услуги</a>
+                                </li>
+                            
+                                <li class="header-nav-list__item">
+                                    <a href="#" class="header-nav-list__link">проекты</a>
+                                </li>
+                            
+                                <li class="header-nav-list__item">
+                                    <a href="#" class="header-nav-list__link">профессионалам</a>
+                                </li>
+                            
+                        </ul>
+                    </nav>
+                    <div class="header-catalog" data-header-catalog data-desktop="catalog">
+                        <div class="header-catalog__inner" data-move="catalog">
+                            
+
+                            <ul class="header-catalog-list">
+                                
+                                    <li class="header-catalog-item active " data-catalog-item data-id="0">
+                                        <a href="#Плитка" class="header-catalog-item__link" data-catalog-item-link>Плитка</a>
+                                    </li>
+                                
+                                    <li class="header-catalog-item  has-child" data-catalog-item data-id="1">
+                                        <a href="#Сантехника" class="header-catalog-item__link" data-catalog-item-link>Сантехника</a>
+                                    </li>
+                                
+                                    <li class="header-catalog-item  has-child" data-catalog-item data-id="2">
+                                        <a href="#Мебель" class="header-catalog-item__link" data-catalog-item-link>Мебель</a>
+                                    </li>
+                                
+                                    <li class="header-catalog-item  has-child" data-catalog-item data-id="3">
+                                        <a href="#Распродажа" class="header-catalog-item__link" data-catalog-item-link>Распродажа</a>
+                                    </li>
+                                
+                            </ul>
+                            <div class="header-sub-catalog">
+                                
+                                    
+                                
+                                    
+                                        <div class="header-sub-catalog-group " data-catalog-group data-group-id="1">
+                                            <ul class="header-sub-catalog-list">
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Сантехника Керамическая плитка</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Сантехника Керамогранит</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Сантехника Крупноформатный керамогранит</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Сантехника Мозайка</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Сантехника Паркет, ламинат, виниловые покрытия</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Сантехника Керамический паркет</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Сантехника Натуральный камень</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Сантехника Искусственный камень</a>
+                                                    </li>
+                                                
+                                            </ul>
+                                            <div class="brands">
+                                                <div class="brands-list">
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-1.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-2.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-3.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-4.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                
+                                    
+                                        <div class="header-sub-catalog-group " data-catalog-group data-group-id="2">
+                                            <ul class="header-sub-catalog-list">
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Мебель Керамическая плитка</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Мебель Керамогранит</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Мебель Крупноформатный керамогранит</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Мебель Мозайка</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Мебель Паркет, ламинат, виниловые покрытия</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Мебель Керамический паркет</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Мебель Натуральный камень</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Мебель Искусственный камень</a>
+                                                    </li>
+                                                
+                                            </ul>
+                                            <div class="brands">
+                                                <div class="brands-list">
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-1.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-2.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-3.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-4.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                
+                                    
+                                        <div class="header-sub-catalog-group " data-catalog-group data-group-id="3">
+                                            <ul class="header-sub-catalog-list">
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Распродажа Керамическая плитка</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Распродажа Керамогранит</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Распродажа Крупноформатный керамогранит</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Распродажа Мозайка</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Распродажа Паркет, ламинат, виниловые покрытия</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Распродажа Керамический паркет</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Распродажа Натуральный камень</a>
+                                                    </li>
+                                                
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link">Распродажа Искусственный камень</a>
+                                                    </li>
+                                                
+                                            </ul>
+                                            <div class="brands">
+                                                <div class="brands-list">
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-1.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-2.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-3.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-4.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+
+
+
+
+<section class="section section-slider-main">
+    <div id="sliderMain" class="slider-main swiper-slider">
+    <div class="slider-main__container swiper-container">
+        <div class="slider-main__wrapper swiper-wrapper">
+            
+            
+                <div class="slider-main__slide swiper-slide">
+                    <a href="#" class="slider-main__link">
+                        <picture class="slider-main__picture">
+                            <img src="./images/content/slider-main.jpg" alt="" class="slider-main__img">
+                        </picture>
+                        <div class="slider-main__content">
+                            <div class="slider-main__status">New</div>
+                            <h1 class="slider-main__title h1">Плитка <br> MIRAGE-IMAGE уже на складе!</h1>
+                        </div>
+                    </a>
+                </div>
+            
+                <div class="slider-main__slide swiper-slide">
+                    <a href="#" class="slider-main__link">
+                        <picture class="slider-main__picture">
+                            <img src="./images/content/slider-main.jpg" alt="" class="slider-main__img">
+                        </picture>
+                        <div class="slider-main__content">
+                            <div class="slider-main__status">New</div>
+                            <h1 class="slider-main__title h1">Плитка <br> MIRAGE-IMAGE уже на складе!</h1>
+                        </div>
+                    </a>
+                </div>
+            
+                <div class="slider-main__slide swiper-slide">
+                    <a href="#" class="slider-main__link">
+                        <picture class="slider-main__picture">
+                            <img src="./images/content/slider-main.jpg" alt="" class="slider-main__img">
+                        </picture>
+                        <div class="slider-main__content">
+                            <div class="slider-main__status">New</div>
+                            <h1 class="slider-main__title h1">Плитка <br> MIRAGE-IMAGE уже на складе!</h1>
+                        </div>
+                    </a>
+                </div>
+            
+                <div class="slider-main__slide swiper-slide">
+                    <a href="#" class="slider-main__link">
+                        <picture class="slider-main__picture">
+                            <img src="./images/content/slider-main.jpg" alt="" class="slider-main__img">
+                        </picture>
+                        <div class="slider-main__content">
+                            <div class="slider-main__status">New</div>
+                            <h1 class="slider-main__title h1">Плитка <br> MIRAGE-IMAGE уже на складе!</h1>
+                        </div>
+                    </a>
+                </div>
+            
+                <div class="slider-main__slide swiper-slide">
+                    <a href="#" class="slider-main__link">
+                        <picture class="slider-main__picture">
+                            <img src="./images/content/slider-main.jpg" alt="" class="slider-main__img">
+                        </picture>
+                        <div class="slider-main__content">
+                            <div class="slider-main__status">New</div>
+                            <h1 class="slider-main__title h1">Плитка <br> MIRAGE-IMAGE уже на складе!</h1>
+                        </div>
+                    </a>
+                </div>
+            
+                <div class="slider-main__slide swiper-slide">
+                    <a href="#" class="slider-main__link">
+                        <picture class="slider-main__picture">
+                            <img src="./images/content/slider-main.jpg" alt="" class="slider-main__img">
+                        </picture>
+                        <div class="slider-main__content">
+                            <div class="slider-main__status">New</div>
+                            <h1 class="slider-main__title h1">Плитка <br> MIRAGE-IMAGE уже на складе!</h1>
+                        </div>
+                    </a>
+                </div>
+            
+                <div class="slider-main__slide swiper-slide">
+                    <a href="#" class="slider-main__link">
+                        <picture class="slider-main__picture">
+                            <img src="./images/content/slider-main.jpg" alt="" class="slider-main__img">
+                        </picture>
+                        <div class="slider-main__content">
+                            <div class="slider-main__status">New</div>
+                            <h1 class="slider-main__title h1">Плитка <br> MIRAGE-IMAGE уже на складе!</h1>
+                        </div>
+                    </a>
+                </div>
+            
+                <div class="slider-main__slide swiper-slide">
+                    <a href="#" class="slider-main__link">
+                        <picture class="slider-main__picture">
+                            <img src="./images/content/slider-main.jpg" alt="" class="slider-main__img">
+                        </picture>
+                        <div class="slider-main__content">
+                            <div class="slider-main__status">New</div>
+                            <h1 class="slider-main__title h1">Плитка <br> MIRAGE-IMAGE уже на складе!</h1>
+                        </div>
+                    </a>
+                </div>
+            
+                <div class="slider-main__slide swiper-slide">
+                    <a href="#" class="slider-main__link">
+                        <picture class="slider-main__picture">
+                            <img src="./images/content/slider-main.jpg" alt="" class="slider-main__img">
+                        </picture>
+                        <div class="slider-main__content">
+                            <div class="slider-main__status">New</div>
+                            <h1 class="slider-main__title h1">Плитка <br> MIRAGE-IMAGE уже на складе!</h1>
+                        </div>
+                    </a>
+                </div>
+            
+                <div class="slider-main__slide swiper-slide">
+                    <a href="#" class="slider-main__link">
+                        <picture class="slider-main__picture">
+                            <img src="./images/content/slider-main.jpg" alt="" class="slider-main__img">
+                        </picture>
+                        <div class="slider-main__content">
+                            <div class="slider-main__status">New</div>
+                            <h1 class="slider-main__title h1">Плитка <br> MIRAGE-IMAGE уже на складе!</h1>
+                        </div>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <div class="swiper-button-wrapper">
+        <div class="swiper-button swiper-button-prev">
+            <svg class="i-icon">
+                <use xlink:href="#i-slider-arrow-left"></use>
+            </svg>
+        </div>
+        <div class="swiper-button swiper-button-next">
+            <svg class="i-icon">
+                <use xlink:href="#i-slider-arrow-right"></use>
+            </svg>
+        </div>
+    </div>
+</div>
+</section>
+<section class="section section-brand">
+    <div class="container">
+        <div class="brand">
+            <div class="brand-header">
+                <div class="brand-subtitle wow fadeInup" data-wow-delay="0.1s">Бренд</div>
+                <div class="brand-title">
+                    <span class="brand-title-symbol wow fadeInDown" data-wow-delay="0.75s">P</span>
+                    <span class="brand-title-symbol wow fadeInDown" data-wow-delay="0.75s">O</span>
+                    <span class="brand-title-symbol wow fadeInDown" data-wow-delay="0.75s">R</span>
+                    <span class="brand-title-symbol wow fadeInDown" data-wow-delay="0.75s">C</span>
+                    <span class="brand-title-symbol wow fadeInDown" data-wow-delay="0.75s">E</span>
+                    <br>
+                    <span class="brand-title-symbol wow fadeInDown" data-wow-delay="0.5s">L</span>
+                    <span class="brand-title-symbol wow fadeInDown" data-wow-delay="0.5s">A</span>
+                    <span class="brand-title-symbol wow fadeInDown" data-wow-delay="0.5s">N</span>
+                    <span class="brand-title-symbol wow fadeInDown" data-wow-delay="0.5s">O</span>
+                    <br>
+                    <span class="brand-title-symbol wow fadeInDown" data-wow-delay="0.25s">S</span>
+                    <span class="brand-title-symbol wow fadeInDown" data-wow-delay="0.25s">A</span>
+                </div>
+            </div>
+            <div class="brand-content">
+                <picture class="brand-content-picture">
+                    <img src="./images/content/brand-image.jpg" alt="" class="brand-content-image">
+                </picture>
+                <div class="brand-content-row">
+                    <div class="brand-content-col">
+                        <div class="brand-content-text">Это группа, состоящая из 8 компаний. Диверсификация производства стала фундаментальной опорой в развитии группы компаний, которая начинала исключительно с производства плитки.</div>
+                        <div class="brand-content-label">Широкий ассортимент и передовые строительные решения</div>
+                    </div>
+                    <div class="brand-content-col">
+                        <div class="brand-content-slider" data-desktop="slider-brand">
+                            <div id="sliderBrands" class="slider-brand swiper-slider" data-move="slider-brand">
+    <div class="slider-brand__container swiper-container">
+        <div class="slider-brand__wrapper swiper-wrapper">
+            
+            
+                <div class="slider-brand__slide swiper-slide">
+                    <a href="#" class="slider-brand__link">
+                        <picture class="slider-brand__picture">
+                            <img src="./images/content/brand-img-1.png" alt="" class="slider-brand__img">
+                        </picture>
+                    </a>
+                </div>
+            
+                <div class="slider-brand__slide swiper-slide">
+                    <a href="#" class="slider-brand__link">
+                        <picture class="slider-brand__picture">
+                            <img src="./images/content/brand-img-2.png" alt="" class="slider-brand__img">
+                        </picture>
+                    </a>
+                </div>
+            
+                <div class="slider-brand__slide swiper-slide">
+                    <a href="#" class="slider-brand__link">
+                        <picture class="slider-brand__picture">
+                            <img src="./images/content/brand-img-3.png" alt="" class="slider-brand__img">
+                        </picture>
+                    </a>
+                </div>
+            
+                <div class="slider-brand__slide swiper-slide">
+                    <a href="#" class="slider-brand__link">
+                        <picture class="slider-brand__picture">
+                            <img src="./images/content/brand-img-4.png" alt="" class="slider-brand__img">
+                        </picture>
+                    </a>
+                </div>
+            
+                <div class="slider-brand__slide swiper-slide">
+                    <a href="#" class="slider-brand__link">
+                        <picture class="slider-brand__picture">
+                            <img src="./images/content/brand-img-2.png" alt="" class="slider-brand__img">
+                        </picture>
+                    </a>
+                </div>
+            
+        </div>
+    </div>
+    <div class="swiper-button-wrapper">
+        <div class="swiper-button swiper-button-prev">
+            <svg class="i-icon">
+                <use xlink:href="#i-slider-arrow-left"></use>
+            </svg>
+        </div>
+        <div class="swiper-button swiper-button-next">
+            <svg class="i-icon">
+                <use xlink:href="#i-slider-arrow-right"></use>
+            </svg>
+        </div>
+    </div>
+</div>
+                        </div>
+                        <div class="brand-content-text">В настоящее время восемь компаний группы предлагают широкий ассортимент продукции, начиная от сантехнического оборудования и заканчивая технологическими материалами и передовыми строительными решениями для современной архитектуры.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section section-advants">
+    <div id="sliderAdvants" class="slider-advants swiper-slider">
+        <div class="slider-advants__container swiper-container">
+            <div class="slider-advants__wrapper swiper-wrapper">
+                
+                
+                    <div class="slider-advants__slide swiper-slide">
+                        <div class="slider-advants__slide-inner">
+                            <picture class="slider-advants__picture">
+                                <img src="./images/content/slider-advants-1.svg" alt="" class="slider-advants__img">
+                            </picture>
+                            <div class="slider-advants__content">
+                                <div class="slider--advants__title">Официальные партнеры Porcelanosa Grupo</div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="slider-advants__slide swiper-slide">
+                        <div class="slider-advants__slide-inner">
+                            <picture class="slider-advants__picture">
+                                <img src="./images/content/slider-advants-2.svg" alt="" class="slider-advants__img">
+                            </picture>
+                            <div class="slider-advants__content">
+                                <div class="slider--advants__title">Услуги доставки <br> и монтажа</div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="slider-advants__slide swiper-slide">
+                        <div class="slider-advants__slide-inner">
+                            <picture class="slider-advants__picture">
+                                <img src="./images/content/slider-advants-3.svg" alt="" class="slider-advants__img">
+                            </picture>
+                            <div class="slider-advants__content">
+                                <div class="slider--advants__title">Высокое качество продукции</div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="slider-advants__slide swiper-slide">
+                        <div class="slider-advants__slide-inner">
+                            <picture class="slider-advants__picture">
+                                <img src="./images/content/slider-advants-4.svg" alt="" class="slider-advants__img">
+                            </picture>
+                            <div class="slider-advants__content">
+                                <div class="slider--advants__title">Сервис и гарантии</div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="slider-advants__slide swiper-slide">
+                        <div class="slider-advants__slide-inner">
+                            <picture class="slider-advants__picture">
+                                <img src="./images/content/slider-advants-5.svg" alt="" class="slider-advants__img">
+                            </picture>
+                            <div class="slider-advants__content">
+                                <div class="slider--advants__title">3D визуализация проекта</div>
+                            </div>
+                        </div>
+                    </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section section-catalog-cat">
+    <div class="container">
+        <div class="section__head">
+            <h2 class="h2">Каталог <br> товаров</h2>
+        </div>
+        <div class="catalog">
+            <div class="catalog-cat-list">
+                <div class="catalog-cat-col">
+                    <div class="catalog-cat-item">
+                        <div class="catalog-cat-item__inner">
+                            <a href="#" class="catalog-cat-item__link">
+                                <picture class="catalog-cat-item__picture">
+                                    <img src="./images/content/catalog-cat-img-1.jpg" alt="" class="catalog-cat-item__image">
+                                </picture>
+                                <div class="catalog-cat-item__info">
+                                    <div class="catalog-cat-item__name">Плитка</div>
+                                    <div class="catalog-cat-item__arrow">
+                                        <svg class="i-icon i-arrow-right-md">
+                                            <use xlink:href="#i-arrow-right-md"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="catalog-cat-item">
+                        <div class="catalog-cat-item__inner">
+                            <a href="#" class="catalog-cat-item__link">
+                                <picture class="catalog-cat-item__picture">
+                                    <img src="./images/content/catalog-cat-img-2.jpg" alt="" class="catalog-cat-item__image">
+                                </picture>
+                                <div class="catalog-cat-item__info">
+                                    <div class="catalog-cat-item__name">Сантехника</div>
+                                    <div class="catalog-cat-item__arrow">
+                                        <svg class="i-icon i-arrow-right-md">
+                                            <use xlink:href="#i-arrow-right-md"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="catalog-cat-col">
+                    <div class="catalog-cat-item">
+                        <div class="catalog-cat-item__inner">
+                            <a href="#" class="catalog-cat-item__link">
+                                <picture class="catalog-cat-item__picture">
+                                    <img src="./images/content/catalog-cat-img-3.jpg" alt="" class="catalog-cat-item__image">
+                                </picture>
+                                <div class="catalog-cat-item__info">
+                                    <div class="catalog-cat-item__name"> Мебель</div>
+                                    <div class="catalog-cat-item__arrow">
+                                        <svg class="i-icon i-arrow-right-md">
+                                            <use xlink:href="#i-arrow-right-md"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <a href="#" class="catalog-cat-more">
+                        <span>Смотреть все</span>
+                        <div class="catalog-cat-more__arrow"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section mobile-brand-slider">
+    <div class="container" data-mobile="slider-brand">
+
+    </div>
+</section>
+<section class="section section-collections ">
+    <div class="container">
+        <div class="section__head wow fadeInDown" data-wow-delay="0.5s">
+            <h2 class="h2">Коллекции</h2>
+             <a href="#" class="more-all wow fadeInDown" data-wow-delay="0.75s">Смотреть все</a>
+        </div>
+        <div id="sliderCollections" class="slider swiper-slider slider-collections ">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            
+
+                <div class="swiper-slide">
+                    
+
+                            <div class="collections-item">
+    <a href="#" class="collections-item__link">
+        <picture class="collections-item__picture">
+            <img src="./images/content/slider-collections-img-1.jpg" alt="" class="collections-item__image">
+        </picture>
+        <div class="collections-item-content">
+            <div class="collections-item__title">Mirage-Image</div>
+            <div class="collections-item__price">от 16 500 руб. / м2</div>
+        </div>
+    </a>
+</div>
+
+
+                    
+                </div>
+
+            
+
+                <div class="swiper-slide">
+                    
+
+                            <div class="collections-item">
+    <a href="#" class="collections-item__link">
+        <picture class="collections-item__picture">
+            <img src="./images/content/slider-collections-img-2.jpg" alt="" class="collections-item__image">
+        </picture>
+        <div class="collections-item-content">
+            <div class="collections-item__title">Mirage-Image</div>
+            <div class="collections-item__price">от 16 500 руб. / м2</div>
+        </div>
+    </a>
+</div>
+
+
+                    
+                </div>
+
+            
+
+                <div class="swiper-slide">
+                    
+
+                            <div class="collections-item">
+    <a href="#" class="collections-item__link">
+        <picture class="collections-item__picture">
+            <img src="./images/content/slider-collections-img-3.jpg" alt="" class="collections-item__image">
+        </picture>
+        <div class="collections-item-content">
+            <div class="collections-item__title">Mirage-Image</div>
+            <div class="collections-item__price">от 16 500 руб. / м2</div>
+        </div>
+    </a>
+</div>
+
+
+                    
+                </div>
+
+            
+
+                <div class="swiper-slide">
+                    
+
+                            <div class="collections-item">
+    <a href="#" class="collections-item__link">
+        <picture class="collections-item__picture">
+            <img src="./images/content/slider-collections-img-1.jpg" alt="" class="collections-item__image">
+        </picture>
+        <div class="collections-item-content">
+            <div class="collections-item__title">Mirage-Image</div>
+            <div class="collections-item__price">от 16 500 руб. / м2</div>
+        </div>
+    </a>
+</div>
+
+
+                    
+                </div>
+
+            
+
+                <div class="swiper-slide">
+                    
+
+                            <div class="collections-item">
+    <a href="#" class="collections-item__link">
+        <picture class="collections-item__picture">
+            <img src="./images/content/slider-collections-img-2.jpg" alt="" class="collections-item__image">
+        </picture>
+        <div class="collections-item-content">
+            <div class="collections-item__title">Mirage-Image</div>
+            <div class="collections-item__price">от 16 500 руб. / м2</div>
+        </div>
+    </a>
+</div>
+
+
+                    
+                </div>
+
+            
+
+                <div class="swiper-slide">
+                    
+
+                            <div class="collections-item">
+    <a href="#" class="collections-item__link">
+        <picture class="collections-item__picture">
+            <img src="./images/content/slider-collections-img-3.jpg" alt="" class="collections-item__image">
+        </picture>
+        <div class="collections-item-content">
+            <div class="collections-item__title">Mirage-Image</div>
+            <div class="collections-item__price">от 16 500 руб. / м2</div>
+        </div>
+    </a>
+</div>
+
+
+                    
+                </div>
+
+            
+        </div>
+    </div>
+    
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-wrapper">
+            <div class="swiper-button swiper-button-prev">
+                <svg class="i-icon">
+                    <use xlink:href="#i-slider-arrow-left"></use>
+                </svg>
+            </div>
+            <div class="swiper-button swiper-button-next">
+                <svg class="i-icon">
+                    <use xlink:href="#i-slider-arrow-right"></use>
+                </svg>
+            </div>
+        </div>
+    
+
+
+</div>
+    </div>
+</section>
+<section class="section section-new section-dark   section-slider-product ">
+    <div class="container">
+        <div class="section__head wow fadeInDown" data-wow-delay="0.5s">
+            <h2 class="h2">Новинки</h2>
+             <a href="#" class="more-all wow fadeInDown" data-wow-delay="0.75s">Смотреть все</a>
+        </div>
+        <div id="sliderNew" class="slider swiper-slider slider-new slider-product">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            
+
+                <div class="swiper-slide">
+                    
+
+                        <div class="catalog-item">
+                            <div class="catalog-item" data-catalog-list-item>
+    <div class="catalog-item__inner" >
+        <div class="catalog-item__head">
+            <a href="#" class="catalog-item__link-picture" >
+                <picture class="catalog-item__picture">
+                    <img src="./images/content/slider-new-img-1.jpg" alt="" class="catalog-item__img">
+                </picture>
+            </a>
+        </div>
+        <div class="catalog-item__body">
+            <a href="#" class="catalog-item__link">
+                <div class="catalog-item__name">Плитка Mirage-Image</div>
+            </a>
+            <div class="price">
+    <div class="price__value">400 руб. / м<sup>2</sup></div>
+    
+    <div class="price__pack">9 800 руб. / упак</div><!-- только для слайдера новинок -->
+</div>
+            <div class="catalog-item__features">
+                <div class="features">
+                    <div class="features__list">
+                        <div class="features__item">120 х 250 см</div>
+                        <div class="features__item">Коллекция VENIS</div>
+                        <div class="features__item">Под заказ</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="catalog-item__foot">
+            <a href="#" class="btn btn--gold">Добавить в корзину</a>
+        </div>
+    </div>
+</div>
+                        </div>
+
+                    
+                </div>
+
+            
+
+                <div class="swiper-slide">
+                    
+
+                        <div class="catalog-item">
+                            <div class="catalog-item" data-catalog-list-item>
+    <div class="catalog-item__inner" >
+        <div class="catalog-item__head">
+            <a href="#" class="catalog-item__link-picture" >
+                <picture class="catalog-item__picture">
+                    <img src="./images/content/slider-new-img-2.jpg" alt="" class="catalog-item__img">
+                </picture>
+            </a>
+        </div>
+        <div class="catalog-item__body">
+            <a href="#" class="catalog-item__link">
+                <div class="catalog-item__name">Керамогранит Austin</div>
+            </a>
+            <div class="price">
+    <div class="price__value">48 000 руб. / м<sup>2</sup></div>
+    
+    <div class="price__pack">9 800 руб. / упак</div><!-- только для слайдера новинок -->
+</div>
+            <div class="catalog-item__features">
+                <div class="features">
+                    <div class="features__list">
+                        <div class="features__item">120 х 250 см</div>
+                        <div class="features__item">Коллекция VENIS</div>
+                        <div class="features__item">Под заказ</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="catalog-item__foot">
+            <a href="#" class="btn btn--gold">Добавить в корзину</a>
+        </div>
+    </div>
+</div>
+                        </div>
+
+                    
+                </div>
+
+            
+
+                <div class="swiper-slide">
+                    
+
+                        <div class="catalog-item">
+                            <div class="catalog-item" data-catalog-list-item>
+    <div class="catalog-item__inner" >
+        <div class="catalog-item__head">
+            <a href="#" class="catalog-item__link-picture" >
+                <picture class="catalog-item__picture">
+                    <img src="./images/content/slider-new-img-1.jpg" alt="" class="catalog-item__img">
+                </picture>
+            </a>
+        </div>
+        <div class="catalog-item__body">
+            <a href="#" class="catalog-item__link">
+                <div class="catalog-item__name">Плитка Mirage-Image</div>
+            </a>
+            <div class="price">
+    <div class="price__value">400 руб. / м<sup>2</sup></div>
+    
+    <div class="price__pack">9 800 руб. / упак</div><!-- только для слайдера новинок -->
+</div>
+            <div class="catalog-item__features">
+                <div class="features">
+                    <div class="features__list">
+                        <div class="features__item">120 х 250 см</div>
+                        <div class="features__item">Коллекция VENIS</div>
+                        <div class="features__item">Под заказ</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="catalog-item__foot">
+            <a href="#" class="btn btn--gold">Добавить в корзину</a>
+        </div>
+    </div>
+</div>
+                        </div>
+
+                    
+                </div>
+
+            
+
+                <div class="swiper-slide">
+                    
+
+                        <div class="catalog-item">
+                            <div class="catalog-item" data-catalog-list-item>
+    <div class="catalog-item__inner" >
+        <div class="catalog-item__head">
+            <a href="#" class="catalog-item__link-picture" >
+                <picture class="catalog-item__picture">
+                    <img src="./images/content/slider-new-img-2.jpg" alt="" class="catalog-item__img">
+                </picture>
+            </a>
+        </div>
+        <div class="catalog-item__body">
+            <a href="#" class="catalog-item__link">
+                <div class="catalog-item__name">Керамогранит Austin</div>
+            </a>
+            <div class="price">
+    <div class="price__value">48 000 руб. / м<sup>2</sup></div>
+    
+    <div class="price__pack">9 800 руб. / упак</div><!-- только для слайдера новинок -->
+</div>
+            <div class="catalog-item__features">
+                <div class="features">
+                    <div class="features__list">
+                        <div class="features__item">120 х 250 см</div>
+                        <div class="features__item">Коллекция VENIS</div>
+                        <div class="features__item">Под заказ</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="catalog-item__foot">
+            <a href="#" class="btn btn--gold">Добавить в корзину</a>
+        </div>
+    </div>
+</div>
+                        </div>
+
+                    
+                </div>
+
+            
+
+                <div class="swiper-slide">
+                    
+
+                        <div class="catalog-item">
+                            <div class="catalog-item" data-catalog-list-item>
+    <div class="catalog-item__inner" >
+        <div class="catalog-item__head">
+            <a href="#" class="catalog-item__link-picture" >
+                <picture class="catalog-item__picture">
+                    <img src="./images/content/slider-new-img-1.jpg" alt="" class="catalog-item__img">
+                </picture>
+            </a>
+        </div>
+        <div class="catalog-item__body">
+            <a href="#" class="catalog-item__link">
+                <div class="catalog-item__name">Плитка Mirage-Image</div>
+            </a>
+            <div class="price">
+    <div class="price__value">400 руб. / м<sup>2</sup></div>
+    
+    <div class="price__pack">9 800 руб. / упак</div><!-- только для слайдера новинок -->
+</div>
+            <div class="catalog-item__features">
+                <div class="features">
+                    <div class="features__list">
+                        <div class="features__item">120 х 250 см</div>
+                        <div class="features__item">Коллекция VENIS</div>
+                        <div class="features__item">Под заказ</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="catalog-item__foot">
+            <a href="#" class="btn btn--gold">Добавить в корзину</a>
+        </div>
+    </div>
+</div>
+                        </div>
+
+                    
+                </div>
+
+            
+
+                <div class="swiper-slide">
+                    
+
+                        <div class="catalog-item">
+                            <div class="catalog-item" data-catalog-list-item>
+    <div class="catalog-item__inner" >
+        <div class="catalog-item__head">
+            <a href="#" class="catalog-item__link-picture" >
+                <picture class="catalog-item__picture">
+                    <img src="./images/content/slider-new-img-2.jpg" alt="" class="catalog-item__img">
+                </picture>
+            </a>
+        </div>
+        <div class="catalog-item__body">
+            <a href="#" class="catalog-item__link">
+                <div class="catalog-item__name">Керамогранит Austin</div>
+            </a>
+            <div class="price">
+    <div class="price__value">48 000 руб. / м<sup>2</sup></div>
+    
+    <div class="price__pack">9 800 руб. / упак</div><!-- только для слайдера новинок -->
+</div>
+            <div class="catalog-item__features">
+                <div class="features">
+                    <div class="features__list">
+                        <div class="features__item">120 х 250 см</div>
+                        <div class="features__item">Коллекция VENIS</div>
+                        <div class="features__item">Под заказ</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="catalog-item__foot">
+            <a href="#" class="btn btn--gold">Добавить в корзину</a>
+        </div>
+    </div>
+</div>
+                        </div>
+
+                    
+                </div>
+
+            
+        </div>
+    </div>
+    
+        <div class="swiper-navigation">
+            <div class="swiper-navigation__container">
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-wrapper">
+                    <div class="swiper-button swiper-button-prev">
+                        <svg class="i-icon">
+                            <use xlink:href="#i-slider-arrow-left"></use>
+                        </svg>
+                    </div>
+                    <div class="swiper-button swiper-button-next">
+                        <svg class="i-icon">
+                            <use xlink:href="#i-slider-arrow-right"></use>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+
+</div>
+    </div>
+</section>
+<section class="section section-projects ">
+    <div class="container">
+        <div class="section__head wow fadeInDown" data-wow-delay="0.5s">
+            <h2 class="h2">Проекты</h2>
+             <a href="#" class="more-all wow fadeInDown" data-wow-delay="0.75s">Смотреть все</a>
+        </div>
+        <div id="sliderProjects" class="slider swiper-slider slider-projects ">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            
+
+                <div class="swiper-slide">
+                    
+                        <div class="projects-item">
+    <a href="#" class="projects-item__link">
+        <picture class="projects-item__picture">
+            <img src="./images/content/slider-project-img-1.jpg" alt="" class="projects-item__img">
+        </picture>
+        <div class="projects-item-content">
+            <div class="projects-item__title">Вилла в трех уровнях с бассейном</div>
+            <div class="projects-item__author">Махнев Евгений</div>
+        </div>
+    </a>
+    <div class="projects-item__used-products">
+        <a href="#" class="projects-item__link">Porcelanosa, Venis, Gamadecor,  Krion</a>
+    </div>
+</div>
+
+                    
+                </div>
+
+            
+
+                <div class="swiper-slide">
+                    
+                        <div class="projects-item">
+    <a href="#" class="projects-item__link">
+        <picture class="projects-item__picture">
+            <img src="./images/content/slider-project-img-2.jpg" alt="" class="projects-item__img">
+        </picture>
+        <div class="projects-item-content">
+            <div class="projects-item__title">Квартира в ЖК Арбат</div>
+            <div class="projects-item__author">Алиса Гиголян</div>
+        </div>
+    </a>
+    <div class="projects-item__used-products">
+        <a href="#" class="projects-item__link">Porcelanosa, Venis, Gamadecor</a>
+    </div>
+</div>
+
+                    
+                </div>
+
+            
+
+                <div class="swiper-slide">
+                    
+                        <div class="projects-item">
+    <a href="#" class="projects-item__link">
+        <picture class="projects-item__picture">
+            <img src="./images/content/slider-project-img-1.jpg" alt="" class="projects-item__img">
+        </picture>
+        <div class="projects-item-content">
+            <div class="projects-item__title">Вилла в трех уровнях с бассейном</div>
+            <div class="projects-item__author">Махнев Евгений</div>
+        </div>
+    </a>
+    <div class="projects-item__used-products">
+        <a href="#" class="projects-item__link">Porcelanosa, Venis, Gamadecor,  Krion</a>
+    </div>
+</div>
+
+                    
+                </div>
+
+            
+
+                <div class="swiper-slide">
+                    
+                        <div class="projects-item">
+    <a href="#" class="projects-item__link">
+        <picture class="projects-item__picture">
+            <img src="./images/content/slider-project-img-2.jpg" alt="" class="projects-item__img">
+        </picture>
+        <div class="projects-item-content">
+            <div class="projects-item__title">Квартира в ЖК Арбат</div>
+            <div class="projects-item__author">Алиса Гиголян</div>
+        </div>
+    </a>
+    <div class="projects-item__used-products">
+        <a href="#" class="projects-item__link">Porcelanosa, Venis, Gamadecor</a>
+    </div>
+</div>
+
+                    
+                </div>
+
+            
+
+                <div class="swiper-slide">
+                    
+                        <div class="projects-item">
+    <a href="#" class="projects-item__link">
+        <picture class="projects-item__picture">
+            <img src="./images/content/slider-project-img-1.jpg" alt="" class="projects-item__img">
+        </picture>
+        <div class="projects-item-content">
+            <div class="projects-item__title">Вилла в трех уровнях с бассейном</div>
+            <div class="projects-item__author">Махнев Евгений</div>
+        </div>
+    </a>
+    <div class="projects-item__used-products">
+        <a href="#" class="projects-item__link">Porcelanosa, Venis, Gamadecor,  Krion</a>
+    </div>
+</div>
+
+                    
+                </div>
+
+            
+
+                <div class="swiper-slide">
+                    
+                        <div class="projects-item">
+    <a href="#" class="projects-item__link">
+        <picture class="projects-item__picture">
+            <img src="./images/content/slider-project-img-2.jpg" alt="" class="projects-item__img">
+        </picture>
+        <div class="projects-item-content">
+            <div class="projects-item__title">Квартира в ЖК Арбат</div>
+            <div class="projects-item__author">Алиса Гиголян</div>
+        </div>
+    </a>
+    <div class="projects-item__used-products">
+        <a href="#" class="projects-item__link">Porcelanosa, Venis, Gamadecor</a>
+    </div>
+</div>
+
+                    
+                </div>
+
+            
+
+                <div class="swiper-slide">
+                    
+                        <div class="projects-item">
+    <a href="#" class="projects-item__link">
+        <picture class="projects-item__picture">
+            <img src="./images/content/slider-project-img-1.jpg" alt="" class="projects-item__img">
+        </picture>
+        <div class="projects-item-content">
+            <div class="projects-item__title">Вилла в трех уровнях с бассейном</div>
+            <div class="projects-item__author">Махнев Евгений</div>
+        </div>
+    </a>
+    <div class="projects-item__used-products">
+        <a href="#" class="projects-item__link">Porcelanosa, Venis, Gamadecor,  Krion</a>
+    </div>
+</div>
+
+                    
+                </div>
+
+            
+
+                <div class="swiper-slide">
+                    
+                        <div class="projects-item">
+    <a href="#" class="projects-item__link">
+        <picture class="projects-item__picture">
+            <img src="./images/content/slider-project-img-2.jpg" alt="" class="projects-item__img">
+        </picture>
+        <div class="projects-item-content">
+            <div class="projects-item__title">Квартира в ЖК Арбат</div>
+            <div class="projects-item__author">Алиса Гиголян</div>
+        </div>
+    </a>
+    <div class="projects-item__used-products">
+        <a href="#" class="projects-item__link">Porcelanosa, Venis, Gamadecor</a>
+    </div>
+</div>
+
+                    
+                </div>
+
+            
+        </div>
+    </div>
+    
+        <div class="swiper-navigation">
+            <div class="swiper-navigation__container">
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-wrapper">
+                    <div class="swiper-button swiper-button-prev">
+                        <svg class="i-icon">
+                            <use xlink:href="#i-slider-arrow-left"></use>
+                        </svg>
+                    </div>
+                    <div class="swiper-button swiper-button-next">
+                        <svg class="i-icon">
+                            <use xlink:href="#i-slider-arrow-right"></use>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+
+</div>
+    </div>
+</section>
+<section class="section section-reviews ">
+    <div class="container">
+        <div class="section__head wow fadeInDown" data-wow-delay="0.5s">
+            <h2 class="h2">Отзывы дизайнеров</h2>
+             <a href="#" class="more-all wow fadeInDown" data-wow-delay="0.75s">Смотреть все</a>
+        </div>
+        <div id="sliderReviews" class="slider swiper-slider slider-reviews ">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            
+
+                <div class="swiper-slide">
+                    
+
+                            <div class="swiper-slide-content">
+    <div class="swiper-slide__rating">
+        <div class="rating">
+    <div class="rating-list">
+        <div class="rating-item active">
+            <svg class="i-icon i-rating">
+                <use xlink:href="#i-rating-star"></use>
+            </svg>
+        </div>
+        <div class="rating-item active">
+            <svg class="i-icon i-rating">
+                <use xlink:href="#i-rating-star"></use>
+            </svg>
+        </div>
+        <div class="rating-item active">
+            <svg class="i-icon i-rating">
+                <use xlink:href="#i-rating-star"></use>
+            </svg>
+        </div>
+        <div class="rating-item active">
+            <svg class="i-icon i-rating">
+                <use xlink:href="#i-rating-star"></use>
+            </svg>
+        </div>
+        <div class="rating-item">
+            <svg class="i-icon i-rating">
+                <use xlink:href="#i-rating-star"></use>
+            </svg>
+        </div>
+    </div>
+</div>
+    </div>
+    <div class="swiper-slide__review-text">Наша концепция - это делать удобные, комфортные и легкие интерьеры для своих заказчиков. И такие интерьеры могут получаться только с качественными отделочными материалами. В выборе таких качественных отделочных материалов мы можем положиться на компанию Zodiac.</div>
+    <div class="swiper-slide-video">
+        <a href="./video/video.mp4" class="swiper-slide-video__link" data-fancybox>
+            <span class="swiper-slide-video__icon">
+                <svg class="i-icon i-video-play">
+                    <use xlink:href="#i-video-play"></use>
+                </svg>
+            </span>
+            <div class="swiper-slide-video__label">Смотреть видеотзыв</div>
+        </a>
+    </div>
+    <picture class="swiper-slide__picture">
+        <img src="./images/content/slider-reviews-img-1.jpg" alt="" class="swiper-slide__image">
+    </picture>
+    <div class="swiper-slide-review__info">
+        <div class="swiper-slide-review__name">Ольга Иванова</div>
+        <div class="swiper-slide-review__position">Дизайнер интерьера</div>
+    </div>
+</div>
+
+                    
+                </div>
+
+            
+
+                <div class="swiper-slide">
+                    
+
+                            <div class="swiper-slide-content">
+    <div class="swiper-slide__rating">
+        <div class="rating">
+    <div class="rating-list">
+        <div class="rating-item active">
+            <svg class="i-icon i-rating">
+                <use xlink:href="#i-rating-star"></use>
+            </svg>
+        </div>
+        <div class="rating-item active">
+            <svg class="i-icon i-rating">
+                <use xlink:href="#i-rating-star"></use>
+            </svg>
+        </div>
+        <div class="rating-item active">
+            <svg class="i-icon i-rating">
+                <use xlink:href="#i-rating-star"></use>
+            </svg>
+        </div>
+        <div class="rating-item active">
+            <svg class="i-icon i-rating">
+                <use xlink:href="#i-rating-star"></use>
+            </svg>
+        </div>
+        <div class="rating-item">
+            <svg class="i-icon i-rating">
+                <use xlink:href="#i-rating-star"></use>
+            </svg>
+        </div>
+    </div>
+</div>
+    </div>
+    <div class="swiper-slide__review-text">Наша концепция - это делать удобные, комфортные и легкие интерьеры для своих заказчиков. И такие интерьеры могут получаться только с качественными отделочными материалами. В выборе таких качественных отделочных материалов мы можем положиться на компанию Zodiac.</div>
+    <div class="swiper-slide-video">
+        <a href="./video/video.mp4" class="swiper-slide-video__link" data-fancybox>
+            <span class="swiper-slide-video__icon">
+                <svg class="i-icon i-video-play">
+                    <use xlink:href="#i-video-play"></use>
+                </svg>
+            </span>
+            <div class="swiper-slide-video__label">Смотреть видеотзыв</div>
+        </a>
+    </div>
+    <picture class="swiper-slide__picture">
+        <img src="./images/content/slider-reviews-img-2.jpg" alt="" class="swiper-slide__image">
+    </picture>
+    <div class="swiper-slide-review__info">
+        <div class="swiper-slide-review__name">Александра Константинопольская</div>
+        <div class="swiper-slide-review__position">Дизайнер интерьера</div>
+    </div>
+</div>
+
+                    
+                </div>
+
+            
+
+                <div class="swiper-slide">
+                    
+
+                            <div class="swiper-slide-content">
+    <div class="swiper-slide__rating">
+        <div class="rating">
+    <div class="rating-list">
+        <div class="rating-item active">
+            <svg class="i-icon i-rating">
+                <use xlink:href="#i-rating-star"></use>
+            </svg>
+        </div>
+        <div class="rating-item active">
+            <svg class="i-icon i-rating">
+                <use xlink:href="#i-rating-star"></use>
+            </svg>
+        </div>
+        <div class="rating-item active">
+            <svg class="i-icon i-rating">
+                <use xlink:href="#i-rating-star"></use>
+            </svg>
+        </div>
+        <div class="rating-item active">
+            <svg class="i-icon i-rating">
+                <use xlink:href="#i-rating-star"></use>
+            </svg>
+        </div>
+        <div class="rating-item">
+            <svg class="i-icon i-rating">
+                <use xlink:href="#i-rating-star"></use>
+            </svg>
+        </div>
+    </div>
+</div>
+    </div>
+    <div class="swiper-slide__review-text">Наша концепция - это делать удобные, комфортные и легкие интерьеры для своих заказчиков. И такие интерьеры могут получаться только с качественными отделочными материалами. В выборе таких качественных отделочных материалов мы можем положиться на компанию Zodiac.</div>
+    <div class="swiper-slide-video">
+        <a href="./video/video.mp4" class="swiper-slide-video__link" data-fancybox>
+            <span class="swiper-slide-video__icon">
+                <svg class="i-icon i-video-play">
+                    <use xlink:href="#i-video-play"></use>
+                </svg>
+            </span>
+            <div class="swiper-slide-video__label">Смотреть видеотзыв</div>
+        </a>
+    </div>
+    <picture class="swiper-slide__picture">
+        <img src="./images/content/slider-reviews-img-3.jpg" alt="" class="swiper-slide__image">
+    </picture>
+    <div class="swiper-slide-review__info">
+        <div class="swiper-slide-review__name">Константин Прокопьев</div>
+        <div class="swiper-slide-review__position">Дизайнер интерьера</div>
+    </div>
+</div>
+
+                    
+                </div>
+
+            
+        </div>
+    </div>
+    
+        <div class="swiper-navigation">
+            <div class="swiper-navigation__container">
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-wrapper">
+                    <div class="swiper-button swiper-button-prev">
+                        <svg class="i-icon">
+                            <use xlink:href="#i-slider-arrow-left"></use>
+                        </svg>
+                    </div>
+                    <div class="swiper-button swiper-button-next">
+                        <svg class="i-icon">
+                            <use xlink:href="#i-slider-arrow-right"></use>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+
+</div>
+    </div>
+</section>
+<section class="section section-events ">
+    <div class="container">
+        <div class="section__head wow fadeInDown" data-wow-delay="0.5s">
+            <h2 class="h2">Мероприятия</h2>
+             <a href="#" class="more-all wow fadeInDown" data-wow-delay="0.75s">Смотреть все</a>
+        </div>
+        <div id="sliderEvents" class="slider swiper-slider slider-events ">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            
+
+                <div class="swiper-slide">
+                    
+
+                            <div class="events-card">
+    <a href="#" class="events-card__link">
+        <div class="events-card-content">
+            <picture class="events-card__picture">
+                <img src="./images/content/slider-events-img-1.jpg" alt="" class="events-card__image">
+            </picture>
+            <div class="events-card__label">
+                <div class="events-card-date">
+                    <div class="events-card-date__col">11</div>
+                    <div class="events-card-date__col">
+                        <span>декабря</span>
+                        <span>2020</span>
+                    </div>
+                </div>
+                <div class="events-card-info">
+                    <div class="events-card__title">Виртуальная экскурсия с Porselanosa Grupo</div>
+                    <div class="events-card__place">Краснодар</div>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+                    
+                </div>
+
+            
+
+                <div class="swiper-slide">
+                    
+
+                            <div class="events-card">
+    <a href="#" class="events-card__link">
+        <div class="events-card-content">
+            <picture class="events-card__picture">
+                <img src="./images/content/slider-events-img-2.jpg" alt="" class="events-card__image">
+            </picture>
+            <div class="events-card__label">
+                <div class="events-card-date">
+                    <div class="events-card-date__col">11</div>
+                    <div class="events-card-date__col">
+                        <span>декабря</span>
+                        <span>2020</span>
+                    </div>
+                </div>
+                <div class="events-card-info">
+                    <div class="events-card__title">Про душевой дизайн с Radaway</div>
+                    <div class="events-card__place">Новосибирск</div>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+                    
+                </div>
+
+            
+
+                <div class="swiper-slide">
+                    
+
+                            <div class="events-card">
+    <a href="#" class="events-card__link">
+        <div class="events-card-content">
+            <picture class="events-card__picture">
+                <img src="./images/content/slider-events-img-1.jpg" alt="" class="events-card__image">
+            </picture>
+            <div class="events-card__label">
+                <div class="events-card-date">
+                    <div class="events-card-date__col">11</div>
+                    <div class="events-card-date__col">
+                        <span>декабря</span>
+                        <span>2020</span>
+                    </div>
+                </div>
+                <div class="events-card-info">
+                    <div class="events-card__title">Сочные новинки от Noken 2021</div>
+                    <div class="events-card__place">Новосибирск</div>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+                    
+                </div>
+
+            
+
+                <div class="swiper-slide">
+                    
+
+                            <div class="events-card">
+    <a href="#" class="events-card__link">
+        <div class="events-card-content">
+            <picture class="events-card__picture">
+                <img src="./images/content/slider-events-img-2.jpg" alt="" class="events-card__image">
+            </picture>
+            <div class="events-card__label">
+                <div class="events-card-date">
+                    <div class="events-card-date__col">11</div>
+                    <div class="events-card-date__col">
+                        <span>декабря</span>
+                        <span>2020</span>
+                    </div>
+                </div>
+                <div class="events-card-info">
+                    <div class="events-card__title">Сочные новинки от Noken 2021</div>
+                    <div class="events-card__place">Новосибирск</div>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+                    
+                </div>
+
+            
+        </div>
+    </div>
+    
+        <div class="swiper-navigation">
+            <div class="swiper-navigation__container">
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-wrapper">
+                    <div class="swiper-button swiper-button-prev">
+                        <svg class="i-icon">
+                            <use xlink:href="#i-slider-arrow-left"></use>
+                        </svg>
+                    </div>
+                    <div class="swiper-button swiper-button-next">
+                        <svg class="i-icon">
+                            <use xlink:href="#i-slider-arrow-right"></use>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+
+</div>
+    </div>
+</section>
+<div class="section section-seo section-dark">
+    <div class="container">
+        <div class="seo">
+            <div class="seo-header">
+                <div class="section__head wow fadeInDown" data-wow-delay="0.5s">
+                    <h2 class="h2">Напольное <br> и облицовочное <br> покрытия</h2>
+                </div>
+            </div>
+            <div class="seo-content">
+                <picture class="seo-picture">
+                    <img src="./images/content/seo-image.jpg" alt="" class="seo-image">
+                </picture>
+                <div class="seo-content-row">
+                    <div class="seo-col">
+                        <p>Стойкость и тепло керамического паркета, фабричная плитка, черпающая вдохновение в гидравлической, или напольное покрытие, воспроизводящее эстетику цемента, напоминают нам о ценности ремесленного труда для качественного продукта.</p>
+                        <p>Сельский, индустриальный и минималистичный стиль для интерьеров, ищущих новые смыслы.</p>
+                    </div>
+                    <div class="seo-col">
+                        <p> Сельский, индустриальный и минималистичный стиль для интерьеров, ищущих новые смыслы. Стойкость и тепло керамического паркета, фабричная плитка, черпающая вдохновение в гидравлической, или напольное покрытие, воспроизводящее эстетику цемента, напоминают нам о ценности ремесленного труда для качественного продукта. Коллекции, которые сочетаются с рельефными покрытиями для стен и виниловой отделкой.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+        </main>
+        </div>
+        <footer class="footer">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="footer-row">
+                        <div class="footer-col">
+                            <div class="footer-col__inner">
+                                <div class="footer-col__title">Каталог</div>
+                                <div class="footer-nav">
+                                    <ul class="footer-nav-list">
+                                        <li class="footer-nav-item">
+                                            <a href="#" class="footer-nav__link">Плитка</a>
+                                        </li>
+                                        <li class="footer-nav-item">
+                                            <a href="#" class="footer-nav__link">Сантехника</a>
+                                        </li>
+                                        <li class="footer-nav-item">
+                                            <a href="#" class="footer-nav__link">Мебель</a>
+                                        </li>
+                                        <li class="footer-nav-item">
+                                            <a href="#" class="footer-nav__link">Распродажа</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-col" data-mobile="footer-logo">
+                            <div class="footer-col__inner">
+                                <div class="footer-col__title">Блог</div>
+                                <div class="footer-nav">
+                                    <ul class="footer-nav-list">
+                                        <li class="footer-nav-item">
+                                            <a href="#" class="footer-nav__link">Новости</a>
+                                        </li>
+                                        <li class="footer-nav-item">
+                                            <a href="#" class="footer-nav__link">Мероприятия</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-col">
+                            <div class="footer-col__inner">
+                                <div class="footer-col__title">О компании</div>
+                                <div class="footer-nav">
+                                    <ul class="footer-nav-list">
+                                        <li class="footer-nav-item">
+                                            <a href="#" class="footer-nav__link">Салоны</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-col">
+                            <div class="footer-col__inner">
+                                <div class="footer-col__title">Контакты</div>
+                                <div class="footer-contact-list">
+                                    <a href="tel:+7 (383) 383 09 63" class="footer-contact__item footer__phone">+7 (383) 383 09 63</a>
+                                    <a href="mailto:mail@info.ru" class="footer-contact__item footer__email">E-mail@info.ru</a>
+                                    <div class="footer-contact__item footer__address">г. Новосибирск, <br> Фабричная улица, 31</div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+            <div class="footer-middle">
+                <div class="container" data-desktop="footer-logo">
+                    <div class="footer-logo" data-move="footer-logo">
+                        <a href="#" class="footer-logo-social__link">
+                            <svg class="i-icon i-inst">
+                                <use xlink:href="#i-inst"></use>
+                            </svg>
+                        </a>
+                        <a href="#" class="footer-logo__link">
+                            <img src="./images/footer-logo.svg" alt="" class="footer-logo__image">
+                        </a>
+                        <a href="#" class="footer-logo-social__link">
+                            <svg class="i-icon i-vk">
+                                <use xlink:href="#i-vk"></use>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="subscription">
+                        <div class="subscription__left">
+                            <div class="subscription__info">
+                                <div class="subscription__title">Подписаться на <br> рассылку</div>
+                            </div>
+                        </div>
+                        <div class="subscription__center">
+                            <form class="subscription__form" action="#" data-form="subscription" data-ajax-url="" data-form-no-ajax="">
+                                <label class="subscription__label">
+                                    <input type="text" class="subscription__input input" name="email" data-input-required="email" placeholder="Ваш e-mail">
+                                    <input type="submit" class="subscription__btn" value="Подписаться">
+                                </label>
+                            </form>
+                        </div>
+                        <div class="subscription__right">
+                            <div class="subscription__rules">
+                                <span>Подписываясь, вы соглашаетесь <br> с </span>
+                                <a href="#">условиями обработки персональных данных</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-bottom-row">
+                        <div class="footer-dev">
+                            <a class="footer-dev__link" href="https://iarga.ru" target="_blank">
+                                <span>Сделано в </span>
+                                <img src="./images/svg/dev-logo.svg" alt="" class="footer-dev__logo">
+                            </a>
+                        </div>
+                        <div class="footer__copyright">
+                            <div class="copyright">
+                                <span>© 2021. ООО Мой Дом. Все права защищены. </span>
+                            </div>
+                        </div>
+                        <div class="footer__privacy">
+                            <div class="privacy">
+                                <div class="privacy__item">
+                                    <a href="#" class="privacy__link">Политика конфеденциальности</a>
+                                </div>
+                                <div class="privacy__item">
+                                    <a href="#" class="privacy__link">Публичная оферта</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        </div>
+
+        <div class="whats-app">
+            <a href="#" class="whats-app__link">
+                <svg class="i-icon i-wa">
+                    <use xlink:href="#i-wa"></use>
+                </svg>
+            </a>
+        </div>
+
+        <div id="mobileFilter" class="mobile-filter" data-mobile-filter>
+    <button class="mobile-filter__close circle-close" data-mobile-filter-close></button>
+    <div class="mobile-filter__filter" data-mobile="bx-filter"></div>
+</div>
+        <div id="mobileMenu" class="mobile-menu" data-mobile-menu>
+    <div class="mobile-menu__section" data-mobile-section="catalog">
+
+    </div>
+    <div class="mobile-menu__section" data-mobile-section="header-nav">
+
+    </div>
+</div>
+        <div id="mobileSearch" class="mobile-search" data-mobile-search>
+    <div class="mobile-search__section mobile-search__search" data-mobile="header-search">
+
+    </div>
+    <div class="mobile-search__section mobile-search__logo" data-mobile="header-logo">
+
+    </div>
+</div>
+        <div id="auth" class="modal modal-small">
+    <div class="modal__head">
+        <div class="modal__title">Вход в личный кабинет</div>
+    </div>
+    <div class="modal__body">
+        <form class="modal__form" data-form data-ajax-url="">
+            <label class="modal__label">
+                <input type="text" class="modal__input input" placeholder="+ 7 (ххх)  ххх - хх-хх" data-inputmask data-input-required="phone">
+            </label>
+            <label class="modal__label">
+                <input type="text" class="modal__input input" placeholder="Введите код из СМС*" data-input-required="code">
+            </label>
+            <div class="modal__button">
+                <button type="submit" class="modal__submit btn btn--brown--dark">
+                    <span>Получить код</span>
+                </button>
+                <div class="modal__code">
+                    Не пришел код?
+                    <span>Повторить отправку можно через <span>60</span> сек</span>
+                    <button type="button" class="resend-code">Отправить код</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="reviewVideo" class="modal">
+    <div class="modal__body">
+        <div class="video-wrapper">
+            <div class="video" data-video>
+                <a class="video__link" href="./video/video.mp4" data-video-link="">
+                    <picture>
+                        <img class="video__media" src="./images/content/video-image.jpg" alt="" data-video-media="">
+                    </picture>
+                </a>
+                <button class="video__button" type="button" aria-label="Запустить видео" data-video-button="">
+                    <img src="./images/svg/video-play.svg" alt="">
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <div class="overlay"></div>
+        <div class="preloader" data-preloader>
+            <div class="preloader__circle"></div>
+            <div class="preloader__circle"></div>
+            <div class="preloader__circle"></div>
+        </div>
+    <script type="text/javascript" src="bundle.js"></script></body>
+</html>

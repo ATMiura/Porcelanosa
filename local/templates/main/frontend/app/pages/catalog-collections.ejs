@@ -1,0 +1,22 @@
+<% const data = {
+    title: 'Плитка',
+    'flowContainerClass' : 'flow-container--main'
+} %>
+<%- require("../layouts/header.ejs")(data) %>
+
+    <section class="section-head">
+        <div class="container">
+            <%- require('../components/elements/breadcrumbs.ejs')(data)%>
+            <div class="section-head__title">
+                <h1 class="h1">Плитка</h1>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-catalog">
+        <div class="container">
+            <%- require("../section/catalog-section.ejs")({ catalogType: 'collections', searchPage: false }) %>
+        </div>
+    </section>
+
+<%- require("../layouts/footer.ejs")() %>

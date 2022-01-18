@@ -1,0 +1,63 @@
+<div class="catalog">
+    <div class="catalog__list">
+
+        <% if(catalogType === 'list') { %>
+            <% const list=[
+                { item: '3', name: 'Плитка Mirage-Image', img: 'catalog-item-img-1.jpg', price: '400 руб.',                             sale: false, },
+                { item: '3', name: 'Керамогранит Austin', img: 'catalog-item-img-2.jpg', price: '48 000 руб.',                          sale: true, },
+                { item: '3', name: 'Керамогранит Austin', img: 'catalog-item-img-3.jpg', price: '48 000 руб.',                          sale: false, },
+
+                { item: '3', name: 'Отдельно стоящая ванна Manhattan Par-Ker', img: 'catalog-item-img-4.jpg', price: '765 899 руб.',    sale: false, },
+                { item: '3', name: 'Плитка Mirage-Image', img: 'catalog-item-img-1.jpg', price: '400 руб.',                             sale: false, },
+                { item: '3', name: 'Керамогранит Austin', img: 'catalog-item-img-2.jpg', price: '48 000 руб.',                          sale: false, },
+
+                { item: '3', name: 'Керамогранит Austin', img: 'catalog-item-img-2.jpg', price: '48 000 руб.',                          sale: false, },
+                { item: '3', name: 'Керамогранит Austin', img: 'catalog-item-img-3.jpg', price: '48 000 руб.',                          sale: false, },
+                { item: '3', name: 'Отдельно стоящая ванна Manhattan Par-Ker', img: 'catalog-item-img-4.jpg', price: '765 899 руб.',    sale: false, },
+
+                { item: '3', name: 'Отдельно стоящая ванна Manhattan Par-Ker', img: 'catalog-item-img-4.jpg', price: '765 899 руб.',    sale: false, },
+                { item: '3', name: 'Плитка Mirage-Image', img: 'catalog-item-img-1.jpg', price: '400 руб.',                             sale: false, },
+                { item: '3', name: 'Керамогранит Austin', img: 'catalog-item-img-2.jpg', price: '48 000 руб.',                          sale: false, },
+            ] %>
+
+            <% list.forEach(function (item) { %>
+                <div class="catalog__item <%= item.item ? 'catalog__item--' + item.item : '' %>">
+                    <%- require("../catalog/catalog-item.ejs")({ name: item.name, img: item.img, price: item.price, sale: item.sale }) %>
+                </div>
+            <% }) %>
+
+        <% } else { %>
+
+            <% const list=[
+                { item: '2', name: 'Gamadecor', img: 'catalog-collections-item-img-1.jpg', price: 'от 8 000 руб.', quantity: '755', },
+                { item: '2', name: 'VENIS', img: 'catalog-collections-item-img-2.jpg', price: 'от 48 000 руб.', quantity: '11 594', },
+                { item: '2', name: 'PORCELANOSA', img: 'catalog-collections-item-img-3.jpg', price: 'от 48 000 руб.', quantity: '1 596', },
+                { item: '2', name: 'Krion', img: 'catalog-collections-item-img-4.jpg', price: 'от 765 899 руб.', quantity: '68 755', },
+            ] %>
+
+            <% list.forEach(function (item) { %>
+                <div class="catalog__item <%= item.item ? 'catalog__item--' + item.item : '' %> catalog__item--collections">
+                    <div class="catalog-item">
+                        <div class="catalog-item__head">
+                            <a href="#" class="catalog-item__link-picture" >
+                                <picture class="catalog-item__picture">
+                                    <img src="./images/content/<%= item.img %>" alt="" class="catalog-item__img">
+                                </picture>
+                            </a>
+                        </div>
+                        <div class="catalog-item__body">
+                            <a href="#" class="catalog-item__link">
+                                <div class="catalog-item__name"><%= item.name %></div>
+                            </a>
+                            <div class="catalog-item__price">
+                                <%- require("../elements/price.ejs")({ sale: false, priceValue: item.price, }) %>
+                            </div>
+                            <div class="catalog-item__quantity"><%= item.quantity %> товаров</div>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+
+        <% } %>
+    </div>
+</div>

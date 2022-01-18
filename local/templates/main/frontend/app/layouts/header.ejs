@@ -1,0 +1,288 @@
+<!-- (c) Digital Element || http://www.d-element.ru/ -->
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title><%=title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=61536017-f4a7-4aaf-a708-fa73ef88c02d&amp;lang=ru_RU" type="text/javascript"></script>
+</head>
+<body>
+
+<div class="cursor"></div>
+<style>
+    /*html:not(html:hover) .cursor::after {
+        opacity: 0;
+        transform: scale(0);
+    }*/
+    .cursor {
+        display: none;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: var(--width);
+        height: var(--height);
+        transform: translate(calc(var(--x) - var(--width) / 2), calc(var(--y) - var(--height) / 2));
+        transition-duration: 125ms;
+        transition-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+        transition-property: width, height, transform;
+        z-index: 999;
+        border-radius: 50%;
+        pointer-events: none;
+        will-change: transform;
+        opacity: var(--opacity);
+        visibility: var(--visibility);
+        background-color: var(--background);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: initial;
+    }
+    .cursor.active{
+
+    }
+    .cursor-black{
+        background-image: url("data:image/svg+xml,%3Csvg width='25' height='25' viewBox='0 0 25 25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='12' y1='2.18557e-08' x2='12' y2='25' stroke='%23403838'/%3E%3Cline y1='13' x2='25' y2='13' stroke='%23403838'/%3E%3C/svg%3E%0A");
+    }
+    .cursor-white{
+        background-image: url("data:image/svg+xml,%3Csvg width='25' height='25' viewBox='0 0 25 25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M11.5 25L11.5 -4.37114e-08L12.5 0L12.5 25L11.5 25Z' fill='white'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M25 13.5L0 13.5L0 12.5L25 12.5V13.5Z' fill='white'/%3E%3C/svg%3E%0A");
+    }
+    @media (pointer: fine) {
+        .cursor {
+            display: flex;
+        }
+    }
+    .cursor:before {
+        content: "";
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        transition: 300ms opacity cubic-bezier(0.39, 0.575, 0.565, 1),
+        300ms transform cubic-bezier(0.39, 0.575, 0.565, 1),
+        150ms border-radius cubic-bezier(0.39, 0.575, 0.565, 1);
+    }
+    .cursor.show-text:after{
+        content: "смотреть";
+        margin-left: calc(100% + 19px);
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 1.2;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #FFFFFF;
+    }
+</style>
+
+<div class="flow-container <%= flowContainerClass && flowContainerClass %>">
+    <div class="content">
+        <header class="header <% if(title=='Главная') { %> header-fixed <% } %>" data-header>
+            <div class="header__inner">
+                <div class="header-top">
+                    <div class="header-top__left" data-desktop="header-left">
+                        <div class="header__location" data-move="header-location">
+                            <%- require("../components/elements/header-location.ejs")() %>
+                        </div>
+                        <a href="tel: +7 900 000 00 00" class="header__phone" data-move="header-phone">+7 900 000 00 00</a>
+                    </div>
+                    <div class="header-top__center">
+                        <a class="header-logo" data-move="logo">
+                            <img src="./images/logo.svg" alt="" class="header-logo__img" title="">
+                        </a>
+                    </div>
+                    <div class="header-top__right">
+                        <div class="header__search" data-header="search">
+                            <%- require('../components/elements/search.ejs')() %>
+                        </div>
+                        <div class="control">
+                            <div href="#" class="control-item control-search" data-control-search>
+                                <svg class="i-icon i-search">
+                                    <use xlink:href="#i-search"></use>
+                                </svg>
+                            </div>
+                            <a href="#auth" class="control-item control-login" data-modal-open>
+                                <svg class="i-icon i-login">
+                                    <use xlink:href="#i-login"></use>
+                                </svg>
+                            </a>
+                            <a href="#" class="control-item control-cart control-favorites">
+                                <div class="control-cart__icon">
+                                    <svg class="i-icon i-favorites">
+                                        <use xlink:href="#i-favorites"></use>
+                                    </svg>
+                                </div>
+                                <div class="control-cart__counter">2</div>
+                            </a>
+                            <a href="#" class="control-item control-cart header-cart">
+                                <div class="control-cart__icon">
+                                    <svg class="i-icon i-cart">
+                                        <use xlink:href="#i-cart"></use>
+                                    </svg>
+                                </div>
+                                <div class="control-cart__counter">1</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-sticky" data-header-sticky>
+                    <nav class="header-nav" data-desktop="header-menu">
+                        <div class="burger" data-burger="catalog">
+                            <div class="burger__icon">
+                                <span class="burger__icon-line"></span>
+                                <span class="burger__icon-line"></span>
+                                <span class="burger__icon-line"></span>
+                            </div>
+                            <div class="burger__label">Каталог</div>
+                        </div>
+                        <div class="mobile-menu-btn btn" data-burger="header-nav">
+                            <div class="burger__icon">
+                                <span class="burger__icon-line"></span>
+                                <span class="burger__icon-line"></span>
+                                <span class="burger__icon-line"></span>
+                            </div>
+                            Меню
+                        </div>
+                        <% const list = [
+                            {navItem: 'плитка'},
+                            {navItem: 'сантехника'},
+                            {navItem: 'мебель'},
+                            {navItem: 'sale'},
+                            {navItem: 'услуги'},
+                            {navItem: 'проекты'},
+                            {navItem: 'профессионалам'},
+                        ] %>
+                        <ul class="header-nav-list" data-move="header-menu">
+                            <% list.forEach(function (item) { %>
+                                <li class="header-nav-list__item">
+                                    <a href="#" class="header-nav-list__link"><%= item.navItem %></a>
+                                </li>
+                            <% }) %>
+                        </ul>
+                    </nav>
+                    <div class="header-catalog" data-header-catalog data-desktop="catalog">
+                        <div class="header-catalog__inner" data-move="catalog">
+                            <% const catalogList = {
+                                catalogItems: [{
+                                    id: 1,
+                                    catalogItemLabel: 'Плитка',
+                                    status: 'active',
+                                    /*catalogItemSub: [
+                                        { catalogItemSubLabel: 'Керамическая плитка'},
+                                        { catalogItemSubLabel: 'Керамогранит'},
+                                        { catalogItemSubLabel: 'Крупноформатный керамогранит'},
+                                        { catalogItemSubLabel: 'Мозайка'},
+                                        { catalogItemSubLabel: 'Паркет, ламинат, виниловые покрытия'},
+                                        { catalogItemSubLabel: 'Керамический паркет'},
+                                        { catalogItemSubLabel: 'Натуральный камень'},
+                                        { catalogItemSubLabel: 'Искусственный камень'}
+                                    ]*/
+                                }, {
+                                    id: 2,
+                                    catalogItemLabel: 'Сантехника',
+                                    status: '',
+                                    catalogItemSub: [
+                                        { catalogItemSubLabel: 'Сантехника Керамическая плитка'},
+                                        { catalogItemSubLabel: 'Сантехника Керамогранит'},
+                                        { catalogItemSubLabel: 'Сантехника Крупноформатный керамогранит'},
+                                        { catalogItemSubLabel: 'Сантехника Мозайка'},
+                                        { catalogItemSubLabel: 'Сантехника Паркет, ламинат, виниловые покрытия'},
+                                        { catalogItemSubLabel: 'Сантехника Керамический паркет'},
+                                        { catalogItemSubLabel: 'Сантехника Натуральный камень'},
+                                        { catalogItemSubLabel: 'Сантехника Искусственный камень'}
+                                    ]
+                                }, {
+                                    id: 3,
+                                    catalogItemLabel: 'Мебель',
+                                    status: '',
+                                    catalogItemSub: [
+                                        { catalogItemSubLabel: 'Мебель Керамическая плитка'},
+                                        { catalogItemSubLabel: 'Мебель Керамогранит'},
+                                        { catalogItemSubLabel: 'Мебель Крупноформатный керамогранит'},
+                                        { catalogItemSubLabel: 'Мебель Мозайка'},
+                                        { catalogItemSubLabel: 'Мебель Паркет, ламинат, виниловые покрытия'},
+                                        { catalogItemSubLabel: 'Мебель Керамический паркет'},
+                                        { catalogItemSubLabel: 'Мебель Натуральный камень'},
+                                        { catalogItemSubLabel: 'Мебель Искусственный камень'}
+                                    ]
+                                }, {
+                                    id: 4,
+                                    catalogItemLabel: 'Распродажа',
+                                    status: '',
+                                    catalogItemSub: [
+                                        { catalogItemSubLabel: 'Распродажа Керамическая плитка'},
+                                        { catalogItemSubLabel: 'Распродажа Керамогранит'},
+                                        { catalogItemSubLabel: 'Распродажа Крупноформатный керамогранит'},
+                                        { catalogItemSubLabel: 'Распродажа Мозайка'},
+                                        { catalogItemSubLabel: 'Распродажа Паркет, ламинат, виниловые покрытия'},
+                                        { catalogItemSubLabel: 'Распродажа Керамический паркет'},
+                                        { catalogItemSubLabel: 'Распродажа Натуральный камень'},
+                                        { catalogItemSubLabel: 'Распродажа Искусственный камень'}
+                                    ]
+                                }]
+                            } %>
+
+                            <ul class="header-catalog-list">
+                                <% catalogList.catalogItems.forEach(function(item, index) { %>
+                                    <li class="header-catalog-item <%= item.status ? item.status : '' %> <%= item.catalogItemSub ? 'has-child' : '' %>" data-catalog-item data-id="<%= index %>">
+                                        <a href="#<%= item.catalogItemLabel %>" class="header-catalog-item__link" data-catalog-item-link><%= item.catalogItemLabel %></a>
+                                    </li>
+                                <% });  %>
+                            </ul>
+                            <div class="header-sub-catalog">
+                                <% catalogList.catalogItems.forEach(function(item, index) { %>
+                                    <% if(item.catalogItemSub) { %>
+                                        <div class="header-sub-catalog-group <%= item.status ? item.status : '' %>" data-catalog-group data-group-id="<%= index %>">
+                                            <ul class="header-sub-catalog-list">
+                                                <%  item.catalogItemSub.forEach(function(el) { %>
+                                                    <li class="header-sub-catalog-item">
+                                                        <a href="#" class="header-sub-catalog-item__link"><%= el.catalogItemSubLabel %></a>
+                                                    </li>
+                                                <% }); %>
+                                            </ul>
+                                            <div class="brands">
+                                                <div class="brands-list">
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-1.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-2.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-3.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                    <div class="brands-item">
+                                                        <a href="#" class="brands__link">
+                                                            <picture class="brands__picture">
+                                                                <img src="./images/content/brands-image-4.png" alt="" class="brands__image">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <% } %>
+                                <% }); %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">

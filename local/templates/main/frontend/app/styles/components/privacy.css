@@ -1,0 +1,8 @@
+.privacy{
+    display: flex;
+}
+.privacy__item{
+    &:not(:last-child){
+        margin-right: 25px;
+    }
+}

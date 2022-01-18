@@ -1,0 +1,139 @@
+@import "../media.css";
+@import "../variables.css";
+
+.events-card{
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.2;
+    color: var(--c-brown-dark);
+    @media(--tablet-above){
+        font-size: 24px;
+    }
+    @media(--mobile-s){
+        font-size: 18px;
+    }
+    @media(--mobile-xs){
+        font-size: 14px;
+    }
+}
+.events-card__link{
+    display: block;
+    color: currentColor;
+}
+.events-card-date{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 28px;
+    @media(--mobile){
+        margin-right: 20px;
+    }
+    @media(--mobile-s){
+        margin-right: 15px;
+    }
+    @media(--mobile-xs){
+        padding-top: 7px;
+        margin-right: 10px;
+    }
+}
+.events-card-date__col{
+    font-weight: normal;
+    color: var(--c-gold);
+    text-transform: uppercase;
+    &:first-child{
+        font-size: 40px;
+        line-height: 48px;
+        margin-right: 7px;
+    }
+    span{
+        display: block;
+        font-size: 12px;
+        line-height: 1.16;
+        &:not(:last-child){
+            margin-bottom: 5px;
+        }
+        @media(--mobile-xs){
+            font-size: 10px;
+            &:not(:last-child){
+                 margin-bottom: 1px;
+            }
+        }
+    }
+    @media(--mobile){
+        &:first-child {
+            font-size: 36px;
+            line-height: 1;
+        }
+    }
+    @media(--mobile-xs){
+        &:first-child {
+            margin-right: 2px;
+            font-size: 28px;
+            line-height: 1;
+        }
+    }
+}
+.events-card-info{
+    @media(--mobile-xs){
+        padding-top: 10px;
+    }
+}
+.events-card-content{
+    position: relative;
+}
+.events-card__picture{
+    display: block;
+}
+.events-card__image{
+    @media(--mobile-xs){
+        min-height: 250px;
+        object-fit: cover;
+    }
+}
+.events-card__label{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    display: flex;
+    align-items: flex-start;
+
+    max-width: 79.3%;
+    width: 100%;
+    min-height: 117px;
+
+    padding: 6px 3px 10px 10px;
+
+    background: #FFFFFF;
+
+    @media(--tablet-above){
+        min-height: 100px;
+    }
+    @media(--tablet){
+        max-width: 100%;
+    }
+    @media(--mobile-xs){
+        min-height: 54px;
+        padding: 6px 3px 0 10px;
+    }
+}
+.events-card__title{
+    font-weight: 500;
+    margin-bottom: 16px;
+    @media(--mobile){
+        margin-bottom: 10px;
+    }
+    @media(--mobile-xs){
+        margin-bottom: 3px;
+    }
+}
+.events-card__place{
+    font-weight: normal;
+    font-size: 18px;
+    @media(--mobile){
+        font-size: 14px;
+    }
+    @media(--mobile-xs){
+        font-size: 12px;
+    }
+}

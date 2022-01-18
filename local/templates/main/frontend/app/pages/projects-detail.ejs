@@ -1,0 +1,118 @@
+<% const data = {
+    title: 'Жемчужная россыпь',
+    'flowContainerClass' : 'flow-container--main'
+} %>
+<%- require("../layouts/header.ejs")(data) %>
+
+<%
+    const listNew = [
+
+        { name: 'Плитка Mirage-Image', img: 'catalog-item-img-1.jpg', price: '400 руб.',     sale: false },
+        { name: 'Керамогранит Austin', img: 'catalog-item-img-2.jpg', price: '48 000 руб.',  sale: false },
+        { name: 'Керамогранит Austin', img: 'catalog-item-img-3.jpg', price: '48 000 руб.',  sale: false },
+        { name: 'Плитка Mirage-Image', img: 'catalog-item-img-4.jpg', price: '765 899 руб.', sale: false },
+    ]
+    const sectionNewData = { sectTitle: 'Товары в проекте', sectMore: true, sliderId: 'sliderNew', sliderProduct: true, SectionDark: true,  SectSliderClass: 'new', sliderSlides: listNew, }
+
+%>
+
+    <section class="section-head">
+        <div class="container">
+            <%- require('../components/elements/breadcrumbs.ejs')(data)%>
+            <div class="section-head__title">
+                <h1 class="h1">Жемчужная россыпь</h1>
+                <a href="#" class="btn btn--brown--dark">Заказать проект</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-project-slider">
+        <div class="container">
+            <div class="slider-detail" id="sliderDetail">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <% for(var i=0; i<10; i++) { %>
+                            <div class="swiper-slide slider-detail__slide" style="background: url('./images/content/collections-slider-image.jpg')">
+                                <div class="slider__points">
+
+                                    <div class="slider__point" style="left: 29.7%; top: 20%;" data-card-id="introTooltip-slide-0-tooltip-0"></div>
+
+                                    <div class="slider__point" data-card-id="introTooltip-slide-0-tooltip-2" style="top: 19.5%; left: 10.8%;"></div>
+                                    <div class="slider__point" data-card-id="introTooltip-slide-0-tooltip-3" style="top: 85.5%; left: 11.4%;"></div>
+                                    <div class="slider__point" data-card-id="introTooltip-slide-0-tooltip-4" style="top: 67.9%; left: 59.7%;"></div>
+                                    <div class="slider__point" data-card-id="introTooltip-slide-0-tooltip-5" style="top: 31.1%; left: 61.7%;"></div>
+                                    <div class="slider__point" data-card-id="introTooltip-slide-0-tooltip-6" style="top: 49.7%; left: 93.5%;"></div>
+
+                                </div>
+
+                                <div class="slider-point-card" data-card="">
+                                    <div class="slider-point-card__close" data-popover-close></div>
+                                    <div class="catalog__item">
+                                        <div class="catalog-item always-show" data-catalog-list-item="">
+                                            <div class="catalog-item__inner">
+                                                <div class="catalog-item__head">
+                                                    <a href="#" class="catalog-item__link-picture">
+                                                        <picture class="catalog-item__picture">
+                                                            <img src="./images/content/catalog-item-img-1.jpg" alt="" class="catalog-item__img">
+                                                        </picture>
+                                                    </a>
+                                                </div>
+                                                <div class="catalog-item__body">
+                                                    <a href="#" class="catalog-item__link">
+                                                        <div class="catalog-item__name">Плитка Mirage-Image</div>
+                                                    </a>
+                                                    <div class="price">
+                                                        <div class="price__value">400 руб. / м<sup>2</sup></div>
+                                                    </div>
+                                                </div>
+                                                <div class="catalog-item__foot">
+                                                    <a href="#" class="btn btn--border-gold">Добавить в корзину</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-wrapper">
+                        <div class="swiper-button swiper-button-prev">
+                            <svg class="i-icon">
+                                <use xlink:href="#i-slider-arrow-left"></use>
+                            </svg>
+                        </div>
+                        <div class="swiper-button swiper-button-next">
+                            <svg class="i-icon">
+                                <use xlink:href="#i-slider-arrow-right"></use>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-project">
+        <div class="container">
+            <div class="project">
+                <div class="project__descr">
+                    <div class="editor">
+                        <p>Дизайнеры из Сочи оформили интерьер столичной квартиры своих постоянных клиентов – харизматичной семейной пары из Москвы. Главным пожеланием заказчиков было следование классическому стилю в дизайне. С помощью эстетических средств авторам удалось подчеркнуть стиль жизни и статус хозяев, а также выдержать все помещения в благородной классике.</p>
+                        <p>Объединяющим пространство элементом выступает напольное покрытие – керамогранит испанской фабрики Colorker. Полы во всех помещениях общего пользования выложены из этого материала, придающего нотку торжественности и роскоши всему интерьеру.</p>
+                        <p>Для хозяйской ванной комнаты выбрана мозаика фабрики L'Antic Colonial, выполненная с использованием кусочков натурального мрамора, стекла и металла. Она эффектно выделяет зону ванны от Devon&Devon с посеребренными ножками. В гостевом санузле для отделки стен дизайнеры использовали мрамор Calacatta и металлическую мозаику L'Antic Colonial.</p>
+                        <p>Интерьер опубликован в печатной версии журнала Salon Interior  №1 от 2021 года.</p>
+                        <p>Дизайнеры проекта: <a href="#">Ольга Данилова</a> и <a href="#">Алиса Гиголян</a></p>
+                    </div>
+                </div>
+                <div class="project__right">
+                    <div class="project__used-products">Porcelanosa, Venis, Gamadecor,  Krion</div>
+                    <div class="project__label">С помощью эстетических средств авторам удалось подчеркнуть стиль жизни и статус хозяев</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <%- require("../section/section.ejs")(sectionNewData) %>
+
+<%- require("../layouts/footer.ejs")() %>

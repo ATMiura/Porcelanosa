@@ -1,0 +1,28 @@
+@import "media.css";
+
+:root {
+    --mouse-x: 0px;
+    --mouse-y: 0px;
+
+    --c-black: black;
+    --с-white: white;
+    --c-white-2: #FAF6F1;
+
+    --c-gold: #A77255;
+    --c-gold-hover: #AD7B5F;
+    --c-gold-light: #DDC8AE;
+    --c-brown: #403838;
+    --c-brown-dark: #403838;
+    --c-invalid: #FF2929;
+
+    --border: #F0F0F0;
+
+    --inputBg: #EDEDED;
+    --inputBorder: #CFCFCF;
+
+    --placeholder: #B6ACA0;
+
+    --boxShadow: 0px 30px 55px rgba(0, 0, 0, 0.1);
+    --borderRadius: 6px;
+    --transition: .2s;
+}

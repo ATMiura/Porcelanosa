@@ -1,0 +1,123 @@
+@import "../media.css";
+@import "../variables.css";
+
+.projects-item{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-bottom: 40px;
+    @media(--mobile-xs){
+        padding-bottom: 14px;
+    }
+}
+.projects-item__link,
+.projects-item__picture{
+    display: block;
+}
+.projects-item__link{
+    &:hover{
+        .projects-item__title,
+        .projects-item__author{
+            color: #ad7b5f;
+            transition: .2s;
+        }
+    }
+}
+.projects-item__img{
+    @media(--mobile-xs){
+        min-height: 277px;
+    }
+}
+.projects-item-content{
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    padding: 26px 15px 0;
+
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 1.2;
+    color: var(--c-brown-dark);
+    @media(--mobile-xs){
+        padding: 11px 0px 0 14px;
+    }
+
+    a{
+        color: var(--c-brown-dark);
+    }
+}
+.projects-item__title{
+    margin-bottom: 4px;
+
+    font-weight: 500;
+    font-size: 30px;
+    @media(--tablet){
+        font-size: 24px;
+    }
+    @media(--mobile-s){
+        font-size: 18px;
+    }
+    @media(--mobile-xs){
+        font-size: 14px;
+    }
+}
+.projects-item__author{
+    @media(--tablet){
+        font-size: 16px;
+    }
+    @media(--mobile-s){
+        font-size: 14px;
+    }
+    @media(--mobile-xs){
+        font-size: 12px;
+    }
+}
+.projects-item__used-products{
+    position: relative;
+    bottom: 17px;
+    right: 4px;
+
+    display: inline-flex;
+    align-items: center;
+    padding-top: 18px;
+    color: var(--c-gold-hover);
+    border-top: 1px solid #A77255;
+    &:before{
+        content: "";
+        min-width: 25px;
+        width: 25px;
+        height: 25px;
+        margin-right: 11px;
+        background-image: url("data:image/svg+xml,%3Csvg width='25' height='25' viewBox='0 0 25 25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M12.5 24C18.8513 24 24 18.8513 24 12.5C24 6.14873 18.8513 1 12.5 1C6.14873 1 1 6.14873 1 12.5C1 18.8513 6.14873 24 12.5 24ZM12.5 25C19.4036 25 25 19.4036 25 12.5C25 5.59644 19.4036 0 12.5 0C5.59644 0 0 5.59644 0 12.5C0 19.4036 5.59644 25 12.5 25Z' fill='%23A77255'/%3E%3C/svg%3E%0A");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+    }
+    @media(--tablet-above){
+        position: relative;
+        bottom: 0;
+        right: 0;
+        margin: 10px 0 0 auto;
+        padding: 10px 0 0 0;
+    }
+    @media(--tablet){
+        font-size: 16px;
+    }
+    @media(--mobile-s){
+        font-size: 14px;
+    }
+    @media(--mobile-xs){
+        margin: 2px 0 0 auto;
+        padding: 0;
+        font-size: 12px;
+        &:before{
+            content: "";
+            min-width: 10px;
+            width: 10px;
+            height: 10px;
+            margin-right: 6px;
+        }
+    }
+}

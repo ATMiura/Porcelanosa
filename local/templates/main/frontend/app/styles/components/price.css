@@ -1,0 +1,42 @@
+@import "../media.css";
+@import "../variables.css";
+
+.price{
+    display: flex;
+    font-size: 18px;
+    line-height: 1.2;
+    font-weight: normal;
+    .price__value{
+
+    }
+    .price__old,
+    .price__pack{
+        margin-left: 25px;
+        color: var(--c-gold);
+        text-decoration: line-through;
+    }
+    .price__pack{
+        display: none;
+        color: currentColor;
+        text-decoration: none;
+    }
+    sup{
+        left: 0;
+        @media(--mobile-s){
+            top: -4px;
+        }
+    }
+    @media(--mobile){
+        font-size: 14px;
+        .price__value{
+            font-weight: bold;
+        }
+    }
+    @media(--mobile-xs){
+        font-size: 10px;
+        .price__old,
+        .price__pack{
+            margin-left: 15px;
+        }
+    }
+}

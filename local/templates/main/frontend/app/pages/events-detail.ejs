@@ -1,0 +1,83 @@
+<% const data = {
+    title: 'Мероприятия - деталка',
+    'flowContainerClass' : 'flow-container--main'
+} %>
+
+<%- require("../layouts/header.ejs")(data) %>
+
+    <section class="section-head">
+        <div class="container">
+            <%- require('../components/elements/breadcrumbs.ejs')(data)%>
+            <div class="section-head__title">
+                <h1 class="h1">Виртуальная экскурсия с PORCELANOSA GRUPO</h1>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-post">
+        <div class="container">
+            <div class="grid">
+                <div class="grid__col">
+                    <div class="post__banner">
+                        <picture class="post__picture">
+                            <img src="./images/content/post__image.jpg" alt="" class="post__image">
+                        </picture>
+                    </div>
+                </div>
+                <div class="grid__col grid__col--3 post__date">
+                    <div class="post-date">
+                        <div class="post-date__list">
+                            <div class="post-date__item">
+                                <div class="post-date__day">18</div>
+                            </div>
+                            <div class="post-date__item">
+                                <div class="post-date__month">марта</div>
+                                <div class="post-date__year">2021</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid__col grid__col--9 post__editor">
+                    <div class="editor">
+                        <p>В 2020 году Porcelanosa Grupo предоставила уникальную возможность — каждый желающий может побывать на ежегодной выставке компании, находясь в любой точке земного шара!
+                            <br> Мы приглашаем вас в интерактивное пространство, где вы можете увидеть последние новинки от всех брендов группы, самые последние разработки и тенденции в мире дизайна интерьера и не только.</p>
+                        <p>Уверены, дизайнеры, архитекторы и клиенты найдут в этом туре свежую порцию вдохновения, новые материалы и идеи для своих проектов!</p>
+                    </div>
+                </div>
+                <div class="grid__col post__gallery">
+                    <%- require("../components/elements/gallery.ejs")() %>
+                </div>
+                <div class="grid__col post__back">
+                    <a href="#" class="btn btn--border-brown-dark post__back__link">
+                        <svg class="i-icon i-back">
+                            <use xlink:href="#i-back"></use>
+                        </svg>
+                        <span>Назад к списку</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-events section-events--page">
+        <div class="container">
+            <div class="section__head">
+                <h2 class="h2">Другие мероприятия</h2>
+            </div>
+            <div class="events">
+                <div class="events-list">
+                    <%
+                    const listEvents = [
+                        { date: '28.03', img: './images/content/slider-events-img-2.jpg', title: 'Про душевой дизайн с Radaway', place: 'Екатеринбург', },
+                        { date: '28.03', img: './images/content/slider-events-img-5.jpg', title: 'Apavisa - презентация с испанским колоритом', place: 'Краснодар', },
+                    ]
+
+                    listEvents.forEach(function (item) { %>
+                        <%- require("../components/elements/events-card.ejs")({date: item.date, image: item.img, title: item.title, place: item.place, }) %>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<%- require("../layouts/footer.ejs")() %>

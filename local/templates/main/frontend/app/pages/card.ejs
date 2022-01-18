@@ -1,0 +1,40 @@
+<% const data = {
+    title: 'Карточка товара',
+    'flowContainerClass' : 'flow-container--main'
+} %>
+
+<%- require("../layouts/header.ejs")(data) %>
+
+<%
+    const listSlider = [
+        { name: 'Плитка Mirage-Image', img: 'slider-new-img-1.jpg', price: '400 руб.',     sale: false },
+        { name: 'Керамогранит Austin', img: 'slider-new-img-2.jpg', price: '48 000 руб.',  sale: false },
+        { name: 'Керамогранит Austin', img: 'slider-new-img-3.jpg', price: '48 000 руб.',  sale: false },
+        { name: 'Плитка Mirage-Image', img: 'slider-new-img-4.jpg', price: '765 899 руб.', sale: false },
+        { name: 'Плитка Mirage-Image', img: 'slider-new-img-4.jpg', price: '765 899 руб.', sale: false },
+    ]
+
+    const sectionAdditionalData = { sectTitle: 'С этим товаром покупают', sectMore: false, sliderId: 'sliderAdditional', sliderProduct: true, SectionDark: false, SliderInContainer: true, SectSliderClass: 'additional', sliderSlides: listSlider, }
+
+    const sectionPreviouslyData = { sectTitle: 'Ранее  вы  смотрели', sectMore: false, sliderId: 'sliderPreviosly', sliderProduct: true, SectionDark: true, SliderInContainer: true, SectSliderClass: 'previosly', sliderSlides: listSlider, }
+%>
+
+    <section class="section-head">
+        <div class="container">
+            <%- require('../components/elements/breadcrumbs.ejs')(data)%>
+        </div>
+    </section>
+
+    <section class="section section-card">
+        <div class="container">
+            <%- require("../section/card.ejs")() %>
+        </div>
+    </section>
+
+    <%- require("../section/section-advants.ejs")() %>
+
+    <%- require("../section/section.ejs")(sectionAdditionalData) %>
+
+    <%- require("../section/section.ejs")(sectionPreviouslyData) %>
+
+<%- require("../layouts/footer.ejs")() %>

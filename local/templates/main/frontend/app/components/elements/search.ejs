@@ -1,0 +1,16 @@
+<div class="search" data-search data-clone="search">
+    <form action="" class="search__form">
+        <input type="text" class="search__input input" placeholder="Поиск по сайту" data-search-input>
+        <div class="search__btns">
+            <button class="search__submit" type="submit">
+                <svg class="i-icon i-search">
+                    <use xlink:href="#i-search"></use>
+                </svg>
+            </button>
+            <svg class="i-icon i-close" data-control-search>
+                <use xlink:href="#i-close"></use>
+            </svg>
+        </div>
+    </form>
+    <%- require("./search-tooltip.ejs")() %>
+</div>

@@ -1,0 +1,106 @@
+@import "../media.css";
+@import "../variables.css";
+
+
+.section-map{
+    [class*="-balloon_layout_normal"]{
+        background: #FFFFFF;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    [class*="-balloon__layout"]{
+        display: flex;
+        flex-direction: row-reverse;
+        box-sizing: border-box;
+    }
+    [class*="-balloon__content"]{
+        width: 230px;
+        padding: 10px 12px;
+        margin-right: 0 !important;
+        box-sizing: border-box;
+        ymaps{
+            width: 100% !important;
+        }
+    }
+    [class*="-balloon__tail"]{
+        display: none;
+    }
+    .list-contacts-item{
+        &:not(:last-child){
+             margin-bottom: 15px;
+        }
+    }
+    .list-contacts-item__label{
+        &:after{
+             display: none;
+        }
+    }
+    .list-contacts-item__key,
+    .list-contacts-item__label{
+        font-size: 12px;
+        line-height: 1.2;
+    }
+    .list-contacts-item__key{
+        min-width: 60px;
+        margin-right: 20px;
+    }
+}
+.list-contacts{
+
+}
+.list-contacts__item{
+
+}
+.list-contacts-item{
+    &:not(:last-child){
+        margin-bottom: 35px;
+        @media(--tablet){
+            margin-bottom: 20px;
+        }
+    }
+}
+.list-contacts-item__link{
+    display: flex;
+    align-items: center;
+    color: var(--c-brown-dark);
+    @media(--tablet) and (min-width: 801px){
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+.list-contacts-item__key{
+    min-width: 70px;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-right: 90px;
+    @media(--tablet-above){
+        margin-right: 30px;
+    }
+    @media(--tablet) and (min-width: 801px){
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
+.list-contacts-item__label{
+    position: relative;
+    width: 100%;
+    font-size: 18px;
+    &--address{
+        font-size: 16px;
+        &:hover{
+            cursor: none;
+            color: var(--c-brown-dark);
+        }
+    }
+    &:after{
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: block;
+        height: 1px;
+        width: 100%;
+        background: var(--c-gold-light);
+        transform: scaleY(0.5);
+    }
+}

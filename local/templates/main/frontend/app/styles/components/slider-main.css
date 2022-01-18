@@ -1,0 +1,227 @@
+@import "../media.css";
+@import "../variables.css";
+
+.slider-main{
+    position: relative;
+    height: 100vh;
+    @media(--mobile){
+        height: calc(100vh - 97px);
+    }
+    .swiper-button-wrapper{
+        position: absolute;
+        left: 2.6%;
+        right: 0;
+        bottom: 7.8%;
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        height: 86px;
+        max-width: 1090px;
+        width: 100%;
+        margin: 0 auto;
+    }
+    .swiper-button{
+        position: relative;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin-top: 0;
+        &:not(:last-child){
+             margin-right: 110px;
+        }
+        path{
+            fill: var(--c-gold-light);
+        }
+    }
+    .swiper-pagination{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    .swiper-pagination-fraction{
+        top: 9px;
+        right: 0;
+        left: 5px;
+        bottom: 0;
+
+        max-width: 1590px;
+        margin: auto;
+        &:after{
+             content: "";
+             display: block;
+             width: 55px;
+             height: 1px;
+             margin-top: 5px;
+             margin-left: 24px;
+             background-color: var(--c-gold-light);
+        }
+        @media(--tablet){
+            top: initial;
+            bottom: 30%;
+            right: 20px;
+            left: initial;
+            justify-content: flex-end;
+            &:after{
+                 display: none;
+            }
+        }
+        @media(--mobile-xs){
+            bottom: 30%;
+            right: 14px;
+        }
+    }
+    .swiper-pagination-bullet{
+        border-color: var(--с-white);
+    }
+    @media(min-width: 1001px){
+        .swiper-pagination-bullets{
+            display: none;
+        }
+    }
+    @media(--tablet){
+        .swiper-button-wrapper{
+            display: none;
+        }
+        .swiper-pagination-bullets{
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            max-width: 70%;
+            margin: 0 auto;
+        }
+    }
+
+}
+.slider-main__container{
+
+}
+.slider-main__wrapper{
+    height: 100%;
+}
+.slider-main__slide{
+    position: relative;
+}
+.slider-main__link{
+    display: block;
+    height: 100%;
+    cursor: none;
+}
+.slider-main__content{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 17.86%;
+    display: flex;
+    align-items: center;
+
+    max-width: 1090px;
+    margin: 0 auto;
+    @media(max-width: 1600px){
+        left: 13%;
+    }
+    @media(--tablet-above){
+        left: 17%;
+    }
+    @media(--tablet){
+        top: initial;
+        left: 0;
+        bottom: 38%;
+
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 20px;
+    }
+    @media(--mobile){
+        bottom: 47%;
+    }
+}
+.slider-main__status{
+    position: relative;
+    bottom: 55px;
+    left: 10px;
+
+    font-family: 'History Pro 02';
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 90%;
+    text-align: right;
+    text-transform: uppercase;
+    color: var(--c-gold-light);
+    transform: rotate(-90deg);
+    @media(--tablet){
+        left: 0;
+        bottom: 0;
+
+        padding-left: 10px;
+        margin-bottom: 3px;
+
+        font-size: 24px;
+
+        transform: rotate(0deg);
+
+        border-left: 0.5px solid #DDC8AE;
+    }
+    @media(--mobile){
+        font-size: 20px;
+    }
+    @media(--mobile-xs){
+        font-size: 14px;
+    }
+}
+.slider-main__title{
+    max-width: 655px;
+    margin-top: 18.4%;
+    margin-left: 5px;
+
+    font-family: 'TT Norms Pro';
+    font-weight: bold;
+    font-size: 70px;
+    line-height: 90%;
+    text-transform: uppercase;
+    color: var(--с-white);
+    text-align: left;
+}
+.slider-main__picture{
+    display: block;
+    height: 100%;
+}
+.slider-main__img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /*object-fit: contain;*/
+    font-family: 'object-fit: contain;';
+}
+@media(--tablet){
+    .slider-main__title{
+        max-width: 60%;
+        margin-top: 0;
+        margin-left: 0;
+        padding-left: 24px;
+
+        font-size: 50px;
+        line-height: 1;
+    }
+}
+@media(--mobile){
+    .slider-main__title{
+        max-width: 70%;
+        font-size: 40px;
+    }
+}
+@media(--mobile-s){
+    .slider-main__title{
+        font-size: 32px;
+    }
+}
+@media(--mobile-xs){
+    .slider-main__title{
+        max-width: 80%;
+        font-size: 26px;
+    }
+}

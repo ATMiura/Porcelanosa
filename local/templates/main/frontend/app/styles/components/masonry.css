@@ -1,0 +1,80 @@
+@import "../variables.css";
+@import "../media.css";
+
+.masonry {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(7.8%, 1fr));
+    grid-auto-rows: 185px;
+    grid-auto-flow: row dense;
+
+    padding: 70px 0;
+    margin: 0 -15px;
+
+    @media(--mobile){
+        padding: 30px 0;
+        margin: 0;
+        grid-auto-rows: 225px;
+    }
+
+    &--gallery {
+
+        .gallery-card {
+            position: relative;
+            padding: 15px;
+
+
+            &--small {
+                grid-column: span 4;
+                grid-row: span 2;
+            }
+
+            &--small-vertical {
+                grid-column: span 3;
+                grid-row: span 3;
+            }
+
+            &--horizontal {
+                grid-column: span 2;
+                grid-row: span 2;
+            }
+
+            &--horizontal-big {
+                grid-column: span 9;
+                grid-row: span 3;
+                @media(--mobile-s){
+                    grid-column: span 12;
+                }
+            }
+
+            &--vertical {
+
+            }
+
+            &--vertical-big{
+                grid-column: span 3;
+                grid-row: span 4;
+            }
+
+            &--big{
+                grid-column: span 5;
+                grid-row: span 4;
+            }
+
+            @media(--mobile-s){
+                padding: 0;
+                &:not(:last-child){
+                    margin-bottom: 10px;
+                }
+                grid-column: span 12;
+                grid-row: span 1;
+            }
+
+        }
+        .gallery-card__img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+

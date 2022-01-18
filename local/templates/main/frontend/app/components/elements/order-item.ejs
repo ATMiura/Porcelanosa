@@ -1,0 +1,65 @@
+<div class="order__item" data-order-item>
+    <div class="order-item__header">
+        <div class="order-item__title">
+            <div class="order-item__name">ЗАКАЗ №</div>
+            <div class="order-item__code"><%= code %></div>
+        </div>
+        <div class="order-item__status"><%= status %></div>
+        <div class="order-item__toggle" data-order-toggle>Свернуть</div>
+    </div>
+    <div class="order-item__body" data-order-preview>
+        <div class="order-item__property">
+            <%- require("../elements/property.ejs")({property: property }) %>
+        </div>
+        <div class="order-item__details">
+            <table class="basket-items-list-table">
+                <tbody>
+                    <% orderItems.forEach(function(item) { %>
+                        <tr class="basket-items-list-item-container" >
+                            <td class="basket-items-list-item-descriptions">
+                                <div class="basket-items-list-item-descriptions-inner" >
+                                    <div class="basket-item-block-image">
+                                        <a href="#" class="basket-item-image-link">
+                                            <img class="basket-item-image" alt="" src="./images/content/<%= item.image %>.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="basket-item-block-info">
+                                        <div class="basket-item-block-info__head">
+                                            <h2 class="basket-item-info-name">
+                                                <a href="#" class="basket-item-info-name-link">
+                                                    <span data-entity="basket-item-name"><%= item.name %></span>
+                                                </a>
+                                            </h2>
+                                            <div class="basket-item-block-info__top">
+                                                <div class="basket-item-block-article">
+                                                    <div class="basket-item-block-article__key">Артикул</div>
+                                                    <div class="basket-item-block-article__value"><%= item.code %></div>
+                                                </div>
+                                                <div class="basket-item-block-for-one">
+                                                    <div class="basket-item-block-for-one__volume"><%= item.volume %> / м<sup>2</sup></div>
+                                                    <div class="basket-item-block-for-one__pack"><%= item.pack %></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-count">
+                                <div class="basket-item-block-count">
+                                    <span class="basket-item-count-text"><%= item.count %></span>
+                                </div>
+                            </td>
+                            <td class="basket-items-list-item-price">
+                                <div class="basket-item-block-price">
+                                    <div class="basket-item-price-current">
+                                        <span class="basket-item-price-current-text"><%= item.cost %></span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

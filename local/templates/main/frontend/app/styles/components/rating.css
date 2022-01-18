@@ -1,0 +1,36 @@
+@import "../media.css";
+
+.rating{
+    display: flex;
+}
+.rating-form{
+    display: flex;
+}
+.rating__input{
+    display: none;
+}
+.rating__label{
+
+}
+.rating-list{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.rating-item{
+    svg{
+
+    }
+    &.active{
+        path{
+            stroke: #403838;
+            fill: transparent;
+        }
+    }
+    &:not(:last-child){
+        margin-right: 10px;
+        @media(--mobile-xs){
+            margin-right: 3px;
+        }
+    }
+}

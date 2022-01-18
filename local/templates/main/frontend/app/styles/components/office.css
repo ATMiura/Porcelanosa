@@ -1,0 +1,60 @@
+@import "../media.css";
+@import "../variables.css";
+
+#map{
+    height: 510px;
+    width: 100%;
+}
+
+.office{
+    position: relative;
+    z-index: 1;
+    max-width: 1316px;
+    margin: -120px auto 0;
+    background: #FFFFFF;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+
+    @media(--tablet-above){
+        margin: 50px auto 0;
+    }
+}
+.office-list{
+
+}
+.office-list__item{
+
+}
+.office-item{
+    display: flex;
+    align-items: flex-start;
+    padding: 50px 15px 50px 105px;
+
+    &:not(:last-child){
+         border-bottom: 1px solid #DDC8AE;
+    }
+    .list-contacts{
+        max-width: 570px;
+    }
+    @media(--tablet-above){
+        padding: 30px;
+    }
+}
+.office-item__content{
+    display: flex;
+    align-items: center;
+    @media(--mobile){
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+.office-item__picture{
+    display: block;
+    margin-right: 60px;
+    @media(--tablet){
+        margin-right: 30px;
+    }
+    @media(--mobile){
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+}

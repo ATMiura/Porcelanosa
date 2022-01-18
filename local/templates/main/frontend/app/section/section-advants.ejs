@@ -1,0 +1,27 @@
+<section class="section section-advants">
+    <div id="sliderAdvants" class="slider-advants swiper-slider">
+        <div class="slider-advants__container swiper-container">
+            <div class="slider-advants__wrapper swiper-wrapper">
+                <% const list = [
+                    {img:'1', text: 'Официальные партнеры Porcelanosa Grupo'},
+                    {img:'2', text: 'Услуги доставки <br> и монтажа'},
+                    {img:'3', text: 'Высокое качество продукции'},
+                    {img:'4', text: 'Сервис и гарантии'},
+                    {img:'5', text: '3D визуализация проекта'},
+                ] %>
+                <% list.forEach(function (item) { %>
+                    <div class="slider-advants__slide swiper-slide">
+                        <div class="slider-advants__slide-inner">
+                            <picture class="slider-advants__picture">
+                                <img src="./images/content/slider-advants-<%= item.img %>.svg" alt="" class="slider-advants__img">
+                            </picture>
+                            <div class="slider-advants__content">
+                                <div class="slider--advants__title"><%- item.text %></div>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</section>

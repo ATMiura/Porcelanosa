@@ -1,0 +1,104 @@
+<% const data = {
+    title: 'Мероприятия - деталка',
+    'flowContainerClass' : 'flow-container--main'
+} %>
+
+<%- require("../layouts/header.ejs")(data) %>
+
+    <section class="section-head">
+        <div class="container">
+            <%- require('../components/elements/breadcrumbs.ejs')(data)%>
+            <div class="section-head__title">
+                <h1 class="h1">Больше, чем камень – SILVERLAKE ОТ MIRAGE</h1>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-post">
+        <div class="container">
+            <div class="grid">
+                <div class="grid__col">
+                    <div class="post__banner">
+                        <picture class="post__picture">
+                            <img src="./images/content/post__image--news.jpg" alt="" class="post__image">
+                        </picture>
+                    </div>
+                </div>
+                <div class="grid__col grid__col--3 post__date">
+                    <div class="post-date">
+                        <div class="post-date__list">
+                            <div class="post-date__item">
+                                <div class="post-date__day">18</div>
+                            </div>
+                            <div class="post-date__item">
+                                <div class="post-date__month">марта</div>
+                                <div class="post-date__year">2021</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid__col grid__col--9 post__editor">
+                    <div class="editor">
+                        <p>Новая коллекция Silverlake – это признание в любви кварцу – брутальному, элегантному и такому настоящему камню.</p>
+                        <p>Благодаря самым современным технологиям удалось максимально точно передать природный характер этого материала, воплощенный в фактурной поверхности, мягких прожилках и бесчисленных цветовых переходах.</p>
+                        <p>Керамогранит Silverlake представлен в 6 натуральных оттенках, в двух видах покрытиях и толщины – 9 и 20 мм – для внутренней и внешней отделки. А 7 вариантов размеров позволяют не только подобрать формат для любого помещения, но и создавать интересные комбинации раскладки.</p>
+                        <p>На выставке Cersaie 2019 Venis представил новое прочтение уже знакомого всем сланца. Коллекция Persa — это классическая плитка и керамогранит, представленные в 3 натуральных оттенках и в трех универсальных форматах, которые дополняет фактурный настенный декор.</p>
+                        <p>Серия выделяется своим исключительным рельефом. Он дает полное ощущение уникальной природной поверхности — как на полу, так и на стенах — которая является точным отражением фактуры натурального сланца.</p>
+                        <p>Коллекция Persa доступна к заказу во всех салонах.</p>
+                    </div>
+                </div>
+                <div class="grid__col post__back">
+                    <a href="#" class="btn btn--border-brown-dark post__back__link">
+                        <svg class="i-icon i-back">
+                            <use xlink:href="#i-back"></use>
+                        </svg>
+                        <span>Назад к списку</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-events section-news">
+        <div class="container">
+            <div class="section__head">
+                <h2 class="h2">Другие Новости</h2>
+            </div>
+            <div class="news">
+                <div class="news-list">
+                    <%
+                    const listEvents = [
+                        { date: '28.03', img: './images/content/slider-events-img-1.jpg', title: 'Виртуальная экскурсия с Porselanosa Grupo', place: 'Краснодар', },
+                        { date: '28.03', img: './images/content/slider-events-img-2.jpg', title: 'Про душевой дизайн с Radaway', place: 'Новосибирск', },
+                        { date: '28.03', img: './images/content/slider-events-img-3.jpg', title: 'Про душевой дизайн с Radaway', place: 'Новосибирск', },
+                    ]
+
+                    listEvents.forEach(function (item) { %>
+                        <div class="events-card">
+                            <a href="#" class="events-card__link">
+                                <div class="events-card-content">
+                                    <picture class="events-card__picture">
+                                        <img src="<%= item.img %>" alt="" class="events-card__image">
+                                    </picture>
+                                    <div class="events-card__label">
+                                        <div class="events-card-date">
+                                            <div class="events-card-date__col">11</div>
+                                            <div class="events-card-date__col">
+                                                <span>декабря</span>
+                                                <span>2020</span>
+                                            </div>
+                                        </div>
+                                        <div class="events-card-info">
+                                            <div class="events-card__title"><%= item.title %></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<%- require("../layouts/footer.ejs")() %>

@@ -1,0 +1,19 @@
+<%
+const list = [
+    {'subCatName': 'Керамогранит'},
+    {'subCatName': 'Мозаика'},
+    {'subCatName': 'Керамическая плитка'},
+    {'subCatName': 'Натуральный камень'},
+    {'subCatName': 'искусственный камень'},
+]
+%>
+
+<div class="sub-directory">
+    <ul class="sub-directory-list">
+        <% list.forEach(function (item) { %>
+            <li class="sub-directory-list__item">
+                <a href="#" class="sub-directory-item__link"><%= item.subCatName %></a>
+            </li>
+        <% }) %>
+    </ul>
+</div>

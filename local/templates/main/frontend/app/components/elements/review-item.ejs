@@ -1,0 +1,23 @@
+<div class="swiper-slide-content">
+    <div class="swiper-slide__rating">
+        <%- require("../elements/rating.ejs")() %>
+    </div>
+    <div class="swiper-slide__review-text"><%= reviewText %></div>
+    <div class="swiper-slide-video">
+        <a href="./video/video.mp4" class="swiper-slide-video__link" data-fancybox>
+            <span class="swiper-slide-video__icon">
+                <svg class="i-icon i-video-play">
+                    <use xlink:href="#i-video-play"></use>
+                </svg>
+            </span>
+            <div class="swiper-slide-video__label">Смотреть видеотзыв</div>
+        </a>
+    </div>
+    <picture class="swiper-slide__picture">
+        <img src="<%= image %>" alt="" class="swiper-slide__image">
+    </picture>
+    <div class="swiper-slide-review__info">
+        <div class="swiper-slide-review__name"><%= name %></div>
+        <div class="swiper-slide-review__position"><%= position %></div>
+    </div>
+</div>

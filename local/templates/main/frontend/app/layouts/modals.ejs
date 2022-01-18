@@ -1,0 +1,42 @@
+<div id="auth" class="modal modal-small">
+    <div class="modal__head">
+        <div class="modal__title">Вход в личный кабинет</div>
+    </div>
+    <div class="modal__body">
+        <form class="modal__form" data-form data-ajax-url="">
+            <label class="modal__label">
+                <input type="text" class="modal__input input" placeholder="+ 7 (ххх)  ххх - хх-хх" data-inputmask data-input-required="phone">
+            </label>
+            <label class="modal__label">
+                <input type="text" class="modal__input input" placeholder="Введите код из СМС*" data-input-required="code">
+            </label>
+            <div class="modal__button">
+                <button type="submit" class="modal__submit btn btn--brown--dark">
+                    <span>Получить код</span>
+                </button>
+                <div class="modal__code">
+                    Не пришел код?
+                    <span>Повторить отправку можно через <span>60</span> сек</span>
+                    <button type="button" class="resend-code">Отправить код</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="reviewVideo" class="modal">
+    <div class="modal__body">
+        <div class="video-wrapper">
+            <div class="video" data-video>
+                <a class="video__link" href="./video/video.mp4" data-video-link="">
+                    <picture>
+                        <img class="video__media" src="./images/content/video-image.jpg" alt="" data-video-media="">
+                    </picture>
+                </a>
+                <button class="video__button" type="button" aria-label="Запустить видео" data-video-button="">
+                    <img src="./images/svg/video-play.svg" alt="">
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

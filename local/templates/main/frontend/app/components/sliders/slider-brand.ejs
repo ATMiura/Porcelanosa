@@ -1,0 +1,34 @@
+<div id="sliderBrands" class="slider-brand swiper-slider" data-move="slider-brand">
+    <div class="slider-brand__container swiper-container">
+        <div class="slider-brand__wrapper swiper-wrapper">
+            <% const list = [
+                {img: '1'},
+                {img: '2'},
+                {img: '3'},
+                {img: '4'},
+                {img: '2'},
+            ] %>
+            <% list.forEach(function (item) { %>
+                <div class="slider-brand__slide swiper-slide">
+                    <a href="#" class="slider-brand__link">
+                        <picture class="slider-brand__picture">
+                            <img src="./images/content/brand-img-<%= item.img %>.png" alt="" class="slider-brand__img">
+                        </picture>
+                    </a>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+    <div class="swiper-button-wrapper">
+        <div class="swiper-button swiper-button-prev">
+            <svg class="i-icon">
+                <use xlink:href="#i-slider-arrow-left"></use>
+            </svg>
+        </div>
+        <div class="swiper-button swiper-button-next">
+            <svg class="i-icon">
+                <use xlink:href="#i-slider-arrow-right"></use>
+            </svg>
+        </div>
+    </div>
+</div>

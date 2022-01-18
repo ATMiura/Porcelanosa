@@ -1,0 +1,39 @@
+@import "media.css";
+@import "variables.css";
+
+.editor {
+    font-size: 24px;
+    line-height: 1.5;
+    font-weight: normal;
+    h1, h2, h3, h4, h5, h6 {
+
+    }
+    b{
+        font-weight: bold;
+    }
+    p{
+        margin-bottom: 27px;
+        & + p {
+            margin-top: 25px;
+        }
+        &:first-child {
+            margin-top: 0;
+        }
+        &:last-child{
+            margin-bottom: 0;
+        }
+    }
+    a{
+        color: var(--c-gold);
+    }
+
+    @media(--tablet){
+        font-size: 18px;
+    }
+    @media(--mobile){
+        font-size: 14px;
+    }
+    @media(--mobile-xs){
+        font-size: 12px;
+    }
+}

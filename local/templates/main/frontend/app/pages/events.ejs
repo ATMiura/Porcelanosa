@@ -1,0 +1,64 @@
+<% const data = {
+    title: 'Мероприятия',
+    'flowContainerClass' : 'flow-container--main'
+} %>
+
+<%- require("../layouts/header.ejs")(data) %>
+
+    <section class="section-head">
+        <div class="container">
+            <%- require('../components/elements/breadcrumbs.ejs')(data)%>
+            <div class="section-head__title">
+                <h1 class="h1">Мероприятия</h1>
+                <a href="#" class="h1 section-head__link">Новости</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-events section-events--page">
+        <div class="container">
+            <div class="events">
+                <div class="events-list">
+
+                    <div class="events-card events-card--big">
+                        <a href="#" class="events-card__link">
+                            <div class="events-card-content">
+                                <picture class="events-card__picture">
+                                    <img src="./images/content/eventes-image-big.jpg" alt="" class="events-card__image">
+                                </picture>
+                                <div class="events-card__label">
+                                    <div class="events-card-date">
+                                        <div class="events-card-date__col">21</div>
+                                        <div class="events-card-date__col">
+                                            <span>декабря</span>
+                                            <span>2020</span>
+                                        </div>
+                                    </div>
+                                    <div class="events-card-info">
+                                        <div class="events-card__title">Виртуальная экскурсия с Porselanosa Grupo</div>
+                                        <div class="events-card__place">Краснодар</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <%
+                        const listEvents = [
+                            { date: '28.03', img: './images/content/slider-events-img-3.jpg', title: 'Виртуальная экскурсия с Porselanosa Grupo', place: 'Краснодар', },
+                            { date: '28.03', img: './images/content/slider-events-img-2.jpg', title: 'Про душевой дизайн с Radaway', place: 'Новосибирск', },
+                            { date: '28.03', img: './images/content/slider-events-img-1.jpg', title: 'Сочные новинки от Noken 2021', place: 'Новосибирск', },
+                            { date: '28.03', img: './images/content/slider-events-img-3.jpg', title: 'Сочные новинки от Noken 2021', place: 'Новосибирск', },
+                            { date: '28.03', img: './images/content/slider-events-img-2.jpg', title: 'Сочные новинки от Noken 2021', place: 'Новосибирск', },
+                            { date: '28.03', img: './images/content/slider-events-img-5.jpg', title: 'Сочные новинки от Noken 2021', place: 'Новосибирск', },
+                        ]
+
+                        listEvents.forEach(function (item) { %>
+                        <%- require("../components/elements/events-card.ejs")({date: item.date, image: item.img, title: item.title, place: item.place, }) %>
+                    <% }) %>
+                </div>
+                <%- require("../components/elements/pagination.ejs")() %>
+            </div>
+        </div>
+    </div>
+
+<%- require("../layouts/footer.ejs")() %>

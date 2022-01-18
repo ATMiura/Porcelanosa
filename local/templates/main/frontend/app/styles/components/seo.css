@@ -1,0 +1,91 @@
+@import "../media.css";
+@import "../variables.css";
+
+.seo{
+    position: relative;
+}
+.seo-header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    @media(--mobile){
+        position: relative;
+    }
+}
+.seo-content{
+    padding-top: 12px;
+}
+.seo-picture{
+    display: block;
+    text-align: right;
+    @media(--mobile-xs){
+        position: relative;
+        min-height: 166px;
+        margin-right: -20px;
+        overflow: hidden;
+    }
+}
+.seo-content-row{
+    display: flex;
+    align-items: flex-start;
+    max-width: 1280px;
+    margin: -220px 0 0;
+    color: var(--с-white);
+    background-color: var(--c-brown-dark);
+    position: relative;
+    @media(--tablet-above){
+        margin: -100px 0 0;
+    }
+    @media(--tablet){
+        margin: 0;
+        flex-wrap: wrap;
+    }
+}
+.seo-col{
+    flex-basis: 500px;
+    max-width: 500px;
+    width: 100%;
+
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 1.5;
+    &:not(:last-child){
+        padding-right: 15px;
+        margin-right: 11%;
+    }
+    p:last-child{
+        margin-bottom: 0;
+    }
+    @media(--tablet-above){
+        font-size: 16px;
+    }
+    @media(--tablet){
+        flex-basis: 100%;
+        max-width: 100%;
+        &:not(:last-child){
+            padding-right: 0;
+            margin-right: 0;
+            margin-bottom: 19px;
+        }
+    }
+    @media(--mobile){
+        font-size: 16px;
+    }
+    @media(--mobile-s){
+        font-size: 14px;
+    }
+    @media(--mobile-xs){
+        font-size: 12px;
+        &:not(:last-child){
+             margin-bottom: 7px;
+        }
+    }
+}
+.seo-image{
+    @media(--mobile-xs){
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
+}

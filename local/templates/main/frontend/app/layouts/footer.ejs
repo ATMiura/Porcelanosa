@@ -1,0 +1,158 @@
+
+        </main>
+        </div>
+        <footer class="footer">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="footer-row">
+                        <div class="footer-col">
+                            <div class="footer-col__inner">
+                                <div class="footer-col__title">Каталог</div>
+                                <div class="footer-nav">
+                                    <ul class="footer-nav-list">
+                                        <li class="footer-nav-item">
+                                            <a href="#" class="footer-nav__link">Плитка</a>
+                                        </li>
+                                        <li class="footer-nav-item">
+                                            <a href="#" class="footer-nav__link">Сантехника</a>
+                                        </li>
+                                        <li class="footer-nav-item">
+                                            <a href="#" class="footer-nav__link">Мебель</a>
+                                        </li>
+                                        <li class="footer-nav-item">
+                                            <a href="#" class="footer-nav__link">Распродажа</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-col" data-mobile="footer-logo">
+                            <div class="footer-col__inner">
+                                <div class="footer-col__title">Блог</div>
+                                <div class="footer-nav">
+                                    <ul class="footer-nav-list">
+                                        <li class="footer-nav-item">
+                                            <a href="#" class="footer-nav__link">Новости</a>
+                                        </li>
+                                        <li class="footer-nav-item">
+                                            <a href="#" class="footer-nav__link">Мероприятия</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-col">
+                            <div class="footer-col__inner">
+                                <div class="footer-col__title">О компании</div>
+                                <div class="footer-nav">
+                                    <ul class="footer-nav-list">
+                                        <li class="footer-nav-item">
+                                            <a href="#" class="footer-nav__link">Салоны</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-col">
+                            <div class="footer-col__inner">
+                                <div class="footer-col__title">Контакты</div>
+                                <div class="footer-contact-list">
+                                    <a href="tel:+7 (383) 383 09 63" class="footer-contact__item footer__phone">+7 (383) 383 09 63</a>
+                                    <a href="mailto:mail@info.ru" class="footer-contact__item footer__email">E-mail@info.ru</a>
+                                    <div class="footer-contact__item footer__address">г. Новосибирск, <br> Фабричная улица, 31</div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+            <div class="footer-middle">
+                <div class="container" data-desktop="footer-logo">
+                    <div class="footer-logo" data-move="footer-logo">
+                        <a href="#" class="footer-logo-social__link">
+                            <svg class="i-icon i-inst">
+                                <use xlink:href="#i-inst"></use>
+                            </svg>
+                        </a>
+                        <a href="#" class="footer-logo__link">
+                            <img src="./images/footer-logo.svg" alt="" class="footer-logo__image">
+                        </a>
+                        <a href="#" class="footer-logo-social__link">
+                            <svg class="i-icon i-vk">
+                                <use xlink:href="#i-vk"></use>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="subscription">
+                        <div class="subscription__left">
+                            <div class="subscription__info">
+                                <div class="subscription__title">Подписаться на <br> рассылку</div>
+                            </div>
+                        </div>
+                        <div class="subscription__center">
+                            <form class="subscription__form" action="#" data-form="subscription" data-ajax-url="" data-form-no-ajax="">
+                                <label class="subscription__label">
+                                    <input type="text" class="subscription__input input" name="email" data-input-required="email" placeholder="Ваш e-mail">
+                                    <input type="submit" class="subscription__btn" value="Подписаться">
+                                </label>
+                            </form>
+                        </div>
+                        <div class="subscription__right">
+                            <div class="subscription__rules">
+                                <span>Подписываясь, вы соглашаетесь <br> с </span>
+                                <a href="#">условиями обработки персональных данных</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-bottom-row">
+                        <div class="footer-dev">
+                            <a class="footer-dev__link" href="https://iarga.ru" target="_blank">
+                                <span>Сделано в </span>
+                                <img src="./images/svg/dev-logo.svg" alt="" class="footer-dev__logo">
+                            </a>
+                        </div>
+                        <div class="footer__copyright">
+                            <div class="copyright">
+                                <span>© 2021. ООО Мой Дом. Все права защищены. </span>
+                            </div>
+                        </div>
+                        <div class="footer__privacy">
+                            <div class="privacy">
+                                <div class="privacy__item">
+                                    <a href="#" class="privacy__link">Политика конфеденциальности</a>
+                                </div>
+                                <div class="privacy__item">
+                                    <a href="#" class="privacy__link">Публичная оферта</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        </div>
+
+        <div class="whats-app">
+            <a href="#" class="whats-app__link">
+                <svg class="i-icon i-wa">
+                    <use xlink:href="#i-wa"></use>
+                </svg>
+            </a>
+        </div>
+
+        <%- require('../layouts/mobile-filter.ejs')() %>
+        <%- require('./mobile-menu.ejs')() %>
+        <%- require('./mobile-search.ejs')() %>
+        <%- require('./modals.ejs')() %>
+        <div class="overlay"></div>
+        <div class="preloader" data-preloader>
+            <div class="preloader__circle"></div>
+            <div class="preloader__circle"></div>
+            <div class="preloader__circle"></div>
+        </div>
+    </body>
+</html>

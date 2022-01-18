@@ -1,0 +1,51 @@
+@import "../media.css";
+@import "../variables.css";
+
+.features{
+
+}
+.features__list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.features__item{
+    min-width: 160px;
+    font-size: 18px;
+    font-weight: normal;
+    color: currentColor;
+
+    display: none;
+    /*&:not(:last-child){
+        margin-bottom: 10px;
+    }
+    &:first-child{
+        display: block;
+        margin-bottom: 0;
+    }*/
+}
+@media(--tablet){
+    .features__item{
+        font-size: 16px;
+    }
+}
+@media(--mobile){
+    .features__item{
+        font-size: 14px;
+    }
+}
+@media(--mobile-s){
+    .features__item{
+        min-width: auto;
+        max-width: 50%;
+        width: 100%;
+    }
+}
+@media(--mobile-xs){
+    .features__item{
+        font-size: 10px;
+        &:nth-child(-n+1){
+            display: block;
+        }
+    }
+}

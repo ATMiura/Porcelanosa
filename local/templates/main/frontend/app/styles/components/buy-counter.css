@@ -1,0 +1,91 @@
+@import "../media.css";
+@import "../variables.css";
+
+.counter {
+    display: flex;
+    align-items: center;
+
+}
+.counter-btns{
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--c-gold-light);
+}
+.counter__btn {
+    position: relative;
+    width: 90px;
+    min-width: 90px;
+    height: 70px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    @media(max-width: 1600px){
+        width: 70px;
+        min-width: 70px;
+        height: 60px;
+    }
+    @media(--mobile-xs){
+        height: 50px;
+    }
+    &:before,
+    &:after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        width: 18px;
+        height: 1px;
+        background-color: var(--c-black);
+    }
+    &--reduce {
+        &:before {
+            content: '';
+        }
+    }
+    &--increase {
+        &:before,
+        &:after {
+            content: '';
+        }
+        &:after {
+            transform: rotate(90deg);
+        }
+    }
+}
+.counter__input {
+    width: 60px;
+    min-width: 60px;
+    height: 40px;
+    text-align: center;
+    font-weight: 300;
+    font-size: 24px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+.counter__value{
+    margin-left: 30px;
+    font-size: 24px;
+    white-space: nowrap;
+    font-weight: normal;
+    sup{
+        left: 0;
+    }
+    @media(max-width: 1600px){
+        margin-left: 20px;
+        font-size: 22px;
+    }
+    @media(--tablet-above){
+        font-size: 18px;
+    }
+    @media(--mobile-s){
+        font-size: 16px;
+        margin-left: 20px;
+    }
+    @media(--mobile-xs){
+        font-size: 14px;
+        margin-left: 15px;
+    }
+}

@@ -1,0 +1,51 @@
+@import "../media.css";
+@import "../variables.css";
+
+.collections-item{
+
+}
+.collections-item__link,
+.collections-item__picture{
+    display: block;
+}
+.collections-item__image{
+    display: block;
+    font-size: 0;
+    line-height: 0;
+    @media(--mobile-xs){
+        min-height: 214px;
+    }
+}
+.collections-item-content{
+    padding: 21px 70px;
+    line-height: 1.2;
+    color: var(--c-brown-dark);
+    @media(--mobile-s){
+        padding: 15px 10px 0 0;
+    }
+    @media(--mobile-xs){
+        padding: 10px 10px 0 0;
+    }
+}
+.collections-item__title{
+    margin-bottom: 7px;
+
+    font-weight: 500;
+    font-size: 30px;
+    @media(--mobile-s){
+        font-size: 24px;
+    }
+    @media(--mobile-xs){
+        font-size: 14px;
+    }
+}
+.collections-item__price{
+    font-size: 18px;
+    line-height: 1.2;
+    @media(--mobile-s){
+        font-size: 14px;
+    }
+    @media(--mobile-xs){
+        font-size: 10px;
+    }
+}

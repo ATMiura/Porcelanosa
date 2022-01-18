@@ -1,0 +1,81 @@
+<% const data = {
+    title: 'Контакты/салоны',
+    'flowContainerClass' : 'flow-container--main'
+} %>
+<%- require("../layouts/header.ejs")(data) %>
+    <section class="section-head">
+        <div class="container">
+            <%- require('../components/elements/breadcrumbs.ejs')(data)%>
+            <div class="section-head__title">
+                <h1 class="h1">Салоны</h1>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-map">
+        <div id="map"></div>
+        <div class="container">
+            <div class="office">
+                <div class="office-list">
+                    <div class="office-item">
+                        <div class="office-item__content">
+                            <picture class="office-item__picture">
+                                <img src="./images/content/office-item__image-1.jpg" alt="" class="office-item__image">
+                            </picture>
+                            <div class="list-contacts">
+                                <div class="list-contacts-item">
+                                    <a class="list-contacts-item__link list-contacts-item__link--address">
+                                        <div class="list-contacts-item__key">Адрес</div>
+                                        <div class="list-contacts-item__label">г. Новосибирск, ул. Дзержинского, 23</div>
+                                    </a>
+                                </div>
+                                <div class="list-contacts-item">
+                                    <a href="tel:+7 (383) 383 09 63" class="list-contacts-item__link">
+                                        <div class="list-contacts-item__key">Телефон</div>
+                                        <div class="list-contacts-item__label">+7 (383) 383 09 63</div>
+                                    </a>
+                                </div>
+                                <div class="list-contacts-item">
+                                    <a href="mailto:E-mail@info.ru" class="list-contacts-item__link">
+                                        <div class="list-contacts-item__key">E-mail</div>
+                                        <div class="list-contacts-item__label">E-mail@info.ru</div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="office-item">
+                        <div class="office-item__content">
+                            <picture class="office-item__picture">
+                                <img src="./images/content/office-item__image-2.jpg" alt="" class="office-item__image">
+                            </picture>
+                            <div class="list-contacts">
+                                <div class="list-contacts__item">
+                                    <div class="list-contacts-item">
+                                        <a class="list-contacts-item__link list-contacts-item__link--address">
+                                            <div class="list-contacts-item__key">Адрес</div>
+                                            <div class="list-contacts-item__label">г. Новосибирск, ул. Красная, 23</div>
+                                        </a>
+                                    </div>
+                                    <div class="list-contacts-item">
+                                        <a href="tel:+7 (383) 383 19 75" class="list-contacts-item__link">
+                                            <div class="list-contacts-item__key">Телефон</div>
+                                            <div class="list-contacts-item__label">+7 (383) 383 19 75</div>
+                                        </a>
+                                    </div>
+                                    <div class="list-contacts-item">
+                                        <a href="mailto:E-mail2@info.ru" class="list-contacts-item__link">
+                                            <div class="list-contacts-item__key">E-mail</div>
+                                            <div class="list-contacts-item__label">E-mail2@info.ru</div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<%- require("../layouts/footer.ejs")() %>

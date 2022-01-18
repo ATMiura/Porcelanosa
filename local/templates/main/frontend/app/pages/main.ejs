@@ -1,0 +1,91 @@
+<% const data = {
+    title: 'Главная',
+    'flowContainerClass' : 'flow-container--main'
+} %>
+
+<%- require("../layouts/header.ejs")(data) %>
+
+<%
+
+    const listCollection = [
+        { img: './images/content/slider-collections-img-1.jpg', title: 'Mirage-Image', price: 'от 16 500 руб. / м2' },
+        { img: './images/content/slider-collections-img-2.jpg', title: 'Mirage-Image', price: 'от 16 500 руб. / м2' },
+        { img: './images/content/slider-collections-img-3.jpg', title: 'Mirage-Image', price: 'от 16 500 руб. / м2' },
+        { img: './images/content/slider-collections-img-1.jpg', title: 'Mirage-Image', price: 'от 16 500 руб. / м2' },
+        { img: './images/content/slider-collections-img-2.jpg', title: 'Mirage-Image', price: 'от 16 500 руб. / м2' },
+        { img: './images/content/slider-collections-img-3.jpg', title: 'Mirage-Image', price: 'от 16 500 руб. / м2' },
+    ]
+
+    const sectionCollectionData = { sectTitle: 'Коллекции', sectMore: true, sliderId: 'sliderCollections', sliderProduct: false, SectionDark: false,  SectSliderClass: 'collections', sliderSlides: listCollection, }
+
+    const listNew = [
+
+        { name: 'Плитка Mirage-Image', img: 'slider-new-img-1.jpg', price: '400 руб.',     sale: false },
+        { name: 'Керамогранит Austin', img: 'slider-new-img-2.jpg', price: '48 000 руб.',  sale: false },
+        { name: 'Плитка Mirage-Image', img: 'slider-new-img-1.jpg', price: '400 руб.',     sale: false },
+        { name: 'Керамогранит Austin', img: 'slider-new-img-2.jpg', price: '48 000 руб.',  sale: false },
+        { name: 'Плитка Mirage-Image', img: 'slider-new-img-1.jpg', price: '400 руб.',     sale: false },
+        { name: 'Керамогранит Austin', img: 'slider-new-img-2.jpg', price: '48 000 руб.',  sale: false },
+    ]
+
+    const sectionNewData = { sectTitle: 'Новинки', sectMore: true, sliderId: 'sliderNew', sliderProduct: true, SectionDark: true,  SectSliderClass: 'new', sliderSlides: listNew, }
+
+    const listProjects = [
+        { img: './images/content/slider-project-img-1.jpg', title: 'Вилла в трех уровнях с бассейном', author: 'Махнев Евгений', usedProd: 'Porcelanosa, Venis, Gamadecor,  Krion',  },
+        { img: './images/content/slider-project-img-2.jpg', title: 'Квартира в ЖК Арбат', author: 'Алиса Гиголян', usedProd: 'Porcelanosa, Venis, Gamadecor',  },
+        { img: './images/content/slider-project-img-1.jpg', title: 'Вилла в трех уровнях с бассейном', author: 'Махнев Евгений', usedProd: 'Porcelanosa, Venis, Gamadecor,  Krion',  },
+        { img: './images/content/slider-project-img-2.jpg', title: 'Квартира в ЖК Арбат', author: 'Алиса Гиголян', usedProd: 'Porcelanosa, Venis, Gamadecor',  },
+        { img: './images/content/slider-project-img-1.jpg', title: 'Вилла в трех уровнях с бассейном', author: 'Махнев Евгений', usedProd: 'Porcelanosa, Venis, Gamadecor,  Krion',  },
+        { img: './images/content/slider-project-img-2.jpg', title: 'Квартира в ЖК Арбат', author: 'Алиса Гиголян', usedProd: 'Porcelanosa, Venis, Gamadecor',  },
+        { img: './images/content/slider-project-img-1.jpg', title: 'Вилла в трех уровнях с бассейном', author: 'Махнев Евгений', usedProd: 'Porcelanosa, Venis, Gamadecor,  Krion',  },
+        { img: './images/content/slider-project-img-2.jpg', title: 'Квартира в ЖК Арбат', author: 'Алиса Гиголян', usedProd: 'Porcelanosa, Venis, Gamadecor',  },
+    ]
+
+    const sectionProjectsData = { sectTitle: 'Проекты', sectMore: true, sliderId: 'sliderProjects', sliderProduct: false, SectionDark: false,  SectSliderClass: 'projects', sliderSlides: listProjects, }
+
+    const listReviews = [
+        { img: './images/content/slider-reviews-img-1.jpg',
+            name: 'Ольга Иванова',
+            position: 'Дизайнер интерьера',
+            rating: '4',
+            reviewText: 'Наша концепция - это делать удобные, комфортные и легкие интерьеры для своих заказчиков. И такие интерьеры могут получаться только с качественными отделочными материалами. В выборе таких качественных отделочных материалов мы можем положиться на компанию Zodiac.'
+        },
+        { img: './images/content/slider-reviews-img-2.jpg',
+            name: 'Александра Константинопольская',
+            position: 'Дизайнер интерьера',
+            rating: '4',
+            reviewText: 'Наша концепция - это делать удобные, комфортные и легкие интерьеры для своих заказчиков. И такие интерьеры могут получаться только с качественными отделочными материалами. В выборе таких качественных отделочных материалов мы можем положиться на компанию Zodiac.'
+        },
+        { img: './images/content/slider-reviews-img-3.jpg',
+            name: 'Константин Прокопьев',
+            position: 'Дизайнер интерьера',
+            rating: '5',
+            reviewText: 'Наша концепция - это делать удобные, комфортные и легкие интерьеры для своих заказчиков. И такие интерьеры могут получаться только с качественными отделочными материалами. В выборе таких качественных отделочных материалов мы можем положиться на компанию Zodiac.'
+        },
+    ]
+
+    const sectionReviewsData = { sectTitle: 'Отзывы дизайнеров', sectMore: true, sliderId: 'sliderReviews', sliderProduct: false, SectionDark: false,  SectSliderClass: 'reviews', sliderSlides: listReviews, }
+
+    const listEvents = [
+        { date: '28.03', img: './images/content/slider-events-img-1.jpg', title: 'Виртуальная экскурсия с Porselanosa Grupo', place: 'Краснодар', },
+        { date: '28.03', img: './images/content/slider-events-img-2.jpg', title: 'Про душевой дизайн с Radaway', place: 'Новосибирск', },
+        { date: '28.03', img: './images/content/slider-events-img-1.jpg', title: 'Сочные новинки от Noken 2021', place: 'Новосибирск', },
+        { date: '28.03', img: './images/content/slider-events-img-2.jpg', title: 'Сочные новинки от Noken 2021', place: 'Новосибирск', },
+    ]
+
+    const sectionEventsData = { sectTitle: 'Мероприятия', sectMore: true, sliderId: 'sliderEvents', sliderProduct: false, SectionDark: false,  SectSliderClass: 'events', sliderSlides: listEvents, }
+%>
+
+<%- require("../section/section-slider-main.ejs")() %>
+<%- require("../section/section-brand.ejs")() %>
+<%- require("../section/section-advants.ejs")() %>
+<%- require("../section/section-catalog.ejs")() %>
+<%- require("../section/section.ejs")(sectionCollectionData) %>
+<%- require("../section/section.ejs")(sectionNewData) %>
+<%- require("../section/section.ejs")(sectionProjectsData) %>
+<%- require("../section/section.ejs")(sectionReviewsData) %>
+<%- require("../section/section.ejs")(sectionEventsData) %>
+<%- require("../section/section-seo.ejs")() %>
+
+
+<%- require("../layouts/footer.ejs")() %>

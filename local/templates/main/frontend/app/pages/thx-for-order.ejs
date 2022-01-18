@@ -1,0 +1,24 @@
+<% const data = {
+    title: 'Спасибо за заказ',
+    'flowContainerClass' : 'flow-container--main'
+} %>
+
+<%- require("../layouts/header.ejs")(data) %>
+
+<section class="section section-thx">
+    <div class="container">
+        <div class="message">
+            <div class="message__inner">
+                <div class="message__title">Спасибо за заказ</div>
+                <div class="message__descr">Ваш заказ № 5697846</div>
+                <div class="message__order">
+                    <p>В ближайшее время с Вами свяжется менеджер, чтобы уточнить способ доставки и оплаты.</p>
+                    <p>По всем вопросам вы можете написать нам в whatsapp или позвонить по номеру телефона <a href="tel:+7 (383) 383 09 63"><b>+7 (383) 383 09 63</b></a></p>
+                </div>
+                <a href="#" class="message__link">На главную</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- require("../layouts/footer.ejs")() %>

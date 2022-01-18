@@ -1,0 +1,50 @@
+@import "../variables.css";
+@import "../media.css";
+
+
+.video {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.3%;
+}
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+}
+.video--enabled {
+    cursor: pointer;
+}
+.video__link, .video__media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.video__button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 65px;
+    height: 65px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 100%;
+    cursor: pointer;
+    outline: none;
+    @media(--mobile){
+        width: 55px;
+        height: 55px;
+    }
+}
+.video__button svg {
+    width: 65px;
+    height: 60px;
+}

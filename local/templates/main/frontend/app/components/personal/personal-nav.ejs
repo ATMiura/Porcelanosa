@@ -1,0 +1,21 @@
+<nav class="personal-nav">
+    <ul class="personal-nav-list">
+        <li class="personal-nav-list__item">
+            <a href="personal-data.html" class="personal-nav-list-item__link <%= personalKey === 'data' ? 'is-active' : ''  %>">Личные данные</a>
+        </li>
+        <li class="personal-nav-list__item">
+            <a href="personal-orders-current.html" class="personal-nav-list-item__link <%= personalKey === 'orders-none' ||  personalKey === 'orders-current' || personalKey === 'orders-finished' ? 'is-active' : ''  %>">Список заказов</a>
+        </li>
+        <li class="personal-nav-list__item">
+            <a href="personal-favorites.html" class="personal-nav-list-item__link <%= personalKey === 'favorites' || personalKey === 'favorites-none' ? 'is-active' : ''  %>">Избранное</a>
+        </li>
+    </ul>
+    <div class="logout">
+        <a href="#" class="logout__link">
+            <svg class="i-icon">
+                <use xlink:href="#i-logout"></use>
+            </svg>
+            <span class="logout__label">Выход</span>
+        </a>
+    </div>
+</nav>

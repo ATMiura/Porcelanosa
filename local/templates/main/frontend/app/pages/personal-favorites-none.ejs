@@ -1,0 +1,19 @@
+<% const data = {
+    title: 'Избранное',
+    'flowContainerClass' : 'flow-container--main',
+    'personalKey':'favorites-none'
+} %>
+<%- require("../layouts/header.ejs")(data) %>
+
+<section class="section-head">
+    <div class="container">
+        <%- require('../components/elements/breadcrumbs.ejs')(data)%>
+        <div class="section-head__title">
+            <h1 class="h1">Избранное</h1>
+        </div>
+    </div>
+</section>
+
+<%- require("../section/personal.ejs")(data)%>
+
+<%- require("../layouts/footer.ejs")() %>

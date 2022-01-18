@@ -1,0 +1,18 @@
+<% const data = {
+    title: 'Услуги',
+    'flowContainerClass' : 'flow-container--main'
+} %>
+<%- require("../layouts/header.ejs")(data) %>
+
+<section class="section-head">
+    <div class="container">
+        <%- require('../components/elements/breadcrumbs.ejs')(data)%>
+        <div class="section-head__title">
+            <h1 class="h1">Услуги</h1>
+        </div>
+    </div>
+</section>
+
+<%- require("../section/section-services.ejs")() %>
+
+<%- require("../layouts/footer.ejs")() %>

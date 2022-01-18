@@ -1,0 +1,14 @@
+@import "../media.css";
+@import "../variables.css";
+
+.location-city {
+    display: flex;
+    align-items: center;
+    margin-top: 22px;
+    font-size: 16px;
+    .i-icon {
+        margin-right: 6px;
+        /*fill: var(--c-gray2);
+        stroke: var(--c-gray2);*/
+    }
+}

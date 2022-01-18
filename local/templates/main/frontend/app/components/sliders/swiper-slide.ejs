@@ -1,0 +1,15 @@
+<div class="swiper-slide">
+    <a href="#" class="swiper-slide__link">
+        <picture class="swiper-slide__picture">
+            <img src="<%= img %>" alt="" class="swiper-slide__image">
+        </picture>
+        <div class="swiper-slide-content">
+            <div class="swiper-slide__title"><%= title %></div>
+            <% if(sliderId === 'sliderProjects') { %>
+                <div class="swiper-slide__author"><%= SlideProjectsAuthor %></div>
+            <% } else { %>
+                <div class="swiper-slide__price"><%= price %></div>
+            <% } %>
+        </div>
+    </a>
+</div>

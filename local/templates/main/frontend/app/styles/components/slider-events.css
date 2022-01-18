@@ -1,0 +1,73 @@
+@import "../media.css";
+@import "../variables.css";
+
+.slider-events{
+    padding-top: 34px;
+    .swiper-slide{
+        width: 645px;
+    }
+    .swiper-container{
+        overflow: visible;
+        margin-bottom: 95px;
+        &:not(.swiper-container-initialized){
+            .swiper-slide{
+                max-width: 780px;
+                width: 100%;
+                margin-right: 30px;
+            }
+        }
+    }
+    .swiper-navigation{
+        position: relative;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 1;
+
+        height: 106px;
+        width: 100%;
+        margin: 60px auto 0;
+
+        .swiper-pagination,
+        .swiper-button-wrapper{
+            max-width: 240px;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: var(--с-white);
+        }
+        .swiper-button-wrapper{
+
+        }
+        &:before,
+        &:after{
+             content: "";
+             position: absolute;
+             top: 0;
+             bottom: 0;
+             height: 100%;
+             width: 24.5%;
+             background: var(--с-white);
+        }
+        &:before{
+             left: 0;
+        }
+        &:after{
+             right: 0;
+        }
+        @media(--tablet-above){
+            margin: 10px auto 0;
+        }
+        @media(--tablet){
+            display: none;
+        }
+    }
+    @media(--desktop-above){
+        .swiper-container{
+            margin-bottom: 0;
+        }
+    }
+    @media(--tablet-above){
+        padding-top: 0;
+    }
+}

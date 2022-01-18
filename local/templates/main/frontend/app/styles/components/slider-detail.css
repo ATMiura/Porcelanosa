@@ -1,0 +1,40 @@
+@import "../variables.css";
+@import "../media.css";
+
+.slider-detail{
+    position: relative;
+    .swiper-pagination-fraction{
+        right: 200px;
+        bottom: 150px;
+        justify-content: flex-end;
+        width: auto;
+    }
+    .swiper-button-wrapper{
+        position: absolute;
+        right: 37px;
+        bottom: 27px;
+        display: flex;
+        justify-content: space-between;
+        max-width: 240px;
+        width: 100%;
+    }
+    .swiper-button{
+        position: relative;
+        right: 0;
+        left: 0;
+        top: 0;
+        margin-top: 0;
+        .i-icon{
+            path{
+                fill: var(--c-gold-light);
+            }
+        }
+    }
+}
+.slider-detail__slide{
+    height: 830px;
+    @media (max-width: 800px) {
+        height: 243px;
+        background-size: cover !important;
+    }
+}

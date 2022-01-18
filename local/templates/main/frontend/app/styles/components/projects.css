@@ -1,0 +1,32 @@
+@import "../media.css";
+
+.projects{
+
+}
+.project-list{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+
+    .projects-item{
+        flex-basis: 50%;
+        max-width: 50%;
+        width: 100%;
+        padding: 0 15px;
+        &:not(:last-child){
+            margin-bottom: 50px;
+            @media(--mobile-xs){
+                margin-bottom: 30px;
+            }
+        }
+        @media(--mobile-xs){
+            flex-basis: 100%;
+            max-width: 100%;
+        }
+    }
+    .projects-item__img{
+        @media(--mobile-xs){
+            min-height: auto;
+        }
+    }
+}

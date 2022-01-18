@@ -1,0 +1,9 @@
+<section class="section section-<%= SectSliderClass ? SectSliderClass : '' %><%= SectionDark ? ' section-dark ' : '' %> <%= sliderProduct ? ' section-slider-product ' : '' %>">
+    <div class="container">
+        <div class="section__head wow fadeInDown" data-wow-delay="0.5s">
+            <h2 class="h2"><%=sectTitle %></h2>
+            <% if(sectMore) { %> <a href="#" class="more-all wow fadeInDown" data-wow-delay="0.75s">Смотреть все</a><% } %>
+        </div>
+        <%- require("../components/sliders/slider.ejs")({sliderId: sliderId, sliderProduct: sliderProduct, sliderClass: SectSliderClass, sliderSlides: sliderSlides, }) %>
+    </div>
+</section>

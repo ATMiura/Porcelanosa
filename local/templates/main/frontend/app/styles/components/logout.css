@@ -1,0 +1,28 @@
+@import "../variables.css";
+@import "../media.css";
+
+.logout{
+
+}
+.logout__link{
+    display: inline-flex;
+    align-items: center;
+    padding: 17px 20px;
+    font-size: 14px;
+    line-height: 1;
+    text-transform: uppercase;
+    border: 1px solid #403838;
+    .i-icon{
+        margin-right: 27px;
+    }
+    @media(--mobile-xs){
+        border: 0;
+        padding: 0;
+        .i-icon{
+            margin-right: 15px;
+        }
+    }
+}
+.logout__label{
+    color: var(--c-brown-dark);
+}

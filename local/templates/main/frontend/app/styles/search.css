@@ -1,0 +1,221 @@
+@import 'media.css';
+@import 'variables.css';
+
+.search {
+    position: relative;
+    width: 100%;
+    .input {
+        height: 36px;
+        line-height: 36px;
+        padding: 4px 30px 0 30px;
+        margin-bottom: -6px;
+        border-radius: 0;
+        font-size: 18px;
+        border: 0;
+        border-bottom: 1px solid var(--c-gold);
+    }
+}
+.search__form {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+.search__btns{
+    position: absolute;
+    top: -6px;
+    right: 3px;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+}
+.search__block {
+    position: relative;
+}
+.search__input{
+
+}
+.search__submit {
+    position: relative;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1;
+    margin-right: 43px;
+    @media(--tablet){
+        margin-right: 0;
+    }
+}
+.search-tooltip {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    min-width: 520px;
+    margin-top: 6px;
+    padding: 65px 30px 50px;
+    background-color: white;
+    box-shadow: var(--boxShadow);
+    z-index: 1;
+    @media(--tablet-above) {
+        left: auto;
+        right: 0;
+        padding: 30px 20px;
+    }
+    @media(--mobile){
+        min-width: auto;
+    }
+    @media(--mobile-s) {
+        left: -20px;
+        right: -20px;
+        width: auto;
+        max-width: none;
+    }
+    @media(--mobile-xs) {
+        padding: 0 17px;
+    }
+}
+.search-tooltip-cat-list{
+    padding-bottom: 50px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--c-gold-light);
+}
+.search-tooltip-list{
+    margin-bottom: 28px;
+}
+.search-tooltip-cat-list__item{
+
+}
+.search-tooltip-list__item {
+    padding: 10px 0;
+    &:last-child{
+        padding-bottom: 0;
+    }
+    &:hover{
+        opacity: 0.6;
+    }
+    &:active{
+         opacity: 0.3;
+    }
+}
+.search-tooltip-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @media(--mobile){
+
+    }
+    @media(--mobile-xs) {
+
+    }
+}
+.search-tooltip-item__link {
+    display: inline-block;
+    font-weight: 500;
+}
+.search-tooltip-item__picture {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    min-width: 100px;
+    margin-right: 15px;
+    @media(--tablet-above) {
+        width: 70px;
+        min-width: 70px;
+        height: 70px;
+    }
+    @media(--mobile){
+        width: 55px;
+        min-width: 55px;
+        height: 55px;
+        margin-right: 10px;
+    }
+}
+.search-tooltip-item-picture {
+    display: flex;
+    align-items: center;
+    width: 100px;
+    min-width: 100px;
+    height: 100px;
+    overflow: hidden;
+    @media(--tablet-above) {
+        width: 70px;
+        min-width: 70px;
+        height: 70px;
+    }
+    @media(--mobile){
+        width: 55px;
+        min-width: 55px;
+        height: 55px;
+    }
+}
+.search-tooltip-item__content {
+    flex-grow: 1;
+    max-width: 375px;
+    @media(--mobile-xs){
+        max-width: none;
+        flex: 1;
+        padding-right: 10px;
+    }
+}
+.search-tooltip-item__name {
+    font-size: 24px;
+    line-height: 1.2;
+    color: var(--c-brown-dark);
+    @media(--tablet-above){
+        font-size: 18px;
+    }
+    @media(--mobile-s) {
+        font-size: 16px;
+    }
+    @media(--mobile-xs) {
+        font-size: 14px;
+    }
+}
+.search-tooltip-item__price {
+    min-width: 145px;
+    width: 145px;
+    margin-left: auto;
+    margin-right: 15px;
+    text-align: left;
+    white-space: nowrap;
+    .price{
+        .price__value{
+            font-weight: normal;
+        }
+    }
+    @media(--tablet-above){
+        min-width: 125px;
+        width: 125px;
+    }
+    @media(--mobile-s){
+        min-width: initial;
+        width: auto;
+        margin-right: 0;
+        .price {
+            font-size: 12px;
+        }
+    }
+}
+.search-tooltip__btn {
+
+}
+.search-tooltip__link,
+.search-tooltip__error {
+    font-weight: normal;
+    text-transform: uppercase;
+    color: var(--c-gold);
+}
+.search-tooltip__link{
+    letter-spacing: 0.1em;
+    @media(--tablet){
+        font-size: 16px;
+    }
+}

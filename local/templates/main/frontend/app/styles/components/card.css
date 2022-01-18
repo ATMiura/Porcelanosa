@@ -1,0 +1,316 @@
+@import "../media.css";
+@import "../variables.css";
+
+.card {
+    display: flex;
+    justify-content: space-between;
+    @media(--tablet){
+        flex-wrap: wrap;
+    }
+}
+.slider-card{
+    width: 59.749%;
+    min-width: 59.749%;
+    @media(--tablet-above){
+        width: 50%;
+        min-width: 50%;
+    }
+    @media(--tablet){
+        width: 100%;
+        min-width: 100%;
+        margin-bottom: 30px;
+    }
+}
+.slider-card__item{
+    cursor: none;
+}
+.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background: #fff;
+    text-align: center;
+    overflow: auto;
+    .swiper-wrapper {
+        height: auto;
+        overflow-x: hidden;
+        transform: none !important;
+        flex-direction: column;
+    }
+    .slider-card__item {
+        cursor: initial;
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        &:not(:last-child){
+            margin-bottom: 10px;
+        }
+    }
+    .slider-card__image{
+        width: initial;
+        max-width: initial;
+        max-height: initial;
+    }
+    .close-button {
+        display: block;
+    }
+}
+.close-button {
+    display: none;
+    height: 45px;
+    width: 45px;
+    color: #fff;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    font-size: 32px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 9999;
+    opacity: 1;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml,%3Csvg width='29' height='30' viewBox='0 0 29 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M21.0591 22.4997L6.91692 8.35753L7.62402 7.65042L21.7662 21.7926L21.0591 22.4997Z' fill='%23403838'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M22.191 8.35754L8.0489 22.4997L7.3418 21.7926L21.4839 7.65044L22.191 8.35754Z' fill='%23403838'/%3E%3C/svg%3E%0A");
+    &:hover,
+    &:active {
+        opacity: 1;
+    }
+    @media(--tablet){
+        top: 0;
+        right: 0;
+        padding: 10px;
+        background-color: white;
+    }
+}
+@media(min-width: 1001px){
+    .slider-card__list{
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -5px;
+        transform: none !important;
+    }
+    .slider-card__item{
+        width: 100%;
+        padding: 0 5px;
+        &:not(:first-child){
+             flex: 0 0 50%;
+             max-width: 50%;
+        }
+        &:not(:nth-last-child(-n+2)){
+            margin-bottom: 10px;
+        }
+    }
+}
+.slider-card__picture{
+    display: block;
+}
+.slider-card__image{
+    width: 100%;
+    max-width: 950px;
+    object-fit: cover;
+    font-family: 'object-fit: contain;';
+}
+@media(min-width: 1001px){
+    .slider-card-thumbs__container{
+        display: none;
+    }
+}
+@media(--tablet){
+    .slider-card__container{
+        margin-bottom: 10px;
+    }
+}
+
+.card-right{
+    flex-grow: 1;
+    max-width: 510px;
+    width: 100%;
+
+    @media(--tablet){
+        max-width: 100%;
+        padding-left: 0;
+    }
+}
+.card__content {
+    position: sticky;
+    top: 65px;
+
+    font-weight: normal;
+    color: var(--c-brown-dark);
+
+    @media(--tablet-above) {
+
+    }
+    @media(--mobile){
+
+    }
+    @media(--mobile-xs){
+
+    }
+}
+.card__row{
+    position: relative;
+    &:not(:last-child){
+        margin-bottom: 40px;
+        @media(--tablet-above){
+            margin-bottom: 25px;
+        }
+        @media(--tablet){
+            margin-bottom: 0;
+            .select{
+                margin-bottom: 20px;
+            }
+            .card__price{
+                margin-bottom: 17px;
+            }
+            .card__counter{
+                margin-bottom: 10px;
+            }
+            .card__result{
+                margin-bottom: 13px;
+            }
+        }
+    }
+    &:empty{
+        display: none;
+    }
+}
+.card__title{
+    margin-bottom: 16px;
+
+    font-size: 50px;
+    line-height: 1.2;
+    font-weight: normal;
+    @media(min-width: 1281px){
+        max-width: 85%;
+    }
+    @media(--tablet-above){
+        font-size: 44px;
+    }
+    @media(--tablet){
+        font-size: 36px;
+        font-weight: bold;
+        margin-bottom: 7px;
+    }
+    @media(--mobile){
+        font-size: 28px;
+    }
+    @media(--mobile-xs){
+        font-size: 24px;
+    }
+}
+.card-header__mobile{
+    @media(min-width: 1001px){
+        display: none;
+    }
+    @media(--tablet){
+        margin-bottom: 17px;
+    }
+}
+.card__label{
+    margin-bottom: 15px;
+    font-size: 24px;
+    line-height: 1.2;
+    @media(--tablet-above){
+        font-size: 18px;
+    }
+    @media(--tablet){
+        font-size: 16px;
+    }
+    @media(--mobile-xs){
+        margin-bottom: 12px;
+        font-size: 14px;
+    }
+}
+.card__result{
+    font-size: 24px;
+    line-height: 1.2;
+}
+.card__price{
+    .price{
+        display: flex;
+        flex-direction: column;
+        .price__old{
+            margin-left: 0;
+            margin-bottom: 7px;
+        }
+        .price__value{
+            font-size: 30px;
+            line-height: 1.2;
+            font-weight: normal;
+        }
+    }
+    @media(--tablet-above){
+        .price{
+            .price__value{
+                font-size: 24px;
+            }
+        }
+    }
+    @media(--mobile-s){
+        .price{
+            .price__old{
+                font-size: 14px;
+            }
+        }
+    }
+}
+.card__counter{
+
+}
+.card__result{
+}
+.card__button{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 5px;
+    .btn{
+        height: 57px;
+        line-height: 55px;
+        max-width: 240px;
+        width: 100%;
+        &:first-child{
+            font-weight: 500;
+        }
+        &:last-child{
+            font-weight: 300;
+        }
+        @media(--tablet){
+
+        }
+    }
+    @media(--tablet){
+        justify-content: flex-start;
+        .btn{
+            &:not(:last-child){
+                margin-right: 20px;
+            }
+        }
+        padding-top: 0;
+        margin-bottom: 31px;
+    }
+    @media(--mobile-xs){
+        flex-direction: column;
+        .btn{
+            max-width: 100%;
+            font-size: 14px;
+            &:not(:last-child){
+               margin-right: 0;
+               margin-bottom: 10px;
+            }
+        }
+    }
+}
+.card-property{
+    @media(min-width: 1281px){
+        padding-top: 26px;
+    }
+}
+@media(max-width: 1600px){
+    .card__content{
+
+    }
+}

@@ -1,0 +1,40 @@
+<% const data = {
+    title: 'Проекты',
+    'flowContainerClass' : 'flow-container--main'
+} %>
+
+<%- require("../layouts/header.ejs")(data) %>
+    <section class="section-head">
+        <div class="container">
+            <%- require('../components/elements/breadcrumbs.ejs')(data)%>
+            <div class="section-head__title">
+                <h1 class="h1">Проекты</h1>
+                <a href="#" class="btn btn--brown--dark">Заказать проект</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-projects">
+        <div class="container">
+            <div class="projects">
+                <div class="project-list">
+                    <% const listProjects = [
+                        { img: './images/content/slider-project-img-1.jpg', title: 'Вилла в трех уровнях с бассейном', author: 'Махнев Евгений', usedProd: 'Porcelanosa, Venis, Gamadecor,  Krion',  },
+                        { img: './images/content/slider-project-img-2.jpg', title: 'Квартира в ЖК Арбат', author: 'Алиса Гиголян', usedProd: 'Porcelanosa, Venis, Gamadecor',  },
+                        { img: './images/content/slider-project-img-1.jpg', title: 'Вилла в трех уровнях с бассейном', author: 'Махнев Евгений', usedProd: 'Porcelanosa, Venis, Gamadecor,  Krion',  },
+                        { img: './images/content/slider-project-img-2.jpg', title: 'Квартира в ЖК Арбат', author: 'Алиса Гиголян', usedProd: 'Porcelanosa, Venis, Gamadecor',  },
+                        { img: './images/content/slider-project-img-1.jpg', title: 'Вилла в трех уровнях с бассейном', author: 'Махнев Евгений', usedProd: 'Porcelanosa, Venis, Gamadecor,  Krion',  },
+                        { img: './images/content/slider-project-img-2.jpg', title: 'Квартира в ЖК Арбат', author: 'Алиса Гиголян', usedProd: 'Porcelanosa, Venis, Gamadecor',  },
+                        { img: './images/content/slider-project-img-1.jpg', title: 'Вилла в трех уровнях с бассейном', author: 'Махнев Евгений', usedProd: 'Porcelanosa, Venis, Gamadecor,  Krion',  },
+                        { img: './images/content/slider-project-img-2.jpg', title: 'Квартира в ЖК Арбат', author: 'Алиса Гиголян', usedProd: 'Porcelanosa, Venis, Gamadecor',  },
+                    ] %>
+                    <% listProjects.forEach(function (item) { %>
+                        <%- require("../components/elements/projects-item.ejs")({image: item.img, title: item.title, author: item.author, usedProd: item.usedProd, }) %>
+                    <% }) %>
+                </div>
+            </div>
+            <%- require("../components/elements/pagination.ejs")() %>
+        </div>
+    </div>
+
+<%- require("../layouts/footer.ejs")() %>

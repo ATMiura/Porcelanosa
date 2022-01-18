@@ -1,0 +1,141 @@
+<head><link href="styles/main.css" rel="stylesheet"></head>
+
+<div class="container">
+    <h1>Список страниц верстки</h1>
+
+    <ul>
+        <li>
+            <a href="main.html">Главная</a>
+        </li>
+        <li>
+            <a href="catalog.html">Каталог</a>
+        </li>
+        <li>
+            <a href="catalog-collections.html">Каталог - Коллекции</a>
+        </li>
+        <li>
+            <a href="catalog-list.html">Каталог - Список товаров</a>
+        </li>
+        <li>
+            <a href="catalog-list-empty.html">Каталог - Список товаров пустой</a>
+        </li>
+        <li>
+            <a href="card.html">Карточка товара</a>
+        </li>
+        <li>
+            <a href="collections-detail.html">Коллекции деталка</a>
+        </li>
+        <li>
+            <a href="search-result.html">Результаты поиска</a>
+        </li>
+        <li>
+            <a href="events.html">Меропрития</a>
+        </li>
+        <li>
+            <a href="events-detail.html">Меропрития - деталка</a>
+        </li>
+        <li>
+            <a href="news.html">Новости</a>
+        </li>
+        <li>
+            <a href="news-detail.html">Новости - деталка</a>
+        </li>
+        <li>
+            <a href="projects.html">Проекты</a>
+        </li>
+        <li>
+            <a href="projects-detail.html">Проект - деталка</a>
+        </li>
+        <li>
+            <a href="basket.html">Корзина</a>
+        </li>
+        <li>
+            <a href="thx-for-order.html">Спасибо за заказ</a>
+        </li>
+        <li>
+            <a href="404.html">404</a>
+        </li>
+        <li>
+            <a href="service.html">Услуги</a>
+        </li>
+        <li>
+            <a href="text.html">Текстовая</a>
+        </li>
+        <li>
+            <a href="contact.html">Контакты/салоны</a>
+        </li>
+        <li></li>
+        <li>
+            <a href="personal-data.html">Личные данные</a>
+        </li>
+        <li>
+            <a href="personal-orders-none.html">Нет заказов</a>
+        </li>
+        <li>
+            <a href="personal-orders-current.html">Текущие заказы</a>
+        </li>
+        <li>
+            <a href="personal-orders-finished.html">Завршенные заказы</a>
+        </li>
+        <li>
+            <a href="personal-favorites.html">Избранное</a>
+        </li>
+        <li>
+            <a href="personal-favorites-none.html">Нет избранного</a>
+        </li>
+        <!--<li>
+            Модальные окна
+            <ul>
+                <li>
+                    &lt;!&ndash; data-modal-open - для открытия модального окна&ndash;&gt;
+                    <a href="#call" data-modal-open>Заказать звонок</a>
+                </li>
+            </ul>
+        </li>-->
+    </ul>
+</div>
+
+<div id="auth" class="modal modal-small">
+    <div class="modal__head">
+        <div class="modal__title">Вход в личный кабинет</div>
+    </div>
+    <div class="modal__body">
+        <form class="modal__form" data-form data-ajax-url="">
+            <label class="modal__label">
+                <input type="text" class="modal__input input" placeholder="+ 7 (ххх)  ххх - хх-хх" data-inputmask data-input-required="phone">
+            </label>
+            <label class="modal__label">
+                <input type="text" class="modal__input input" placeholder="Введите код из СМС*" data-input-required="code">
+            </label>
+            <div class="modal__button">
+                <button type="submit" class="modal__submit btn btn--brown--dark">
+                    <span>Получить код</span>
+                </button>
+                <div class="modal__code">
+                    Не пришел код?
+                    <span>Повторить отправку можно через <span>60</span> сек</span>
+                    <button type="button" class="resend-code">Отправить код</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="reviewVideo" class="modal">
+    <div class="modal__body">
+        <div class="video-wrapper">
+            <div class="video" data-video>
+                <a class="video__link" href="./video/video.mp4" data-video-link="">
+                    <picture>
+                        <img class="video__media" src="./images/content/video-image.jpg" alt="" data-video-media="">
+                    </picture>
+                </a>
+                <button class="video__button" type="button" aria-label="Запустить видео" data-video-button="">
+                    <img src="./images/svg/video-play.svg" alt="">
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="bundle.js"></script>
